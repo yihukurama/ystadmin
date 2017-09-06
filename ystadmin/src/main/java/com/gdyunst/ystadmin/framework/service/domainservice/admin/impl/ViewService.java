@@ -26,7 +26,6 @@ public class ViewService implements IViewService {
             }
             user.doGetRelationData();
             model.addAttribute("userName", user.getUsername());
-            
         } catch (CrudException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

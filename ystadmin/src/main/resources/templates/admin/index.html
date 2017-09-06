@@ -65,7 +65,17 @@
 				</div>
 			</div>
 			<div class="layui-side layui-bg-black" id="admin-side">
-				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side"></div>
+				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
+                    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
+                        <li class="layui-nav-item layui-nav-itemed">
+                            <a href="javascript:;" th:each="value:${rootMenuList}" th:text="${rootMenu}">默认展开</a>
+                            <dl class="layui-nav-child">
+                                <dd><a href="javascript:;"  th:each="value:${menuList}" th:text="${menu}">选项一</a></dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item"><a href="" th:each="value:${menuList}" th:text="${menu}">云市场</a></li>
+                    </ul>
+				</div>
 			</div>
 			<div class="layui-body" style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
 				<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
