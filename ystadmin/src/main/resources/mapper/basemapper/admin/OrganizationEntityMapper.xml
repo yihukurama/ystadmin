@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Organization">
+	<!-- 保存数据 -->
+	<insert id="createOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
+		<![CDATA[
+			INSERT INTO admin_organization
+				(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,delStatus)
+			VALUES 
+				(#{id},#{parentId},#{path},#{code},#{text},#{areaId},#{areaText},#{address},#{tel},#{principalId},#{indexOrder},#{lng},#{lat},#{note},#{creater},#{operator},#{operateDate},#{printQuotor},#{delStatus})
+        ]]>
+	</insert>
+
+	<!-- 更新数据 -->
+	<update id="updateOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
+        <![CDATA[
+			UPDATE admin_organization SET id=id
+		]]>
+		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
+		<if test="printQuotor!=null and printQuotor!=''">,printQuotor=#{printQuotor}</if>
+		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="note!=null and note!=''">,note=#{note}</if>
+		<if test="lat!=null and lat!=''">,lat=#{lat}</if>
+		<if test="lng!=null and lng!=''">,lng=#{lng}</if>
+		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="principalId!=null and principalId!=''">,principalId=#{principalId}</if>
+		<if test="tel!=null and tel!=''">,tel=#{tel}</if>
+		<if test="address!=null and address!=''">,address=#{address}</if>
+		<if test="areaText!=null and areaText!=''">,areaText=#{areaText}</if>
+		<if test="areaId!=null and areaId!=''">,areaId=#{areaId}</if>
+		<if test="text!=null and text!=''">,text=#{text}</if>
+		<if test="code!=null and code!=''">,code=#{code}</if>
+		<if test="path!=null and path!=''">,path=#{path}</if>
+		<if test="parentId!=null and parentId!=''">,parentId=#{parentId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+			WHERE id=#{id}
+		]]>
+	</update>
+
+	<!-- 查询单个数据 -->
+	<select id="loadOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity"
+		resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
+      	<![CDATA[
+      		SELECT * FROM admin_organization WHERE id=#{id}
+      	]]>
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity"
+		resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
+        <![CDATA[
+	  	 	SELECT * FROM admin_organization WHERE 1=1
+	  	]]>
+		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="printQuotor!=null and printQuotor!=''">AND printQuotor=#{printQuotor}</if>
+		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="lat!=null and lat!=''">AND lat=#{lat}</if>
+		<if test="lng!=null and lng!=''">AND lng=#{lng}</if>
+		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="principalId!=null and principalId!=''">AND principalId=#{principalId}</if>
+		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
+		<if test="address!=null and address!=''">AND address=#{address}</if>
+		<if test="areaText!=null and areaText!=''">AND areaText=#{areaText}</if>
+		<if test="areaId!=null and areaId!=''">AND areaId=#{areaId}</if>
+		<if test="text!=null and text!=''">AND text=#{text}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="path!=null and path!=''">AND path=#{path}</if>
+		<if test="parentId!=null and parentId!=''">AND parentId=#{parentId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+        <![CDATA[
+			ORDER BY indexOrder DESC
+		]]>
+	</select>
+
+	<!-- 删除数据 -->
+	<delete id="removeOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
+      <![CDATA[
+      	DELETE FROM admin_organization where id = #{id}
+      ]]>
+	</delete>
+
+	<!-- 根据path删除区域数据,树形结构数据删除 -->
+	<delete id="removeTreeOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
+		<![CDATA[
+			DELETE FROM admin_organization WHERE path LIKE CONCAT('%',#{path},'%')
+        ]]>
+	</delete>
+
+	<!-- 根据parentId更新path,树形结构数据拖拽 -->
+	<update id="updateTreeOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
+		<![CDATA[
+			UPDATE admin_organization 
+			SET path=CONCAT(#{path},SUBSTR(path,INSTR(path,#{id})+LENGTH(#{id})+1)) 
+			WHERE id!=#{id} AND path LIKE CONCAT('%/',#{id},'/%')
+        ]]>
+	</update>
+
+	<!-- 批量插入数据 -->
+	<insert id="insertBatchOrganization" parameterType="java.util.List">
+    	<![CDATA[
+    		INSERT INTO admin_organization
+        		(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,delStatus)
+        	VALUES
+    	]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.parentId},#{item.path},#{item.code},#{item.text},#{item.areaId},#{item.areaText},#{item.address},#{item.tel},#{item.principalId},#{item.indexOrder},#{item.lng},#{item.lat},#{item.note},#{item.creater},#{item.operator},#{item.operateDate},#{item.printQuotor},#{item.delStatus},
+		</foreach>
+	</insert>
+
+</mapper>

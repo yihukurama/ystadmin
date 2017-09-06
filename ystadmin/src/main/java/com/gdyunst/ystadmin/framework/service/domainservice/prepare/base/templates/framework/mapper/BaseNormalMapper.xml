@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${domainName}">
+	<!-- 保存对象 -->
+	<insert id="create${domainName}" parameterType="${package}.${entityName}">
+		<![CDATA[
+            INSERT INTO ${tableName}
+                ${dbColumns}
+            VALUES 
+                ${insertColumns}
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="update${domainName}" parameterType="${package}.${entityName}">
+        <![CDATA[
+            UPDATE ${tableName} SET id=id
+        ]]>
+		${updateColumns}
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="load${domainName}" resultType="${package}.${entityName}"
+		parameterType="${package}.${entityName}">
+		SELECT * FROM ${tableName} WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="list${domainName}" resultType="${package}.${entityName}"
+		parameterType="${package}.${entityName}">
+        <![CDATA[
+	  		SELECT * FROM ${tableName} WHERE 1=1
+	  	]]>
+		${listColumns}
+		<![CDATA[
+			ORDER BY ${orderColumn} DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="remove${domainName}" parameterType="${package}.${entityName}">
+		UPDATE
+		${tableName} SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatch${domainName}" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO ${tableName}
+                ${dbColumns}
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			${batchInsertColumns}
+		</foreach>
+	</insert>
+
+
+</mapper>

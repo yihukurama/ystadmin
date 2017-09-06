@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Area">
+	<!-- 保存数据 -->
+	<insert id="createArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
+		<![CDATA[
+			INSERT INTO admin_area
+				(id,parentId,path,text,type,indexOrder,note,delStatus,
+			VALUES 
+				(#{id},#{parentId},#{path},#{text},#{type},#{indexOrder},#{note},#{delStatus},
+        ]]>
+	</insert>
+
+	<!-- 更新数据 -->
+	<update id="updateArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
+        <![CDATA[
+			UPDATE admin_area SET id=id
+		]]>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
+		<if test="note!=null and note!=''">,note=#{note}</if>
+		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="type!=null and type!=''">,type=#{type}</if>
+		<if test="text!=null and text!=''">,text=#{text}</if>
+		<if test="path!=null and path!=''">,path=#{path}</if>
+		<if test="parentId!=null and parentId!=''">,parentId=#{parentId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+			WHERE id=#{id}
+		]]>
+	</update>
+
+	<!-- 查询单个数据 -->
+	<select id="loadArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity"
+		resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
+      	<![CDATA[
+      		SELECT * FROM admin_area WHERE id=#{id}
+      	]]>
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity"
+		resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
+        <![CDATA[
+	  	 	SELECT * FROM admin_area WHERE 1=1
+	  	]]>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="text!=null and text!=''">AND text=#{text}</if>
+		<if test="path!=null and path!=''">AND path=#{path}</if>
+		<if test="parentId!=null and parentId!=''">AND parentId=#{parentId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+        <![CDATA[
+			ORDER BY indexOrder DESC
+		]]>
+	</select>
+
+	<!-- 删除数据 -->
+	<delete id="removeArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
+      <![CDATA[
+      	DELETE FROM admin_area where id = #{id}
+      ]]>
+	</delete>
+
+	<!-- 根据path删除区域数据,树形结构数据删除 -->
+	<delete id="removeTreeArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
+		<![CDATA[
+			DELETE FROM admin_area WHERE path LIKE CONCAT('%',#{path},'%')
+        ]]>
+	</delete>
+
+	<!-- 根据parentId更新path,树形结构数据拖拽 -->
+	<update id="updateTreeArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
+		<![CDATA[
+			UPDATE admin_area 
+			SET path=CONCAT(#{path},SUBSTR(path,INSTR(path,#{id})+LENGTH(#{id})+1)) 
+			WHERE id!=#{id} AND path LIKE CONCAT('%/',#{id},'/%')
+        ]]>
+	</update>
+
+	<!-- 批量插入数据 -->
+	<insert id="insertBatchArea" parameterType="java.util.List">
+    	<![CDATA[
+    		INSERT INTO admin_area
+        		(id,parentId,path,text,type,indexOrder,note,delStatus,
+        	VALUES
+    	]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.parentId},#{item.path},#{item.text},#{item.type},#{item.indexOrder},#{item.note},#{item.delStatus},
+		</foreach>
+	</insert>
+
+</mapper>

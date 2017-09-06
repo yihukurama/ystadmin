@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Employee">
+	<!-- 保存对象 -->
+	<insert id="createEmployee" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
+		<![CDATA[
+            INSERT INTO admin_employee
+                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note,delStatus)
+            VALUES 
+                (#{id},#{orgId},#{departmentId},#{code},#{realName},#{mobile},#{tel},#{email},#{address},#{status},#{dateJoined},#{dateLeft},#{workAge},#{emContact},#{emTel},#{creater},#{operator},#{operateDate},#{indexOrder},#{note},#{delStatus})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateEmployee" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
+        <![CDATA[
+            UPDATE admin_employee SET id=id
+        ]]>
+		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
+		<if test="note!=null and note!=''">,note=#{note}</if>
+		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="emTel!=null and emTel!=''">,emTel=#{emTel}</if>
+		<if test="emContact!=null and emContact!=''">,emContact=#{emContact}</if>
+		<if test="workAge!=null and workAge!=''">,workAge=#{workAge}</if>
+		<if test="dateLeft!=null and dateLeft!=''">,dateLeft=#{dateLeft}</if>
+		<if test="dateJoined!=null and dateJoined!=''">,dateJoined=#{dateJoined}</if>
+		<if test="status!=null and status!=''">,status=#{status}</if>
+		<if test="address!=null and address!=''">,address=#{address}</if>
+		<if test="email!=null and email!=''">,email=#{email}</if>
+		<if test="tel!=null and tel!=''">,tel=#{tel}</if>
+		<if test="mobile!=null and mobile!=''">,mobile=#{mobile}</if>
+		<if test="realName!=null and realName!=''">,realName=#{realName}</if>
+		<if test="code!=null and code!=''">,code=#{code}</if>
+		<if test="departmentId!=null and departmentId!=''">,departmentId=#{departmentId}</if>
+		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadEmployee" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
+		SELECT * FROM admin_employee WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listEmployee" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_employee WHERE 1=1
+	  	]]>
+		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="emTel!=null and emTel!=''">AND emTel=#{emTel}</if>
+		<if test="emContact!=null and emContact!=''">AND emContact=#{emContact}</if>
+		<if test="workAge!=null and workAge!=''">AND workAge=#{workAge}</if>
+		<if test="dateLeft!=null and dateLeft!=''">AND dateLeft=#{dateLeft}</if>
+		<if test="dateJoined!=null and dateJoined!=''">AND dateJoined=#{dateJoined}</if>
+		<if test="status!=null and status!=''">AND status=#{status}</if>
+		<if test="address!=null and address!=''">AND address=#{address}</if>
+		<if test="email!=null and email!=''">AND email=#{email}</if>
+		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
+		<if test="mobile!=null and mobile!=''">AND mobile=#{mobile}</if>
+		<if test="realName!=null and realName!=''">AND realName=#{realName}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="departmentId!=null and departmentId!=''">AND departmentId=#{departmentId}</if>
+		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY indexOrder DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeEmployee" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
+		UPDATE
+		admin_employee SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchEmployee" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_employee
+                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note,delStatus)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.orgId},#{item.departmentId},#{item.code},#{item.realName},#{item.mobile},#{item.tel},#{item.email},#{item.address},#{item.status},#{item.dateJoined},#{item.dateLeft},#{item.workAge},#{item.emContact},#{item.emTel},#{item.creater},#{item.operator},#{item.operateDate},#{item.indexOrder},#{item.note},#{item.delStatus},
+		</foreach>
+	</insert>
+
+
+</mapper>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Userrole">
+	<!-- 保存对象 -->
+	<insert id="createUserrole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
+		<![CDATA[
+            INSERT INTO admin_userrole
+                (id,userId,roleId,
+            VALUES 
+                (#{id},#{userId},#{roleId},
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateUserrole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
+        <![CDATA[
+            UPDATE admin_userrole SET id=id
+        ]]>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="roleId!=null and roleId!=''">,roleId=#{roleId}</if>
+		<if test="userId!=null and userId!=''">,userId=#{userId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadUserrole" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
+		SELECT * FROM admin_userrole WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listUserrole" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_userrole WHERE 1=1
+	  	]]>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
+		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY createDate DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeUserrole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
+		UPDATE
+		admin_userrole SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchUserrole" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_userrole
+                (id,userId,roleId,
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.userId},#{item.roleId},
+		</foreach>
+	</insert>
+
+
+</mapper>

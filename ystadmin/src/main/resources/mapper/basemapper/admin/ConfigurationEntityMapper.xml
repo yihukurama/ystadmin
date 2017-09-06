@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Configuration">
+	<!-- 保存对象 -->
+	<insert id="createConfiguration" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity">
+		<![CDATA[
+            INSERT INTO admin_configuration
+                (id,code,value,type,indexOrder,creater,operator,operateDate,note,delStatus)
+            VALUES 
+                (#{id},#{code},#{value},#{type},#{indexOrder},#{creater},#{operator},#{operateDate},#{note},#{delStatus})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateConfiguration" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity">
+        <![CDATA[
+            UPDATE admin_configuration SET id=id
+        ]]>
+		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
+		<if test="note!=null and note!=''">,note=#{note}</if>
+		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="type!=null and type!=''">,type=#{type}</if>
+		<if test="value!=null and value!=''">,value=#{value}</if>
+		<if test="code!=null and code!=''">,code=#{code}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadConfiguration" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity">
+		SELECT * FROM admin_configuration WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listConfiguration" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_configuration WHERE 1=1
+	  	]]>
+		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="value!=null and value!=''">AND value=#{value}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY indexOrder DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeConfiguration" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity">
+		UPDATE
+		admin_configuration SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchConfiguration" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_configuration
+                (id,code,value,type,indexOrder,creater,operator,operateDate,note,delStatus)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.code},#{item.value},#{item.type},#{item.indexOrder},#{item.creater},#{item.operator},#{item.operateDate},#{item.note},#{item.delStatus},
+		</foreach>
+	</insert>
+
+
+</mapper>

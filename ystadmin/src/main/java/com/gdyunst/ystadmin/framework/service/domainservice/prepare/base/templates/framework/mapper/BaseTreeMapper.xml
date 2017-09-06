@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${domainName}">
+	<!-- 保存数据 -->
+	<insert id="create${domainName}" parameterType="${package}.${entityName}">
+		<![CDATA[
+			INSERT INTO ${tableName}
+				${dbColumns}
+			VALUES 
+				${insertColumns}
+        ]]>
+	</insert>
+
+	<!-- 更新数据 -->
+	<update id="update${domainName}" parameterType="${package}.${entityName}">
+        <![CDATA[
+			UPDATE ${tableName} SET id=id
+		]]>
+		${updateColumns}
+        <![CDATA[
+			WHERE id=#{id}
+		]]>
+	</update>
+
+	<!-- 查询单个数据 -->
+	<select id="load${domainName}" parameterType="${package}.${entityName}"
+		resultType="${package}.${entityName}">
+      	<![CDATA[
+      		SELECT * FROM ${tableName} WHERE id=#{id}
+      	]]>
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="list${domainName}" parameterType="${package}.${entityName}"
+		resultType="${package}.${entityName}">
+        <![CDATA[
+	  	 	SELECT * FROM ${tableName} WHERE 1=1
+	  	]]>
+		${listColumns}
+        <![CDATA[
+			ORDER BY ${orderColumn} DESC
+		]]>
+	</select>
+
+	<!-- 删除数据 -->
+	<delete id="remove${domainName}" parameterType="${package}.${entityName}">
+      <![CDATA[
+      	DELETE FROM ${tableName} where id = #{id}
+      ]]>
+	</delete>
+
+	<!-- 根据path删除区域数据,树形结构数据删除 -->
+	<delete id="removeTree${domainName}" parameterType="${package}.${entityName}">
+		<![CDATA[
+			DELETE FROM ${tableName} WHERE path LIKE CONCAT('%',#{path},'%')
+        ]]>
+	</delete>
+
+	<!-- 根据parentId更新path,树形结构数据拖拽 -->
+	<update id="updateTree${domainName}" parameterType="${package}.${entityName}">
+		<![CDATA[
+			UPDATE ${tableName} 
+			SET path=CONCAT(#{path},SUBSTR(path,INSTR(path,#{id})+LENGTH(#{id})+1)) 
+			WHERE id!=#{id} AND path LIKE CONCAT('%/',#{id},'/%')
+        ]]>
+	</update>
+
+	<!-- 批量插入数据 -->
+	<insert id="insertBatch${domainName}" parameterType="java.util.List">
+    	<![CDATA[
+    		INSERT INTO ${tableName}
+        		${dbColumns}
+        	VALUES
+    	]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			${batchInsertColumns}
+		</foreach>
+	</insert>
+
+</mapper>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Func">
+	<!-- 保存对象 -->
+	<insert id="createFunc" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity">
+		<![CDATA[
+            INSERT INTO admin_func
+                (id,subSystemId,code,text,serverUrl,indexOrder,creater,operator,operateDate,note)
+            VALUES 
+                (#{id},#{subSystemId},#{code},#{text},#{serverUrl},#{indexOrder},#{creater},#{operator},#{operateDate},#{note})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateFunc" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity">
+        <![CDATA[
+            UPDATE admin_func SET id=id
+        ]]>
+		<if test="note!=null and note!=''">,note=#{note}</if>
+		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="serverUrl!=null and serverUrl!=''">,serverUrl=#{serverUrl}</if>
+		<if test="text!=null and text!=''">,text=#{text}</if>
+		<if test="code!=null and code!=''">,code=#{code}</if>
+		<if test="subSystemId!=null and subSystemId!=''">,subSystemId=#{subSystemId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadFunc" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity">
+		SELECT * FROM admin_func WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listFunc" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_func WHERE 1=1
+	  	]]>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="serverUrl!=null and serverUrl!=''">AND serverUrl=#{serverUrl}</if>
+		<if test="text!=null and text!=''">AND text=#{text}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="subSystemId!=null and subSystemId!=''">AND subSystemId=#{subSystemId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY indexOrder DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeFunc" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity">
+		UPDATE
+		admin_func SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchFunc" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_func
+                (id,subSystemId,code,text,serverUrl,indexOrder,creater,operator,operateDate,note)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.subSystemId},#{item.code},#{item.text},#{item.serverUrl},#{item.indexOrder},#{item.creater},#{item.operator},#{item.operateDate},#{item.note},
+		</foreach>
+	</insert>
+
+
+</mapper>

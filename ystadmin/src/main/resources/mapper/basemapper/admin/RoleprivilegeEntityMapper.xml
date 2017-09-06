@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Roleprivilege">
+	<!-- 保存对象 -->
+	<insert id="createRoleprivilege" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity">
+		<![CDATA[
+            INSERT INTO admin_roleprivilege
+                (id,subSystemId,privilegeId,roleId,type,
+            VALUES 
+                (#{id},#{subSystemId},#{privilegeId},#{roleId},#{type},
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateRoleprivilege" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity">
+        <![CDATA[
+            UPDATE admin_roleprivilege SET id=id
+        ]]>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="type!=null and type!=''">,type=#{type}</if>
+		<if test="roleId!=null and roleId!=''">,roleId=#{roleId}</if>
+		<if test="privilegeId!=null and privilegeId!=''">,privilegeId=#{privilegeId}</if>
+		<if test="subSystemId!=null and subSystemId!=''">,subSystemId=#{subSystemId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadRoleprivilege" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity">
+		SELECT * FROM admin_roleprivilege WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listRoleprivilege" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_roleprivilege WHERE 1=1
+	  	]]>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
+		<if test="privilegeId!=null and privilegeId!=''">AND privilegeId=#{privilegeId}</if>
+		<if test="subSystemId!=null and subSystemId!=''">AND subSystemId=#{subSystemId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY createDate DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeRoleprivilege" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity">
+		UPDATE
+		admin_roleprivilege SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchRoleprivilege" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_roleprivilege
+                (id,subSystemId,privilegeId,roleId,type,
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.subSystemId},#{item.privilegeId},#{item.roleId},#{item.type},
+		</foreach>
+	</insert>
+
+
+</mapper>

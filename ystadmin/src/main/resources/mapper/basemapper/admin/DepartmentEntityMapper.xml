@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Department">
+	<!-- 保存对象 -->
+	<insert id="createDepartment" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity">
+		<![CDATA[
+            INSERT INTO admin_department
+                (id,orgId,code,text,tel,principalId,indexOrder,creater,operator,operateDate,note,delStatus)
+            VALUES 
+                (#{id},#{orgId},#{code},#{text},#{tel},#{principalId},#{indexOrder},#{creater},#{operator},#{operateDate},#{note},#{delStatus})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateDepartment" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity">
+        <![CDATA[
+            UPDATE admin_department SET id=id
+        ]]>
+		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
+		<if test="note!=null and note!=''">,note=#{note}</if>
+		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="principalId!=null and principalId!=''">,principalId=#{principalId}</if>
+		<if test="tel!=null and tel!=''">,tel=#{tel}</if>
+		<if test="text!=null and text!=''">,text=#{text}</if>
+		<if test="code!=null and code!=''">,code=#{code}</if>
+		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadDepartment" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity">
+		SELECT * FROM admin_department WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listDepartment" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_department WHERE 1=1
+	  	]]>
+		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="principalId!=null and principalId!=''">AND principalId=#{principalId}</if>
+		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
+		<if test="text!=null and text!=''">AND text=#{text}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY indexOrder DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeDepartment" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity">
+		UPDATE
+		admin_department SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchDepartment" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_department
+                (id,orgId,code,text,tel,principalId,indexOrder,creater,operator,operateDate,note,delStatus)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.orgId},#{item.code},#{item.text},#{item.tel},#{item.principalId},#{item.indexOrder},#{item.creater},#{item.operator},#{item.operateDate},#{item.note},#{item.delStatus},
+		</foreach>
+	</insert>
+
+
+</mapper>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Role">
+	<!-- 保存对象 -->
+	<insert id="createRole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity">
+		<![CDATA[
+            INSERT INTO admin_role
+                (id,text,note,creater,operator,operateDate,orgId)
+            VALUES 
+                (#{id},#{text},#{note},#{creater},#{operator},#{operateDate},#{orgId})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateRole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity">
+        <![CDATA[
+            UPDATE admin_role SET id=id
+        ]]>
+		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
+		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="note!=null and note!=''">,note=#{note}</if>
+		<if test="text!=null and text!=''">,text=#{text}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadRole" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity">
+		SELECT * FROM admin_role WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listRole" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_role WHERE 1=1
+	  	]]>
+		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
+		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="text!=null and text!=''">AND text=#{text}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY createDate DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeRole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity">
+		UPDATE
+		admin_role SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchRole" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_role
+                (id,text,note,creater,operator,operateDate,orgId)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.text},#{item.note},#{item.creater},#{item.operator},#{item.operateDate},#{item.orgId},
+		</foreach>
+	</insert>
+
+
+</mapper>
