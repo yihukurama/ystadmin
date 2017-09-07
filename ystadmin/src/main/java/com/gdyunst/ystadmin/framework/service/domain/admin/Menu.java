@@ -8,6 +8,7 @@ import com.gdyunst.ystadmin.framework.domain.entity.admin.MenuEntity;
 
 public class Menu extends MenuEntity{
 
+	public final static String PATH_ROOT = "root"; 
     private List<MenuEntity> subMenus;
 
     public List<MenuEntity> getSubMenus() {

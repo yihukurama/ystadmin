@@ -73,16 +73,6 @@
 			<version>1.3.6.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>com.gdyunst</groupId>
-			<artifactId>qcloud-sms</artifactId>
-			<version>v5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.gdyunst</groupId>
-			<artifactId>qcloud-sms</artifactId>
-			<version>json</version>
-		</dependency>
-		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>${druid.version}</version>
