@@ -68,15 +68,15 @@
 				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
                     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;"   >
 						<div th:each="menu,iterStat : ${menus}">
-                        <li class="layui-nav-item" th:if="${menu.subSystemId=='240073468e8c4c27a99131e4055463c1'}">
+                        <li class="layui-nav-item">
                             <a href="javascript:;"  th:text="${menu.text}">默认展开</a>
                             <dl class="layui-nav-child"  th:each="subMenu,iterStat2: ${menu.getSubMenus()}">
                                 <dd><a href="javascript:;"    th:text="${subMenu.text}">选项一</a></dd>
                             </dl>
                         </li>
 
-                        <li class="layui-nav-item" th:if="${menu.getSubMenus().size()==0 and menu.subSystemId=='240073468e8c4c27a99131e4055463c1'}">
-							<a href=""  th:text="${menu.text}">云市场</a>
+                        <li class="layui-nav-item" th:if="${menu.getSubMenus().size()==0}" >
+							<a href="javascript:;"  th:text="${menu.text}">云市场</a>
 						</li>
 						</div>
                     </ul>
