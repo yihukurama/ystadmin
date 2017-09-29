@@ -5,9 +5,9 @@
 	<insert id="createConfiguration" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity">
 		<![CDATA[
             INSERT INTO admin_configuration
-                (id,code,value,type,indexOrder,creater,operator,operateDate,note,delStatus)
+                (id,code,value,type,indexOrder,creater,operator,operateDate,note,
             VALUES 
-                (#{id},#{code},#{value},#{type},#{indexOrder},#{creater},#{operator},#{operateDate},#{note},#{delStatus})
+                (#{id},#{code},#{value},#{type},#{indexOrder},#{creater},#{operator},#{operateDate},#{note},
         ]]>
 	</insert>
 
@@ -20,7 +20,7 @@
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
 		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
 		<if test="type!=null and type!=''">,type=#{type}</if>
@@ -50,7 +50,7 @@
 		<if test="note!=null and note!=''">AND note=#{note}</if>
 		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
 		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
 		<if test="type!=null and type!=''">AND type=#{type}</if>
@@ -73,7 +73,7 @@
 	<insert id="insertBatchConfiguration" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_configuration
-                (id,code,value,type,indexOrder,creater,operator,operateDate,note,delStatus)
+                (id,code,value,type,indexOrder,creater,operator,operateDate,note,
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"

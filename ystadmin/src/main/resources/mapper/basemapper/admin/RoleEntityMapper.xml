@@ -19,7 +19,7 @@
 		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
 		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="text!=null and text!=''">,text=#{text}</if>
@@ -45,7 +45,7 @@
 		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
 		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
 		<if test="text!=null and text!=''">AND text=#{text}</if>

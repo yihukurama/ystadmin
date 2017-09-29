@@ -5,9 +5,9 @@
 	<insert id="createPointhistory" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.PointhistoryEntity">
 		<![CDATA[
             INSERT INTO service_pointhistory
-                (id,type,value,delStatus,tag,currentPoint,relatedId,userId,realName)
+                (id,type,value,tag,currentPoint,relatedId,userId,realName)
             VALUES 
-                (#{id},#{type},#{value},#{delStatus},#{tag},#{currentPoint},#{relatedId},#{userId},#{realName})
+                (#{id},#{type},#{value},#{tag},#{currentPoint},#{relatedId},#{userId},#{realName})
         ]]>
 	</insert>
 
@@ -23,7 +23,7 @@
 		<if test="tag!=null and tag!=''">,tag=#{tag}</if>
 		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
 		<if test="value!=null and value!=''">,value=#{value}</if>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="type!=null and type!=''">,type=#{type}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
 		
@@ -52,7 +52,7 @@
 		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="value!=null and value!=''">AND value=#{value}</if>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="type!=null and type!=''">AND type=#{type}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
 		
@@ -71,7 +71,7 @@
 	<insert id="insertBatchPointhistory" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO service_pointhistory
-                (id,type,value,delStatus,tag,currentPoint,relatedId,userId,realName)
+                (id,type,value,tag,currentPoint,relatedId,userId,realName)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"

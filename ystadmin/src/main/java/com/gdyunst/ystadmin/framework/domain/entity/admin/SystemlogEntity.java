@@ -20,9 +20,6 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 	private String id;   //id
 	@Column(name="userId")
 	private String userId;  //userId
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //operateDate
 	@Column(name="content")
 	private String content;  //content
 	@Column(name="interfaceAddress")
@@ -53,14 +50,6 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 
 	public void setUserId(String userId){
 		this.userId = userId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
 	}
 
 	public String getContent(){

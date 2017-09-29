@@ -5,9 +5,9 @@
 	<insert id="createArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
 		<![CDATA[
 			INSERT INTO admin_area
-				(id,parentId,path,text,type,indexOrder,note,delStatus,
+				(id,parentId,path,text,type,indexOrder,note,
 			VALUES 
-				(#{id},#{parentId},#{path},#{text},#{type},#{indexOrder},#{note},#{delStatus},
+				(#{id},#{parentId},#{path},#{text},#{type},#{indexOrder},#{note},
         ]]>
 	</insert>
 
@@ -16,7 +16,7 @@
         <![CDATA[
 			UPDATE admin_area SET id=id
 		]]>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
@@ -45,7 +45,7 @@
         <![CDATA[
 	  	 	SELECT * FROM admin_area WHERE 1=1
 	  	]]>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
@@ -88,7 +88,7 @@
 	<insert id="insertBatchArea" parameterType="java.util.List">
     	<![CDATA[
     		INSERT INTO admin_area
-        		(id,parentId,path,text,type,indexOrder,note,delStatus,
+        		(id,parentId,path,text,type,indexOrder,note,
         	VALUES
     	]]>
 		<foreach collection="list" item="item" index="index"

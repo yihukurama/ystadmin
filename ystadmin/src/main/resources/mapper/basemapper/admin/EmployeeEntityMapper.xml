@@ -5,9 +5,9 @@
 	<insert id="createEmployee" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
 		<![CDATA[
             INSERT INTO admin_employee
-                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note,delStatus)
+                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note,
             VALUES 
-                (#{id},#{orgId},#{departmentId},#{code},#{realName},#{mobile},#{tel},#{email},#{address},#{status},#{dateJoined},#{dateLeft},#{workAge},#{emContact},#{emTel},#{creater},#{operator},#{operateDate},#{indexOrder},#{note},#{delStatus})
+                (#{id},#{orgId},#{departmentId},#{code},#{realName},#{mobile},#{tel},#{email},#{address},#{status},#{dateJoined},#{dateLeft},#{workAge},#{emContact},#{emTel},#{creater},#{operator},#{operateDate},#{indexOrder},#{note},
         ]]>
 	</insert>
 
@@ -21,7 +21,7 @@
 		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
 		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
 		<if test="emTel!=null and emTel!=''">,emTel=#{emTel}</if>
 		<if test="emContact!=null and emContact!=''">,emContact=#{emContact}</if>
@@ -62,7 +62,7 @@
 		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
 		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
 		<if test="emTel!=null and emTel!=''">AND emTel=#{emTel}</if>
 		<if test="emContact!=null and emContact!=''">AND emContact=#{emContact}</if>
@@ -95,7 +95,7 @@
 	<insert id="insertBatchEmployee" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_employee
-                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note,delStatus)
+                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note,
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"

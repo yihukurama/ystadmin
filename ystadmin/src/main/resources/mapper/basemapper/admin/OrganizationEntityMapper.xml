@@ -5,9 +5,9 @@
 	<insert id="createOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
 		<![CDATA[
 			INSERT INTO admin_organization
-				(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,delStatus)
+				(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,
 			VALUES 
-				(#{id},#{parentId},#{path},#{code},#{text},#{areaId},#{areaText},#{address},#{tel},#{principalId},#{indexOrder},#{lng},#{lat},#{note},#{creater},#{operator},#{operateDate},#{printQuotor},#{delStatus})
+				(#{id},#{parentId},#{path},#{code},#{text},#{areaId},#{areaText},#{address},#{tel},#{principalId},#{indexOrder},#{lng},#{lat},#{note},#{creater},#{operator},#{operateDate},#{printQuotor},
         ]]>
 	</insert>
 
@@ -20,7 +20,7 @@
 		<if test="printQuotor!=null and printQuotor!=''">,printQuotor=#{printQuotor}</if>
 		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="lat!=null and lat!=''">,lat=#{lat}</if>
@@ -61,7 +61,7 @@
 		<if test="printQuotor!=null and printQuotor!=''">AND printQuotor=#{printQuotor}</if>
 		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
 		<if test="lat!=null and lat!=''">AND lat=#{lat}</if>
@@ -110,7 +110,7 @@
 	<insert id="insertBatchOrganization" parameterType="java.util.List">
     	<![CDATA[
     		INSERT INTO admin_organization
-        		(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,delStatus)
+        		(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,
         	VALUES
     	]]>
 		<foreach collection="list" item="item" index="index"

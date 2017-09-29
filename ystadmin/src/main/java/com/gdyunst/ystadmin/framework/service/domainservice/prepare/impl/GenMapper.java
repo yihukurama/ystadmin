@@ -226,6 +226,9 @@ public class GenMapper implements IGenMapper {
             if (column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)) {
                 continue;
             }
+            if (column.getName().equals(PrepareConstant.DBCOLUMN_DELSTATUS)) {
+                continue;
+            }
             if (i < columns.size() - 1) {
                 dbColumns += column.getName() + ",";
             } else {
@@ -246,6 +249,9 @@ public class GenMapper implements IGenMapper {
             if (column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)) {
                 continue;
             }
+            if (column.getName().equals(PrepareConstant.DBCOLUMN_DELSTATUS)) {
+                continue;
+            }
             if (i < columns.size() - 1) {
                 insertColumns += "#{" + column.getName() + "},";
             } else {
@@ -264,7 +270,12 @@ public class GenMapper implements IGenMapper {
         for (int i = columns.size()-1; i >= 0; i--) {
             Column column = columns.get(i);
             LogUtil.DebugLog(this.getClass(), "tempLine is ------------->"+tempLine);
-            tempLine = String.format(tempLine, column.getName(), column.getName(), column.getName(),column.getName());
+            if(column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)){
+                tempLine = "<if test=\"createDate!=null\">,createDate=#{createDate}</if>\n\t\t";
+            }else{
+                tempLine = String.format(tempLine, column.getName(), column.getName(), column.getName(),column.getName());
+            }
+            
             LogUtil.DebugLog(this.getClass(), "column name is ------------->"+column.getName());
             LogUtil.DebugLog(this.getClass(), "tempLine is ------------->"+tempLine);
             updateColumns += tempLine;
@@ -286,10 +297,15 @@ public class GenMapper implements IGenMapper {
                 listColumns += tempLine;
                 tempLine = "<if test=\"delStatus==null\">AND delStatus=0</if>\n\t\t";
                 listColumns += tempLine;
+            } else if(column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)){
+                tempLine = "<if test=\"createDate!=null\">AND createDate=#{createDate}</if>\n\t\t";
+                listColumns += tempLine;
             } else {
                 tempLine = String.format(tempLine, column.getName(), column.getName(), column.getName(),column.getName());
                 listColumns += tempLine;
             }
+            
+            
             tempLine = "<if test=\"%s!=null and %s!=''\">AND %s=#{%s}</if>\n\t\t";
         }
 

@@ -16,7 +16,7 @@
         <![CDATA[
             UPDATE admin_userrole SET id=id
         ]]>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="roleId!=null and roleId!=''">,roleId=#{roleId}</if>
 		<if test="userId!=null and userId!=''">,userId=#{userId}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
@@ -38,7 +38,7 @@
         <![CDATA[
 	  		SELECT * FROM admin_userrole WHERE 1=1
 	  	]]>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
 		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
