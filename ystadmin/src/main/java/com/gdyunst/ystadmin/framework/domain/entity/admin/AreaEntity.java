@@ -17,24 +17,23 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class AreaEntity extends BaseCrud<AreaEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="parentId")
-	private String parentId;  //parentId
+	private String parentId;  //父类区域id,root代表一级行政区划,默认为root;
 	@Column(name="path")
-	private String path;  //path
+	private String path;  //分层路径
 	@Column(name="text")
-	private String text;  //text
+	private String text;  //区域名称
 	@Column(name="type")
-	private Integer type;  //type
+	private String type;  //区域类型(1省、直辖市、自治区、特别行政区;2市;3区、县,4,乡镇)
 	@Column(name="indexOrder")
-	private Integer indexOrder;  //indexOrder
+	private String indexOrder;  //排序字段
 	@Column(name="note")
-	private String note;  //note
+	private String note;  //备注信息
 	@Column(name="delStatus")
-	private Integer delStatus;  //delStatus
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private String delStatus;  //删除状态,0未删除,1删除
+	@Column(name="createDate")
+	private String createDate;  //创建时间
 	
 	
 	//get  set 方法
@@ -70,19 +69,19 @@ public class AreaEntity extends BaseCrud<AreaEntity>
 		this.text = text;
 	}
 
-	public Integer getType(){
+	public String getType(){
 		return type;
 	}
 
-	public void setType(Integer type){
+	public void setType(String type){
 		this.type = type;
 	}
 
-	public Integer getIndexOrder(){
+	public String getIndexOrder(){
 		return indexOrder;
 	}
 
-	public void setIndexOrder(Integer indexOrder){
+	public void setIndexOrder(String indexOrder){
 		this.indexOrder = indexOrder;
 	}
 
@@ -94,19 +93,19 @@ public class AreaEntity extends BaseCrud<AreaEntity>
 		this.note = note;
 	}
 
-	public Integer getDelStatus(){
+	public String getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(Integer delStatus){
+	public void setDelStatus(String delStatus){
 		this.delStatus = delStatus;
 	}
 
-	public Date getCreateDate(){
+	public String getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate){
+	public void setCreateDate(String createDate){
 		this.createDate = createDate;
 	}
 

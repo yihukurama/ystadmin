@@ -17,53 +17,49 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="orgId")
-	private String orgId;  //orgId
+	private String orgId;  //员工所属机构id
 	@Column(name="departmentId")
-	private String departmentId;  //departmentId
+	private String departmentId;  //员工所属部门id
 	@Column(name="code")
-	private String code;  //code
+	private String code;  //员工编号
 	@Column(name="realName")
-	private String realName;  //realName
+	private String realName;  //员工真实姓名
 	@Column(name="mobile")
-	private String mobile;  //mobile
+	private String mobile;  //员工手机号码
 	@Column(name="tel")
-	private String tel;  //tel
+	private String tel;  //联系电话
 	@Column(name="email")
-	private String email;  //email
+	private String email;  //邮箱地址
 	@Column(name="address")
-	private String address;  //address
+	private String address;  //联系地址
 	@Column(name="status")
-	private Integer status;  //status
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="dateJoined")
-	private Date dateJoined;  //dateJoined
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="dateLeft")
-	private Date dateLeft;  //dateLeft
+	private String status;  //状态,0在职,1离职,2停职
+	@Column(name="dateJoined")
+	private String dateJoined;  //入职日期
+	@Column(name="dateLeft")
+	private String dateLeft;  //离职日期
 	@Column(name="workAge")
-	private Integer workAge;  //workAge
+	private String workAge;  //工作年龄
 	@Column(name="emContact")
-	private String emContact;  //emContact
+	private String emContact;  //紧急联系人姓名
 	@Column(name="emTel")
-	private String emTel;  //emTel
+	private String emTel;  //紧急联系电话
 	@Column(name="creater")
-	private String creater;  //creater
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private String creater;  //创建人id
+	@Column(name="createDate")
+	private String createDate;  //创建时间
 	@Column(name="operator")
-	private String operator;  //operator
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //operateDate
+	private String operator;  //最后修改人id
+	@Column(name="operateDate")
+	private String operateDate;  //最后修改日期
 	@Column(name="indexOrder")
-	private Integer indexOrder;  //indexOrder
+	private String indexOrder;  //排序字段
 	@Column(name="note")
-	private String note;  //note
+	private String note;  //备注信息
 	@Column(name="delStatus")
-	private Integer delStatus;  //delStatus
+	private String delStatus;  //删除状态,0正常,1删除
 	
 	
 	//get  set 方法
@@ -139,35 +135,35 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 		this.address = address;
 	}
 
-	public Integer getStatus(){
+	public String getStatus(){
 		return status;
 	}
 
-	public void setStatus(Integer status){
+	public void setStatus(String status){
 		this.status = status;
 	}
 
-	public Date getDateJoined(){
+	public String getDateJoined(){
 		return dateJoined;
 	}
 
-	public void setDateJoined(Date dateJoined){
+	public void setDateJoined(String dateJoined){
 		this.dateJoined = dateJoined;
 	}
 
-	public Date getDateLeft(){
+	public String getDateLeft(){
 		return dateLeft;
 	}
 
-	public void setDateLeft(Date dateLeft){
+	public void setDateLeft(String dateLeft){
 		this.dateLeft = dateLeft;
 	}
 
-	public Integer getWorkAge(){
+	public String getWorkAge(){
 		return workAge;
 	}
 
-	public void setWorkAge(Integer workAge){
+	public void setWorkAge(String workAge){
 		this.workAge = workAge;
 	}
 
@@ -195,11 +191,11 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 		this.creater = creater;
 	}
 
-	public Date getCreateDate(){
+	public String getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate){
+	public void setCreateDate(String createDate){
 		this.createDate = createDate;
 	}
 
@@ -211,19 +207,19 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 		this.operator = operator;
 	}
 
-	public Date getOperateDate(){
+	public String getOperateDate(){
 		return operateDate;
 	}
 
-	public void setOperateDate(Date operateDate){
+	public void setOperateDate(String operateDate){
 		this.operateDate = operateDate;
 	}
 
-	public Integer getIndexOrder(){
+	public String getIndexOrder(){
 		return indexOrder;
 	}
 
-	public void setIndexOrder(Integer indexOrder){
+	public void setIndexOrder(String indexOrder){
 		this.indexOrder = indexOrder;
 	}
 
@@ -235,11 +231,11 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 		this.note = note;
 	}
 
-	public Integer getDelStatus(){
+	public String getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(Integer delStatus){
+	public void setDelStatus(String delStatus){
 		this.delStatus = delStatus;
 	}
 

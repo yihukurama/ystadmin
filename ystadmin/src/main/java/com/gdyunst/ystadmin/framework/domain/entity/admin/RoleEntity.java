@@ -17,23 +17,21 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class RoleEntity extends BaseCrud<RoleEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="text")
-	private String text;  //text
+	private String text;  //角色名称
 	@Column(name="note")
-	private String note;  //note
+	private String note;  //备注信息
 	@Column(name="creater")
-	private String creater;  //creater
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private String creater;  //创建人id
+	@Column(name="createDate")
+	private String createDate;  //创建时间
 	@Column(name="operator")
-	private String operator;  //operator
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //operateDate
+	private String operator;  //最后修改人id
+	@Column(name="operateDate")
+	private String operateDate;  //最后修改日期
 	@Column(name="orgId")
-	private String orgId;  //orgId
+	private String orgId;  //机构id
 	
 	
 	//get  set 方法
@@ -69,11 +67,11 @@ public class RoleEntity extends BaseCrud<RoleEntity>
 		this.creater = creater;
 	}
 
-	public Date getCreateDate(){
+	public String getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate){
+	public void setCreateDate(String createDate){
 		this.createDate = createDate;
 	}
 
@@ -85,11 +83,11 @@ public class RoleEntity extends BaseCrud<RoleEntity>
 		this.operator = operator;
 	}
 
-	public Date getOperateDate(){
+	public String getOperateDate(){
 		return operateDate;
 	}
 
-	public void setOperateDate(Date operateDate){
+	public void setOperateDate(String operateDate){
 		this.operateDate = operateDate;
 	}
 

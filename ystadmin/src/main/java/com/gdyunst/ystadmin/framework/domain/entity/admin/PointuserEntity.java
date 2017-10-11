@@ -21,12 +21,11 @@ public class PointuserEntity extends BaseCrud<PointuserEntity>
 	@Column(name="userId")
 	private String userId;  //userId
 	@Column(name="currentPoint")
-	private Integer currentPoint;  //currentPoint
+	private String currentPoint;  //currentPoint
 	@Column(name="delStatus")
-	private Integer delStatus;  //delStatus
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private String delStatus;  //delStatus
+	@Column(name="createDate")
+	private String createDate;  //createDate
 	
 	
 	//get  set 方法
@@ -46,27 +45,27 @@ public class PointuserEntity extends BaseCrud<PointuserEntity>
 		this.userId = userId;
 	}
 
-	public Integer getCurrentPoint(){
+	public String getCurrentPoint(){
 		return currentPoint;
 	}
 
-	public void setCurrentPoint(Integer currentPoint){
+	public void setCurrentPoint(String currentPoint){
 		this.currentPoint = currentPoint;
 	}
 
-	public Integer getDelStatus(){
+	public String getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(Integer delStatus){
+	public void setDelStatus(String delStatus){
 		this.delStatus = delStatus;
 	}
 
-	public Date getCreateDate(){
+	public String getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate){
+	public void setCreateDate(String createDate){
 		this.createDate = createDate;
 	}
 

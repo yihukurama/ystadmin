@@ -19,20 +19,19 @@ public class PointhistoryEntity extends BaseCrud<PointhistoryEntity>
 	@Id
 	private String id;   //id
 	@Column(name="type")
-	private Integer type;  //type
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private String type;  //获得或消费积分的各种类型
+	@Column(name="createDate")
+	private String createDate;  //createDate
 	@Column(name="value")
-	private Integer value;  //value
+	private String value;  //积分数量
 	@Column(name="delStatus")
-	private Integer delStatus;  //delStatus
+	private String delStatus;  //delStatus
 	@Column(name="tag")
-	private Integer tag;  //tag
+	private String tag;  //1处理案件  2消费
 	@Column(name="currentPoint")
-	private Integer currentPoint;  //currentPoint
+	private String currentPoint;  //当前积分
 	@Column(name="relatedId")
-	private String relatedId;  //relatedId
+	private String relatedId;  //tag为1时是案件id   tag为2时是奖品id
 	@Column(name="userId")
 	private String userId;  //userId
 	@Column(name="realName")
@@ -48,51 +47,51 @@ public class PointhistoryEntity extends BaseCrud<PointhistoryEntity>
 		this.id = id;
 	}
 
-	public Integer getType(){
+	public String getType(){
 		return type;
 	}
 
-	public void setType(Integer type){
+	public void setType(String type){
 		this.type = type;
 	}
 
-	public Date getCreateDate(){
+	public String getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate){
+	public void setCreateDate(String createDate){
 		this.createDate = createDate;
 	}
 
-	public Integer getValue(){
+	public String getValue(){
 		return value;
 	}
 
-	public void setValue(Integer value){
+	public void setValue(String value){
 		this.value = value;
 	}
 
-	public Integer getDelStatus(){
+	public String getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(Integer delStatus){
+	public void setDelStatus(String delStatus){
 		this.delStatus = delStatus;
 	}
 
-	public Integer getTag(){
+	public String getTag(){
 		return tag;
 	}
 
-	public void setTag(Integer tag){
+	public void setTag(String tag){
 		this.tag = tag;
 	}
 
-	public Integer getCurrentPoint(){
+	public String getCurrentPoint(){
 		return currentPoint;
 	}
 
-	public void setCurrentPoint(Integer currentPoint){
+	public void setCurrentPoint(String currentPoint){
 		this.currentPoint = currentPoint;
 	}
 

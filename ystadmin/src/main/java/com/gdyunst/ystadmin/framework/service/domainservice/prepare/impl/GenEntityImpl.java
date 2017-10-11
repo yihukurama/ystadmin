@@ -150,12 +150,21 @@ public class GenEntityImpl implements IGenEntity {
             String columnType = columns.get(i).getType();
             
             entGetSet.append("public "+columnType+" get"+columnName+"(){\n");
-            entGetSet.append("\t\treturn "+name+";\n\t");
+            if(columnType.equals("Double")){//如果是Double类型经常用于计算设默认值0.0
+                entGetSet.append("\t\treturn "+name+"==null?0.0:"+name+";\n\t"); 
+            }else{
+                entGetSet.append("\t\treturn "+name+";\n\t");  
+            }
             entGetSet.append("}\n");
             entGetSet.append("\n\t");
             
             entGetSet.append("public void set"+columnName+"("+columnType+" "+name+"){\n\t");
-            entGetSet.append("\tthis."+name+" = "+name+";\n\t");
+            if(columnType.equals("Double")){//如果是Double类型经常用于计算设默认值0.0
+                entGetSet.append("\tthis."+name+" = "+name+"==null?0.0:"+name+";\n\t"); 
+            }else{
+                entGetSet.append("\tthis."+name+" = "+name+";\n\t");
+            }
+            
             entGetSet.append("}\n\n\t");
         }
         return entGetSet.toString();

@@ -17,14 +17,13 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class UserroleEntity extends BaseCrud<UserroleEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="userId")
-	private String userId;  //userId
+	private String userId;  //账号id
 	@Column(name="roleId")
-	private String roleId;  //roleId
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private String roleId;  //角色id
+	@Column(name="createDate")
+	private String createDate;  //创建时间
 	
 	
 	//get  set 方法
@@ -52,11 +51,11 @@ public class UserroleEntity extends BaseCrud<UserroleEntity>
 		this.roleId = roleId;
 	}
 
-	public Date getCreateDate(){
+	public String getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate){
+	public void setCreateDate(String createDate){
 		this.createDate = createDate;
 	}
 
