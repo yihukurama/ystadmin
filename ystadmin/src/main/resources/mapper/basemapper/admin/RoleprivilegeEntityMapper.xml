@@ -5,9 +5,9 @@
 	<insert id="createRoleprivilege" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity">
 		<![CDATA[
             INSERT INTO admin_roleprivilege
-                (id,subSystemId,privilegeId,roleId,type,
+                (id,subSystemId,privilegeId,roleId,type)
             VALUES 
-                (#{id},#{subSystemId},#{privilegeId},#{roleId},#{type},
+                (#{id},#{subSystemId},#{privilegeId},#{roleId},#{type})
         ]]>
 	</insert>
 
@@ -17,7 +17,7 @@
             UPDATE admin_roleprivilege SET id=id
         ]]>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
-		<if test="type!=null and type!=''">,type=#{type}</if>
+		<if test="type!=null ">,type=#{type}</if>
 		<if test="roleId!=null and roleId!=''">,roleId=#{roleId}</if>
 		<if test="privilegeId!=null and privilegeId!=''">,privilegeId=#{privilegeId}</if>
 		<if test="subSystemId!=null and subSystemId!=''">,subSystemId=#{subSystemId}</if>
@@ -41,7 +41,7 @@
 	  		SELECT * FROM admin_roleprivilege WHERE 1=1
 	  	]]>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
-		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="type!=null'">AND type=#{type}</if>
 		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
 		<if test="privilegeId!=null and privilegeId!=''">AND privilegeId=#{privilegeId}</if>
 		<if test="subSystemId!=null and subSystemId!=''">AND subSystemId=#{subSystemId}</if>
@@ -62,12 +62,12 @@
 	<insert id="insertBatchRoleprivilege" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_roleprivilege
-                (id,subSystemId,privilegeId,roleId,type,
+                (id,subSystemId,privilegeId,roleId,type)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.subSystemId},#{item.privilegeId},#{item.roleId},#{item.type},
+			(#{item.id},#{item.subSystemId},#{item.privilegeId},#{item.roleId},#{item.type})
 		</foreach>
 	</insert>
 

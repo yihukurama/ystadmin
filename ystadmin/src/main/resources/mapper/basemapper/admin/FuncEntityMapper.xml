@@ -17,11 +17,11 @@
             UPDATE admin_func SET id=id
         ]]>
 		<if test="note!=null and note!=''">,note=#{note}</if>
-		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
-		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
 		<if test="serverUrl!=null and serverUrl!=''">,serverUrl=#{serverUrl}</if>
 		<if test="text!=null and text!=''">,text=#{text}</if>
 		<if test="code!=null and code!=''">,code=#{code}</if>
@@ -46,11 +46,11 @@
 	  		SELECT * FROM admin_func WHERE 1=1
 	  	]]>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operateDate!=null'">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
-		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
 		<if test="serverUrl!=null and serverUrl!=''">AND serverUrl=#{serverUrl}</if>
 		<if test="text!=null and text!=''">AND text=#{text}</if>
 		<if test="code!=null and code!=''">AND code=#{code}</if>
@@ -77,7 +77,7 @@
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.subSystemId},#{item.code},#{item.text},#{item.serverUrl},#{item.indexOrder},#{item.creater},#{item.operator},#{item.operateDate},#{item.note},
+			(#{item.id},#{item.subSystemId},#{item.code},#{item.text},#{item.serverUrl},#{item.indexOrder},#{item.creater},#{item.operator},#{item.operateDate},#{item.note})
 		</foreach>
 	</insert>
 

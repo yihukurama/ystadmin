@@ -5,9 +5,9 @@
 	<insert id="createUserrole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
 		<![CDATA[
             INSERT INTO admin_userrole
-                (id,userId,roleId,
+                (id,userId,roleId)
             VALUES 
-                (#{id},#{userId},#{roleId},
+                (#{id},#{userId},#{roleId})
         ]]>
 	</insert>
 
@@ -58,12 +58,12 @@
 	<insert id="insertBatchUserrole" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_userrole
-                (id,userId,roleId,
+                (id,userId,roleId)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.userId},#{item.roleId},
+			(#{item.id},#{item.userId},#{item.roleId})
 		</foreach>
 	</insert>
 

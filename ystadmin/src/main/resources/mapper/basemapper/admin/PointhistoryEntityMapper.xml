@@ -19,12 +19,12 @@
 		<if test="realName!=null and realName!=''">,realName=#{realName}</if>
 		<if test="userId!=null and userId!=''">,userId=#{userId}</if>
 		<if test="relatedId!=null and relatedId!=''">,relatedId=#{relatedId}</if>
-		<if test="currentPoint!=null and currentPoint!=''">,currentPoint=#{currentPoint}</if>
-		<if test="tag!=null and tag!=''">,tag=#{tag}</if>
-		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
-		<if test="value!=null and value!=''">,value=#{value}</if>
+		<if test="currentPoint!=null ">,currentPoint=#{currentPoint}</if>
+		<if test="tag!=null ">,tag=#{tag}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
+		<if test="value!=null ">,value=#{value}</if>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
-		<if test="type!=null and type!=''">,type=#{type}</if>
+		<if test="type!=null ">,type=#{type}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
 		
         <![CDATA[
@@ -47,13 +47,13 @@
 		<if test="realName!=null and realName!=''">AND realName=#{realName}</if>
 		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
 		<if test="relatedId!=null and relatedId!=''">AND relatedId=#{relatedId}</if>
-		<if test="currentPoint!=null and currentPoint!=''">AND currentPoint=#{currentPoint}</if>
-		<if test="tag!=null and tag!=''">AND tag=#{tag}</if>
-		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="currentPoint!=null'">AND currentPoint=#{currentPoint}</if>
+		<if test="tag!=null'">AND tag=#{tag}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
-		<if test="value!=null and value!=''">AND value=#{value}</if>
+		<if test="value!=null'">AND value=#{value}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
-		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="type!=null'">AND type=#{type}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
 		
 		<![CDATA[
@@ -76,7 +76,7 @@
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.type},#{item.value},#{item.delStatus},#{item.tag},#{item.currentPoint},#{item.relatedId},#{item.userId},#{item.realName},
+			(#{item.id},#{item.type},#{item.value},#{item.tag},#{item.currentPoint},#{item.relatedId},#{item.userId},#{item.realName})
 		</foreach>
 	</insert>
 

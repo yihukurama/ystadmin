@@ -5,9 +5,9 @@
 	<insert id="createUser" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserEntity">
 		<![CDATA[
             INSERT INTO admin_user
-                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note,
+                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note)
             VALUES 
-                (#{id},#{employeeId},#{username},#{password},#{status},#{type},#{creater},#{lastLoginDate},#{loginCount},#{ipAddr},#{indexOrder},#{note},
+                (#{id},#{employeeId},#{username},#{password},#{status},#{type},#{creater},#{lastLoginDate},#{loginCount},#{ipAddr},#{indexOrder},#{note})
         ]]>
 	</insert>
 
@@ -16,16 +16,16 @@
         <![CDATA[
             UPDATE admin_user SET id=id
         ]]>
-		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
-		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
 		<if test="ipAddr!=null and ipAddr!=''">,ipAddr=#{ipAddr}</if>
-		<if test="loginCount!=null and loginCount!=''">,loginCount=#{loginCount}</if>
-		<if test="lastLoginDate!=null and lastLoginDate!=''">,lastLoginDate=#{lastLoginDate}</if>
+		<if test="loginCount!=null ">,loginCount=#{loginCount}</if>
+		<if test="lastLoginDate!=null ">,lastLoginDate=#{lastLoginDate}</if>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
-		<if test="type!=null and type!=''">,type=#{type}</if>
-		<if test="status!=null and status!=''">,status=#{status}</if>
+		<if test="type!=null ">,type=#{type}</if>
+		<if test="status!=null ">,status=#{status}</if>
 		<if test="password!=null and password!=''">,password=#{password}</if>
 		<if test="username!=null and username!=''">,username=#{username}</if>
 		<if test="employeeId!=null and employeeId!=''">,employeeId=#{employeeId}</if>
@@ -48,17 +48,17 @@
         <![CDATA[
 	  		SELECT * FROM admin_user WHERE 1=1
 	  	]]>
-		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
 		<if test="ipAddr!=null and ipAddr!=''">AND ipAddr=#{ipAddr}</if>
-		<if test="loginCount!=null and loginCount!=''">AND loginCount=#{loginCount}</if>
-		<if test="lastLoginDate!=null and lastLoginDate!=''">AND lastLoginDate=#{lastLoginDate}</if>
+		<if test="loginCount!=null'">AND loginCount=#{loginCount}</if>
+		<if test="lastLoginDate!=null'">AND lastLoginDate=#{lastLoginDate}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
-		<if test="type!=null and type!=''">AND type=#{type}</if>
-		<if test="status!=null and status!=''">AND status=#{status}</if>
+		<if test="type!=null'">AND type=#{type}</if>
+		<if test="status!=null'">AND status=#{status}</if>
 		<if test="password!=null and password!=''">AND password=#{password}</if>
 		<if test="username!=null and username!=''">AND username=#{username}</if>
 		<if test="employeeId!=null and employeeId!=''">AND employeeId=#{employeeId}</if>
@@ -79,12 +79,12 @@
 	<insert id="insertBatchUser" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_user
-                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note,
+                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.employeeId},#{item.username},#{item.password},#{item.status},#{item.type},#{item.creater},#{item.lastLoginDate},#{item.loginCount},#{item.ipAddr},#{item.indexOrder},#{item.note},#{item.delStatus},
+			(#{item.id},#{item.employeeId},#{item.username},#{item.password},#{item.status},#{item.type},#{item.creater},#{item.lastLoginDate},#{item.loginCount},#{item.ipAddr},#{item.indexOrder},#{item.note})
 		</foreach>
 	</insert>
 

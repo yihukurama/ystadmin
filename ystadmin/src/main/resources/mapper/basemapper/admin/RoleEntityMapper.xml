@@ -17,7 +17,7 @@
             UPDATE admin_role SET id=id
         ]]>
 		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
-		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
@@ -43,7 +43,7 @@
 	  		SELECT * FROM admin_role WHERE 1=1
 	  	]]>
 		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
-		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="operateDate!=null'">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
@@ -71,7 +71,7 @@
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.text},#{item.note},#{item.creater},#{item.operator},#{item.operateDate},#{item.orgId},
+			(#{item.id},#{item.text},#{item.note},#{item.creater},#{item.operator},#{item.operateDate},#{item.orgId})
 		</foreach>
 	</insert>
 

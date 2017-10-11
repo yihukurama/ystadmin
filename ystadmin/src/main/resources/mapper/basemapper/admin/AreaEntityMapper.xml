@@ -5,9 +5,9 @@
 	<insert id="createArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
 		<![CDATA[
 			INSERT INTO admin_area
-				(id,parentId,path,text,type,indexOrder,note,
+				(id,parentId,path,text,type,indexOrder,note)
 			VALUES 
-				(#{id},#{parentId},#{path},#{text},#{type},#{indexOrder},#{note},
+				(#{id},#{parentId},#{path},#{text},#{type},#{indexOrder},#{note})
         ]]>
 	</insert>
 
@@ -17,10 +17,10 @@
 			UPDATE admin_area SET id=id
 		]]>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
-		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
-		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
-		<if test="type!=null and type!=''">,type=#{type}</if>
+		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
+		<if test="type!=null ">,type=#{type}</if>
 		<if test="text!=null and text!=''">,text=#{text}</if>
 		<if test="path!=null and path!=''">,path=#{path}</if>
 		<if test="parentId!=null and parentId!=''">,parentId=#{parentId}</if>
@@ -46,11 +46,11 @@
 	  	 	SELECT * FROM admin_area WHERE 1=1
 	  	]]>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
-		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
-		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
+		<if test="type!=null'">AND type=#{type}</if>
 		<if test="text!=null and text!=''">AND text=#{text}</if>
 		<if test="path!=null and path!=''">AND path=#{path}</if>
 		<if test="parentId!=null and parentId!=''">AND parentId=#{parentId}</if>
@@ -88,12 +88,12 @@
 	<insert id="insertBatchArea" parameterType="java.util.List">
     	<![CDATA[
     		INSERT INTO admin_area
-        		(id,parentId,path,text,type,indexOrder,note,
+        		(id,parentId,path,text,type,indexOrder,note)
         	VALUES
     	]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.parentId},#{item.path},#{item.text},#{item.type},#{item.indexOrder},#{item.note},#{item.delStatus},
+			(#{item.id},#{item.parentId},#{item.path},#{item.text},#{item.type},#{item.indexOrder},#{item.note})
 		</foreach>
 	</insert>
 
