@@ -29,9 +29,10 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 	@Column(name="note")
 	private String note;  //备注信息
 	@Column(name="delStatus")
-	private String delStatus;  //删除状态,0正常,1删除
-	@Column(name="createDate")
-	private String createDate;  //创建时间
+	private Integer delStatus;  //删除状态,0正常,1删除
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //创建时间
 	
 	
 	//get  set 方法
@@ -83,19 +84,19 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 		this.note = note;
 	}
 
-	public String getDelStatus(){
+	public Integer getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(String delStatus){
+	public void setDelStatus(Integer delStatus){
 		this.delStatus = delStatus;
 	}
 
-	public String getCreateDate(){
+	public Date getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
 	}
 

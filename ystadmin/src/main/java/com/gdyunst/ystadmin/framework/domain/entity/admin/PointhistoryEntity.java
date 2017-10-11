@@ -19,17 +19,18 @@ public class PointhistoryEntity extends BaseCrud<PointhistoryEntity>
 	@Id
 	private String id;   //id
 	@Column(name="type")
-	private String type;  //获得或消费积分的各种类型
-	@Column(name="createDate")
-	private String createDate;  //createDate
+	private Integer type;  //获得或消费积分的各种类型
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //createDate
 	@Column(name="value")
-	private String value;  //积分数量
+	private Integer value;  //积分数量
 	@Column(name="delStatus")
-	private String delStatus;  //delStatus
+	private Integer delStatus;  //delStatus
 	@Column(name="tag")
-	private String tag;  //1处理案件  2消费
+	private Integer tag;  //1处理案件  2消费
 	@Column(name="currentPoint")
-	private String currentPoint;  //当前积分
+	private Integer currentPoint;  //当前积分
 	@Column(name="relatedId")
 	private String relatedId;  //tag为1时是案件id   tag为2时是奖品id
 	@Column(name="userId")
@@ -47,51 +48,51 @@ public class PointhistoryEntity extends BaseCrud<PointhistoryEntity>
 		this.id = id;
 	}
 
-	public String getType(){
+	public Integer getType(){
 		return type;
 	}
 
-	public void setType(String type){
+	public void setType(Integer type){
 		this.type = type;
 	}
 
-	public String getCreateDate(){
+	public Date getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
 	}
 
-	public String getValue(){
+	public Integer getValue(){
 		return value;
 	}
 
-	public void setValue(String value){
+	public void setValue(Integer value){
 		this.value = value;
 	}
 
-	public String getDelStatus(){
+	public Integer getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(String delStatus){
+	public void setDelStatus(Integer delStatus){
 		this.delStatus = delStatus;
 	}
 
-	public String getTag(){
+	public Integer getTag(){
 		return tag;
 	}
 
-	public void setTag(String tag){
+	public void setTag(Integer tag){
 		this.tag = tag;
 	}
 
-	public String getCurrentPoint(){
+	public Integer getCurrentPoint(){
 		return currentPoint;
 	}
 
-	public void setCurrentPoint(String currentPoint){
+	public void setCurrentPoint(Integer currentPoint){
 		this.currentPoint = currentPoint;
 	}
 

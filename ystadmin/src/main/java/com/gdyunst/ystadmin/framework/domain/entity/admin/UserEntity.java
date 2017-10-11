@@ -25,25 +25,27 @@ public class UserEntity extends BaseCrud<UserEntity>
 	@Column(name="password")
 	private String password;  //账号密码
 	@Column(name="status")
-	private String status;  //账号状态,1正常,2禁用
+	private Integer status;  //账号状态,1正常,2禁用
 	@Column(name="type")
-	private String type;  //账号类型,1,评估、报价员工,2,保险,3,交警,4,法院
+	private Integer type;  //账号类型,1,评估、报价员工,2,保险,3,交警,4,法院
 	@Column(name="creater")
 	private String creater;  //创建人id
-	@Column(name="createDate")
-	private String createDate;  //创建时间
-	@Column(name="lastLoginDate")
-	private String lastLoginDate;  //最后登录日期
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //创建时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="lastLoginDate")
+	private Date lastLoginDate;  //最后登录日期
 	@Column(name="loginCount")
-	private String loginCount;  //登录次数统计
+	private Integer loginCount;  //登录次数统计
 	@Column(name="ipAddr")
 	private String ipAddr;  //用户最后登录时的ip地址
 	@Column(name="indexOrder")
-	private String indexOrder;  //排序字段
+	private Integer indexOrder;  //排序字段
 	@Column(name="note")
 	private String note;  //备注信息
 	@Column(name="delStatus")
-	private String delStatus;  //删除状态,0正常,1删除
+	private Integer delStatus;  //删除状态,0正常,1删除
 	
 	
 	//get  set 方法
@@ -79,19 +81,19 @@ public class UserEntity extends BaseCrud<UserEntity>
 		this.password = password;
 	}
 
-	public String getStatus(){
+	public Integer getStatus(){
 		return status;
 	}
 
-	public void setStatus(String status){
+	public void setStatus(Integer status){
 		this.status = status;
 	}
 
-	public String getType(){
+	public Integer getType(){
 		return type;
 	}
 
-	public void setType(String type){
+	public void setType(Integer type){
 		this.type = type;
 	}
 
@@ -103,27 +105,27 @@ public class UserEntity extends BaseCrud<UserEntity>
 		this.creater = creater;
 	}
 
-	public String getCreateDate(){
+	public Date getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
 	}
 
-	public String getLastLoginDate(){
+	public Date getLastLoginDate(){
 		return lastLoginDate;
 	}
 
-	public void setLastLoginDate(String lastLoginDate){
+	public void setLastLoginDate(Date lastLoginDate){
 		this.lastLoginDate = lastLoginDate;
 	}
 
-	public String getLoginCount(){
+	public Integer getLoginCount(){
 		return loginCount;
 	}
 
-	public void setLoginCount(String loginCount){
+	public void setLoginCount(Integer loginCount){
 		this.loginCount = loginCount;
 	}
 
@@ -135,11 +137,11 @@ public class UserEntity extends BaseCrud<UserEntity>
 		this.ipAddr = ipAddr;
 	}
 
-	public String getIndexOrder(){
+	public Integer getIndexOrder(){
 		return indexOrder;
 	}
 
-	public void setIndexOrder(String indexOrder){
+	public void setIndexOrder(Integer indexOrder){
 		this.indexOrder = indexOrder;
 	}
 
@@ -151,11 +153,11 @@ public class UserEntity extends BaseCrud<UserEntity>
 		this.note = note;
 	}
 
-	public String getDelStatus(){
+	public Integer getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(String delStatus){
+	public void setDelStatus(Integer delStatus){
 		this.delStatus = delStatus;
 	}
 

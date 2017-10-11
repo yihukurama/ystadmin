@@ -37,7 +37,7 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 	@Column(name="principalId")
 	private String principalId;  //机构负责人id
 	@Column(name="indexOrder")
-	private String indexOrder;  //排序字段
+	private Integer indexOrder;  //排序字段
 	@Column(name="lng")
 	private Double lng;  //机构所在地经度
 	@Column(name="lat")
@@ -46,16 +46,18 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 	private String note;  //备注信息
 	@Column(name="creater")
 	private String creater;  //创建人id
-	@Column(name="createDate")
-	private String createDate;  //创建时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //创建时间
 	@Column(name="operator")
 	private String operator;  //最后修改人id
-	@Column(name="operateDate")
-	private String operateDate;  //最后修改日期
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
+	private Date operateDate;  //最后修改日期
 	@Column(name="printQuotor")
 	private Boolean printQuotor;  //是否打印报价人姓名,默认不打印
 	@Column(name="delStatus")
-	private String delStatus;  //删除状态,0未删除,1删除
+	private Integer delStatus;  //删除状态,0未删除,1删除
 	
 	
 	//get  set 方法
@@ -139,11 +141,11 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 		this.principalId = principalId;
 	}
 
-	public String getIndexOrder(){
+	public Integer getIndexOrder(){
 		return indexOrder;
 	}
 
-	public void setIndexOrder(String indexOrder){
+	public void setIndexOrder(Integer indexOrder){
 		this.indexOrder = indexOrder;
 	}
 
@@ -179,11 +181,11 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 		this.creater = creater;
 	}
 
-	public String getCreateDate(){
+	public Date getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
 	}
 
@@ -195,11 +197,11 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 		this.operator = operator;
 	}
 
-	public String getOperateDate(){
+	public Date getOperateDate(){
 		return operateDate;
 	}
 
-	public void setOperateDate(String operateDate){
+	public void setOperateDate(Date operateDate){
 		this.operateDate = operateDate;
 	}
 
@@ -211,11 +213,11 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 		this.printQuotor = printQuotor;
 	}
 
-	public String getDelStatus(){
+	public Integer getDelStatus(){
 		return delStatus;
 	}
 
-	public void setDelStatus(String delStatus){
+	public void setDelStatus(Integer delStatus){
 		this.delStatus = delStatus;
 	}
 

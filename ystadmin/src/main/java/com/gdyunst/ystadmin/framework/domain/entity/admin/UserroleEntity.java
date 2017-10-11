@@ -22,8 +22,9 @@ public class UserroleEntity extends BaseCrud<UserroleEntity>
 	private String userId;  //账号id
 	@Column(name="roleId")
 	private String roleId;  //角色id
-	@Column(name="createDate")
-	private String createDate;  //创建时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //创建时间
 	
 	
 	//get  set 方法
@@ -51,11 +52,11 @@ public class UserroleEntity extends BaseCrud<UserroleEntity>
 		this.roleId = roleId;
 	}
 
-	public String getCreateDate(){
+	public Date getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
 	}
 

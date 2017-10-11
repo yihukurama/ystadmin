@@ -24,12 +24,14 @@ public class RoleEntity extends BaseCrud<RoleEntity>
 	private String note;  //备注信息
 	@Column(name="creater")
 	private String creater;  //创建人id
-	@Column(name="createDate")
-	private String createDate;  //创建时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //创建时间
 	@Column(name="operator")
 	private String operator;  //最后修改人id
-	@Column(name="operateDate")
-	private String operateDate;  //最后修改日期
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
+	private Date operateDate;  //最后修改日期
 	@Column(name="orgId")
 	private String orgId;  //机构id
 	
@@ -67,11 +69,11 @@ public class RoleEntity extends BaseCrud<RoleEntity>
 		this.creater = creater;
 	}
 
-	public String getCreateDate(){
+	public Date getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
 	}
 
@@ -83,11 +85,11 @@ public class RoleEntity extends BaseCrud<RoleEntity>
 		this.operator = operator;
 	}
 
-	public String getOperateDate(){
+	public Date getOperateDate(){
 		return operateDate;
 	}
 
-	public void setOperateDate(String operateDate){
+	public void setOperateDate(Date operateDate){
 		this.operateDate = operateDate;
 	}
 

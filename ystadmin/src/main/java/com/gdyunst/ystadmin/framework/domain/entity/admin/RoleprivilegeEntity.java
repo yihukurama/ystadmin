@@ -25,9 +25,10 @@ public class RoleprivilegeEntity extends BaseCrud<RoleprivilegeEntity>
 	@Column(name="roleId")
 	private String roleId;  //角色id
 	@Column(name="type")
-	private String type;  //权限类型,1系统,3菜单,4功能
-	@Column(name="createDate")
-	private String createDate;  //创建时间
+	private Integer type;  //权限类型,1系统,3菜单,4功能
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //创建时间
 	
 	
 	//get  set 方法
@@ -63,19 +64,19 @@ public class RoleprivilegeEntity extends BaseCrud<RoleprivilegeEntity>
 		this.roleId = roleId;
 	}
 
-	public String getType(){
+	public Integer getType(){
 		return type;
 	}
 
-	public void setType(String type){
+	public void setType(Integer type){
 		this.type = type;
 	}
 
-	public String getCreateDate(){
+	public Date getCreateDate(){
 		return createDate;
 	}
 
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
 	}
 

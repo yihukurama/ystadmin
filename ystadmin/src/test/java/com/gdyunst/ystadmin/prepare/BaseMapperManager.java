@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.gdyunst.ystadmin.application.utils.LogUtil;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenEntity;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenMapper;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Column;
@@ -83,6 +84,7 @@ public class BaseMapperManager {
                     }  
                     
                     String dbType = rs.getString("TYPE_NAME");  
+                    LogUtil.DebugLog(this, tableName+"------------"+ colName+"----------->"+dbType);
                     String javaType = Column.sqlType2JavaType(dbType);
                     Column column = new Column();
                     column.setName(colName);  
