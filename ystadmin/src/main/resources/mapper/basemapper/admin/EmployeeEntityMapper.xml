@@ -59,17 +59,17 @@
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
-		<if test="operateDate!=null'">AND operateDate=#{operateDate}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
 		<if test="emTel!=null and emTel!=''">AND emTel=#{emTel}</if>
 		<if test="emContact!=null and emContact!=''">AND emContact=#{emContact}</if>
-		<if test="workAge!=null'">AND workAge=#{workAge}</if>
-		<if test="dateLeft!=null'">AND dateLeft=#{dateLeft}</if>
-		<if test="dateJoined!=null'">AND dateJoined=#{dateJoined}</if>
-		<if test="status!=null'">AND status=#{status}</if>
+		<if test="workAge!=null">AND workAge=#{workAge}</if>
+		<if test="dateLeft!=null">AND dateLeft=#{dateLeft}</if>
+		<if test="dateJoined!=null">AND dateJoined=#{dateJoined}</if>
+		<if test="status!=null">AND status=#{status}</if>
 		<if test="address!=null and address!=''">AND address=#{address}</if>
 		<if test="email!=null and email!=''">AND email=#{email}</if>
 		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>

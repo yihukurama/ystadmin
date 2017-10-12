@@ -50,11 +50,11 @@
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="operateDate!=null'">AND operateDate=#{operateDate}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
-		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
 		<if test="principalId!=null and principalId!=''">AND principalId=#{principalId}</if>
 		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
 		<if test="text!=null and text!=''">AND text=#{text}</if>

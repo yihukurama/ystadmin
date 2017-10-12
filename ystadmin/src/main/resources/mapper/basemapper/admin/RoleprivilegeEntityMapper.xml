@@ -41,7 +41,7 @@
 	  		SELECT * FROM admin_roleprivilege WHERE 1=1
 	  	]]>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
-		<if test="type!=null'">AND type=#{type}</if>
+		<if test="type!=null">AND type=#{type}</if>
 		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
 		<if test="privilegeId!=null and privilegeId!=''">AND privilegeId=#{privilegeId}</if>
 		<if test="subSystemId!=null and subSystemId!=''">AND subSystemId=#{subSystemId}</if>

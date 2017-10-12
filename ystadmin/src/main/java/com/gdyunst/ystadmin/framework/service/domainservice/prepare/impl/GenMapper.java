@@ -312,7 +312,7 @@ public class GenMapper implements IGenMapper {
         List<Column> columns = table.getColumns();
         String listColumns = "";
         String tempLine = "<if test=\"%s!=null and %s!=''\">AND %s=#{%s}</if>\n\t\t";
-        String tempLine2 = "<if test=\"%s!=null'\">AND %s=#{%s}</if>\n\t\t";
+        String tempLine2 = "<if test=\"%s!=null\">AND %s=#{%s}</if>\n\t\t";
         for (int i = columns.size()-1; i >= 0; i--) {
             Column column = columns.get(i);
             if (column.getName().equals(PrepareConstant.DBCOLUMN_DELSTATUS)) {
@@ -323,7 +323,10 @@ public class GenMapper implements IGenMapper {
             } else if(column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)){
                 tempLine = "<if test=\"createDate!=null\">AND createDate=#{createDate}</if>\n\t\t";
                 listColumns += tempLine;
-            } else {
+            } else{
+                if(column.getType().equals("Double")){//若字段是Double则不作为查询条件
+                    continue;
+                }
                 if(!column.getType().equals("String")){//若不是字符串类型
                     tempLine = String.format(tempLine2, column.getName(), column.getName(),column.getName());
                 }else{

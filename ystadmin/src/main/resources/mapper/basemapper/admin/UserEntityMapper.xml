@@ -51,14 +51,14 @@
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
 		<if test="ipAddr!=null and ipAddr!=''">AND ipAddr=#{ipAddr}</if>
-		<if test="loginCount!=null'">AND loginCount=#{loginCount}</if>
-		<if test="lastLoginDate!=null'">AND lastLoginDate=#{lastLoginDate}</if>
+		<if test="loginCount!=null">AND loginCount=#{loginCount}</if>
+		<if test="lastLoginDate!=null">AND lastLoginDate=#{lastLoginDate}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
-		<if test="type!=null'">AND type=#{type}</if>
-		<if test="status!=null'">AND status=#{status}</if>
+		<if test="type!=null">AND type=#{type}</if>
+		<if test="status!=null">AND status=#{status}</if>
 		<if test="password!=null and password!=''">AND password=#{password}</if>
 		<if test="username!=null and username!=''">AND username=#{username}</if>
 		<if test="employeeId!=null and employeeId!=''">AND employeeId=#{employeeId}</if>

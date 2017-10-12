@@ -49,8 +49,8 @@
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
-		<if test="type!=null'">AND type=#{type}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
+		<if test="type!=null">AND type=#{type}</if>
 		<if test="text!=null and text!=''">AND text=#{text}</if>
 		<if test="path!=null and path!=''">AND path=#{path}</if>
 		<if test="parentId!=null and parentId!=''">AND parentId=#{parentId}</if>

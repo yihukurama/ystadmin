@@ -47,13 +47,13 @@
 		<if test="realName!=null and realName!=''">AND realName=#{realName}</if>
 		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
 		<if test="relatedId!=null and relatedId!=''">AND relatedId=#{relatedId}</if>
-		<if test="currentPoint!=null'">AND currentPoint=#{currentPoint}</if>
-		<if test="tag!=null'">AND tag=#{tag}</if>
+		<if test="currentPoint!=null">AND currentPoint=#{currentPoint}</if>
+		<if test="tag!=null">AND tag=#{tag}</if>
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
-		<if test="value!=null'">AND value=#{value}</if>
+		<if test="value!=null">AND value=#{value}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
-		<if test="type!=null'">AND type=#{type}</if>
+		<if test="type!=null">AND type=#{type}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
 		
 		<![CDATA[

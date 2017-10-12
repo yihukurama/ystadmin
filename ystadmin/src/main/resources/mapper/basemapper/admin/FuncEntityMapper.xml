@@ -46,11 +46,11 @@
 	  		SELECT * FROM admin_func WHERE 1=1
 	  	]]>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="operateDate!=null'">AND operateDate=#{operateDate}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
-		<if test="indexOrder!=null'">AND indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
 		<if test="serverUrl!=null and serverUrl!=''">AND serverUrl=#{serverUrl}</if>
 		<if test="text!=null and text!=''">AND text=#{text}</if>
 		<if test="code!=null and code!=''">AND code=#{code}</if>
