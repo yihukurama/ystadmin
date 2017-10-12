@@ -10,8 +10,20 @@ public class SystemConfig {
     private Boolean isWriteLog; // 是否写日志
     private String urlLogFile;
     
+    //系统id
+    private String adminSystemId;	//管理后台
     
-    public String getUrlLogFile() {
+    
+
+	public String getAdminSystemId() {
+		return adminSystemId;
+	}
+
+	public void setAdminSystemId(String adminSystemId) {
+		this.adminSystemId = adminSystemId;
+	}
+
+	public String getUrlLogFile() {
         return urlLogFile;
     }
 

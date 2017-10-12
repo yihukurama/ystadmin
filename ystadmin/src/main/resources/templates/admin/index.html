@@ -66,14 +66,19 @@
 			</div>
 			<div class="layui-side layui-bg-black" id="admin-side">
 				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side">
-                    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
-                        <li class="layui-nav-item layui-nav-itemed">
-                            <a href="javascript:;" th:each="value:${rootMenuList}" th:text="${rootMenu}">默认展开</a>
-                            <dl class="layui-nav-child">
-                                <dd><a href="javascript:;"  th:each="value:${menuList}" th:text="${menu}">选项一</a></dd>
+                    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;"   >
+						<div th:each="menu,iterStat : ${menus}">
+                        <li class="layui-nav-item">
+                            <a href="javascript:;"  th:text="${menu.text}">默认展开</a>
+                            <dl class="layui-nav-child"  th:each="subMenu,iterStat2: ${menu.getSubMenus()}">
+                                <dd><a href="javascript:;"    th:text="${subMenu.text}">选项一</a></dd>
                             </dl>
                         </li>
-                        <li class="layui-nav-item"><a href="" th:each="value:${menuList}" th:text="${menu}">云市场</a></li>
+
+                        <li class="layui-nav-item" th:if="${menu.getSubMenus().size()==0}" >
+							<a href="javascript:;"  th:text="${menu.text}">云市场</a>
+						</li>
+						</div>
                     </ul>
 				</div>
 			</div>
