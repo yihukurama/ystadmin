@@ -17,37 +17,37 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class MenuEntity extends BaseCrud<MenuEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="subSystemId")
-	private String subSystemId;  //subSystemId
+	private String subSystemId;  //菜单所属子系统id
 	@Column(name="parentId")
-	private String parentId;  //parentId
+	private String parentId;  //父级菜单id,该值为root代表菜单为一级菜单
 	@Column(name="path")
-	private String path;  //path
+	private String path;  //分层路径
 	@Column(name="code")
-	private String code;  //code
+	private String code;  //菜单编码
 	@Column(name="text")
-	private String text;  //text
+	private String text;  //菜单名称
 	@Column(name="linkUrl")
-	private String linkUrl;  //linkUrl
+	private String linkUrl;  //extjs链接
 	@Column(name="serverUrl")
-	private String serverUrl;  //serverUrl
+	private String serverUrl;  //菜单接口地址
 	@Column(name="iconClass")
-	private String iconClass;  //iconClass
+	private String iconClass;  //图标样式
 	@Column(name="indexOrder")
-	private Integer indexOrder;  //indexOrder
+	private String indexOrder;  //排序字段
 	@Column(name="creater")
-	private String creater;  //creater
+	private String creater;  //创建人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private Date createDate;  //创建时间
 	@Column(name="operator")
-	private String operator;  //operator
+	private String operator;  //最后修改人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //operateDate
+	private Date operateDate;  //最后修改日期
 	@Column(name="note")
-	private String note;  //note
+	private String note;  //备注信息
 	
 	
 	//get  set 方法
@@ -123,11 +123,11 @@ public class MenuEntity extends BaseCrud<MenuEntity>
 		this.iconClass = iconClass;
 	}
 
-	public Integer getIndexOrder(){
+	public String getIndexOrder(){
 		return indexOrder;
 	}
 
-	public void setIndexOrder(Integer indexOrder){
+	public void setIndexOrder(String indexOrder){
 		this.indexOrder = indexOrder;
 	}
 

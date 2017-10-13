@@ -17,53 +17,53 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="orgId")
-	private String orgId;  //orgId
+	private String orgId;  //员工所属机构id
 	@Column(name="departmentId")
-	private String departmentId;  //departmentId
+	private String departmentId;  //员工所属部门id
 	@Column(name="code")
-	private String code;  //code
+	private String code;  //员工编号
 	@Column(name="realName")
-	private String realName;  //realName
+	private String realName;  //员工真实姓名
 	@Column(name="mobile")
-	private String mobile;  //mobile
+	private String mobile;  //员工手机号码
 	@Column(name="tel")
-	private String tel;  //tel
+	private String tel;  //联系电话
 	@Column(name="email")
-	private String email;  //email
+	private String email;  //邮箱地址
 	@Column(name="address")
-	private String address;  //address
+	private String address;  //联系地址
 	@Column(name="status")
-	private Integer status;  //status
+	private Integer status;  //状态,0在职,1离职,2停职
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="dateJoined")
-	private Date dateJoined;  //dateJoined
+	private Date dateJoined;  //入职日期
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="dateLeft")
-	private Date dateLeft;  //dateLeft
+	private Date dateLeft;  //离职日期
 	@Column(name="workAge")
-	private Integer workAge;  //workAge
+	private Integer workAge;  //工作年龄
 	@Column(name="emContact")
-	private String emContact;  //emContact
+	private String emContact;  //紧急联系人姓名
 	@Column(name="emTel")
-	private String emTel;  //emTel
+	private String emTel;  //紧急联系电话
 	@Column(name="creater")
-	private String creater;  //creater
+	private String creater;  //创建人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private Date createDate;  //创建时间
 	@Column(name="operator")
-	private String operator;  //operator
+	private String operator;  //最后修改人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //operateDate
+	private Date operateDate;  //最后修改日期
 	@Column(name="indexOrder")
-	private Integer indexOrder;  //indexOrder
+	private Integer indexOrder;  //排序字段
 	@Column(name="note")
-	private String note;  //note
+	private String note;  //备注信息
 	@Column(name="delStatus")
-	private Integer delStatus;  //delStatus
+	private Integer delStatus;  //删除状态,0正常,1删除
 	
 	
 	//get  set 方法

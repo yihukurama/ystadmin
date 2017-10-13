@@ -5,9 +5,9 @@
 	<insert id="createOrganization" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.OrganizationEntity">
 		<![CDATA[
 			INSERT INTO admin_organization
-				(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,delStatus)
+				(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor)
 			VALUES 
-				(#{id},#{parentId},#{path},#{code},#{text},#{areaId},#{areaText},#{address},#{tel},#{principalId},#{indexOrder},#{lng},#{lat},#{note},#{creater},#{operator},#{operateDate},#{printQuotor},#{delStatus})
+				(#{id},#{parentId},#{path},#{code},#{text},#{areaId},#{areaText},#{address},#{tel},#{principalId},#{indexOrder},#{lng},#{lat},#{note},#{creater},#{operator},#{operateDate},#{printQuotor})
         ]]>
 	</insert>
 
@@ -16,16 +16,16 @@
         <![CDATA[
 			UPDATE admin_organization SET id=id
 		]]>
-		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
-		<if test="printQuotor!=null and printQuotor!=''">,printQuotor=#{printQuotor}</if>
-		<if test="operateDate!=null and operateDate!=''">,operateDate=#{operateDate}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
+		<if test="printQuotor!=null ">,printQuotor=#{printQuotor}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
-		<if test="lat!=null and lat!=''">,lat=#{lat}</if>
-		<if test="lng!=null and lng!=''">,lng=#{lng}</if>
-		<if test="indexOrder!=null and indexOrder!=''">,indexOrder=#{indexOrder}</if>
+		<if test="lat!=null ">,lat=#{lat}</if>
+		<if test="lng!=null ">,lng=#{lng}</if>
+		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
 		<if test="principalId!=null and principalId!=''">,principalId=#{principalId}</if>
 		<if test="tel!=null and tel!=''">,tel=#{tel}</if>
 		<if test="address!=null and address!=''">,address=#{address}</if>
@@ -56,17 +56,15 @@
         <![CDATA[
 	  	 	SELECT * FROM admin_organization WHERE 1=1
 	  	]]>
-		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
-		<if test="printQuotor!=null and printQuotor!=''">AND printQuotor=#{printQuotor}</if>
-		<if test="operateDate!=null and operateDate!=''">AND operateDate=#{operateDate}</if>
+		<if test="printQuotor!=null">AND printQuotor=#{printQuotor}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="lat!=null and lat!=''">AND lat=#{lat}</if>
-		<if test="lng!=null and lng!=''">AND lng=#{lng}</if>
-		<if test="indexOrder!=null and indexOrder!=''">AND indexOrder=#{indexOrder}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
 		<if test="principalId!=null and principalId!=''">AND principalId=#{principalId}</if>
 		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
 		<if test="address!=null and address!=''">AND address=#{address}</if>
@@ -110,12 +108,12 @@
 	<insert id="insertBatchOrganization" parameterType="java.util.List">
     	<![CDATA[
     		INSERT INTO admin_organization
-        		(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor,delStatus)
+        		(id,parentId,path,code,text,areaId,areaText,address,tel,principalId,indexOrder,lng,lat,note,creater,operator,operateDate,printQuotor)
         	VALUES
     	]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.parentId},#{item.path},#{item.code},#{item.text},#{item.areaId},#{item.areaText},#{item.address},#{item.tel},#{item.principalId},#{item.indexOrder},#{item.lng},#{item.lat},#{item.note},#{item.creater},#{item.operator},#{item.operateDate},#{item.printQuotor},#{item.delStatus},
+			(#{item.id},#{item.parentId},#{item.path},#{item.code},#{item.text},#{item.areaId},#{item.areaText},#{item.address},#{item.tel},#{item.principalId},#{item.indexOrder},#{item.lng},#{item.lat},#{item.note},#{item.creater},#{item.operator},#{item.operateDate},#{item.printQuotor})
 		</foreach>
 	</insert>
 

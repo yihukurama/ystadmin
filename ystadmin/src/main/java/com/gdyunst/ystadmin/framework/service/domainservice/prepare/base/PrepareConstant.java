@@ -15,4 +15,7 @@ public class PrepareConstant {
     public static String mapperPath = "src/main/resources/mapper/basemapper/admin";
     public static String entityPath = "src/main/java/com/gdyunst/"+PROJECT+"/framework/domain/entity/admin";
     public static String entityBusinessPath = "src/main/java/com/gdyunst/"+PROJECT+"/framework/domain/entity/business";
+    
+    //司法调解系统
+
 }

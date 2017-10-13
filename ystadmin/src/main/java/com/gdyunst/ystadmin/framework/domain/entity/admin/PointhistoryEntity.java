@@ -19,20 +19,20 @@ public class PointhistoryEntity extends BaseCrud<PointhistoryEntity>
 	@Id
 	private String id;   //id
 	@Column(name="type")
-	private Integer type;  //type
+	private Integer type;  //获得或消费积分的各种类型
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
 	private Date createDate;  //createDate
 	@Column(name="value")
-	private Integer value;  //value
+	private Integer value;  //积分数量
 	@Column(name="delStatus")
 	private Integer delStatus;  //delStatus
 	@Column(name="tag")
-	private Integer tag;  //tag
+	private Integer tag;  //1处理案件  2消费
 	@Column(name="currentPoint")
-	private Integer currentPoint;  //currentPoint
+	private Integer currentPoint;  //当前积分
 	@Column(name="relatedId")
-	private String relatedId;  //relatedId
+	private String relatedId;  //tag为1时是案件id   tag为2时是奖品id
 	@Column(name="userId")
 	private String userId;  //userId
 	@Column(name="realName")

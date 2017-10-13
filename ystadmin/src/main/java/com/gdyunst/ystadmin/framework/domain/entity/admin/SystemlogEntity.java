@@ -17,25 +17,22 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="userId")
-	private String userId;  //userId
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //operateDate
+	private String userId;  //用户id
 	@Column(name="content")
-	private String content;  //content
+	private String content;  //日志内容
 	@Column(name="interfaceAddress")
-	private String interfaceAddress;  //interfaceAddress
+	private String interfaceAddress;  //访问接口地址
 	@Column(name="requestIP")
-	private String requestIP;  //requestIP
+	private String requestIP;  //请求的IP
 	@Column(name="note")
-	private String note;  //note
+	private String note;  //备注信息
 	@Column(name="delStatus")
-	private Integer delStatus;  //delStatus
+	private Integer delStatus;  //删除状态,0正常,1删除
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private Date createDate;  //创建时间
 	
 	
 	//get  set 方法
@@ -53,14 +50,6 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 
 	public void setUserId(String userId){
 		this.userId = userId;
-	}
-
-	public Date getOperateDate(){
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate){
-		this.operateDate = operateDate;
 	}
 
 	public String getContent(){

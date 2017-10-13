@@ -17,24 +17,24 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class AreaEntity extends BaseCrud<AreaEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="parentId")
-	private String parentId;  //parentId
+	private String parentId;  //父类区域id,root代表一级行政区划,默认为root;
 	@Column(name="path")
-	private String path;  //path
+	private String path;  //分层路径
 	@Column(name="text")
-	private String text;  //text
+	private String text;  //区域名称
 	@Column(name="type")
-	private Integer type;  //type
+	private Integer type;  //区域类型(1省、直辖市、自治区、特别行政区;2市;3区、县,4,乡镇)
 	@Column(name="indexOrder")
-	private Integer indexOrder;  //indexOrder
+	private Integer indexOrder;  //排序字段
 	@Column(name="note")
-	private String note;  //note
+	private String note;  //备注信息
 	@Column(name="delStatus")
-	private Integer delStatus;  //delStatus
+	private Integer delStatus;  //删除状态,0未删除,1删除
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private Date createDate;  //创建时间
 	
 	
 	//get  set 方法

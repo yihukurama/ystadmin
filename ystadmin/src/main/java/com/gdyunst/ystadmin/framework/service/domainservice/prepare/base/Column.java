@@ -58,6 +58,12 @@ public class Column {
         case "DOUBLE":
             javaType = "Double";
             break;
+        case "DATETIME":
+            javaType = "Date";
+            break;
+        case "INT":
+            javaType = "Integer";
+            break;
         default:
             javaType = "String";
         }

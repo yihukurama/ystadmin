@@ -224,6 +224,17 @@ public class GenMapper implements IGenMapper {
         for (int i = 0; i < columns.size(); i++) {
             Column column = columns.get(i);
             if (column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)) {
+                if (i == columns.size() - 1) {
+                    dbColumns = dbColumns.substring(0,dbColumns.length() - 1);
+                    dbColumns +=  ")";
+                }
+                continue;
+            }
+            if (column.getName().equals(PrepareConstant.DBCOLUMN_DELSTATUS)) {
+                if (i == columns.size() - 1) {
+                    dbColumns = dbColumns.substring(0,dbColumns.length() - 1);
+                    dbColumns +=  ")";
+                }
                 continue;
             }
             if (i < columns.size() - 1) {
@@ -244,6 +255,17 @@ public class GenMapper implements IGenMapper {
         for (int i = 0; i < columns.size(); i++) {
             Column column = columns.get(i);
             if (column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)) {
+                if (i == columns.size() - 1) {
+                    insertColumns = insertColumns.substring(0,insertColumns.length() - 1);
+                    insertColumns += ")";
+                }
+                continue;
+            }
+            if (column.getName().equals(PrepareConstant.DBCOLUMN_DELSTATUS)) {
+                if (i == columns.size() - 1) {
+                    insertColumns = insertColumns.substring(0,insertColumns.length() - 1);
+                    insertColumns +=  ")";
+                }
                 continue;
             }
             if (i < columns.size() - 1) {
@@ -261,10 +283,21 @@ public class GenMapper implements IGenMapper {
         List<Column> columns = table.getColumns();
         String updateColumns = "";
         String tempLine = "<if test=\"%s!=null and %s!=''\">,%s=#{%s}</if>\n\t\t";
+        String tempLine2 = "<if test=\"%s!=null \">,%s=#{%s}</if>\n\t\t";
         for (int i = columns.size()-1; i >= 0; i--) {
             Column column = columns.get(i);
             LogUtil.DebugLog(this.getClass(), "tempLine is ------------->"+tempLine);
-            tempLine = String.format(tempLine, column.getName(), column.getName(), column.getName(),column.getName());
+            if(column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)){
+                tempLine = "<if test=\"createDate!=null\">,createDate=#{createDate}</if>\n\t\t";
+            }else{
+                if(!column.getType().equals("String")){
+                    tempLine = String.format(tempLine2, column.getName(), column.getName(),column.getName());
+                }else{
+                    tempLine = String.format(tempLine, column.getName(), column.getName(), column.getName(),column.getName());
+                }
+                
+            }
+            
             LogUtil.DebugLog(this.getClass(), "column name is ------------->"+column.getName());
             LogUtil.DebugLog(this.getClass(), "tempLine is ------------->"+tempLine);
             updateColumns += tempLine;
@@ -279,17 +312,31 @@ public class GenMapper implements IGenMapper {
         List<Column> columns = table.getColumns();
         String listColumns = "";
         String tempLine = "<if test=\"%s!=null and %s!=''\">AND %s=#{%s}</if>\n\t\t";
+        String tempLine2 = "<if test=\"%s!=null\">AND %s=#{%s}</if>\n\t\t";
         for (int i = columns.size()-1; i >= 0; i--) {
             Column column = columns.get(i);
             if (column.getName().equals(PrepareConstant.DBCOLUMN_DELSTATUS)) {
-                tempLine = "<if test=\"delStatus!=null and delStatus!=''\">AND delStatus=#{delStatus}</if>\n\t\t";
+                tempLine = "<if test=\"delStatus!=null \">AND delStatus=#{delStatus}</if>\n\t\t";
                 listColumns += tempLine;
                 tempLine = "<if test=\"delStatus==null\">AND delStatus=0</if>\n\t\t";
                 listColumns += tempLine;
-            } else {
-                tempLine = String.format(tempLine, column.getName(), column.getName(), column.getName(),column.getName());
+            } else if(column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)){
+                tempLine = "<if test=\"createDate!=null\">AND createDate=#{createDate}</if>\n\t\t";
+                listColumns += tempLine;
+            } else{
+                if(column.getType().equals("Double")){//若字段是Double则不作为查询条件
+                    continue;
+                }
+                if(!column.getType().equals("String")){//若不是字符串类型
+                    tempLine = String.format(tempLine2, column.getName(), column.getName(),column.getName());
+                }else{
+                    tempLine = String.format(tempLine, column.getName(), column.getName(), column.getName(),column.getName());
+                }
+                
                 listColumns += tempLine;
             }
+            
+            
             tempLine = "<if test=\"%s!=null and %s!=''\">AND %s=#{%s}</if>\n\t\t";
         }
 
@@ -317,12 +364,23 @@ public class GenMapper implements IGenMapper {
         for (int i = 0; i < columns.size(); i++) {
             Column column = columns.get(i);
             if (column.getName().equals(PrepareConstant.DBCOLUMN_CREATEDATE)) {
+                if (i == columns.size() - 1) {
+                    insertColumns = insertColumns.substring(0,insertColumns.length() - 1);
+                    insertColumns += ")";
+                }
+                continue;
+            }
+            if (column.getName().equals(PrepareConstant.DBCOLUMN_DELSTATUS)) {
+                if (i == columns.size() - 1) {
+                    insertColumns = insertColumns.substring(0,insertColumns.length() - 1);
+                    insertColumns +=  ")";
+                }
                 continue;
             }
             if (i < columns.size() - 1) {
                 insertColumns += "#{item." + column.getName() + "},";
             } else {
-                insertColumns += "#{item." + column.getName() + "},";
+                insertColumns += "#{item." + column.getName() + "})";
             }
         }
 

@@ -5,9 +5,9 @@
 	<insert id="createPointuser" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.PointuserEntity">
 		<![CDATA[
             INSERT INTO service_pointuser
-                (id,userId,currentPoint,delStatus,
+                (id,userId,currentPoint)
             VALUES 
-                (#{id},#{userId},#{currentPoint},#{delStatus},
+                (#{id},#{userId},#{currentPoint})
         ]]>
 	</insert>
 
@@ -16,9 +16,9 @@
         <![CDATA[
             UPDATE service_pointuser SET id=id
         ]]>
-		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
-		<if test="delStatus!=null and delStatus!=''">,delStatus=#{delStatus}</if>
-		<if test="currentPoint!=null and currentPoint!=''">,currentPoint=#{currentPoint}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
+		<if test="currentPoint!=null ">,currentPoint=#{currentPoint}</if>
 		<if test="userId!=null and userId!=''">,userId=#{userId}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
 		
@@ -39,10 +39,10 @@
         <![CDATA[
 	  		SELECT * FROM service_pointuser WHERE 1=1
 	  	]]>
-		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
-		<if test="delStatus!=null and delStatus!=''">AND delStatus=#{delStatus}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
-		<if test="currentPoint!=null and currentPoint!=''">AND currentPoint=#{currentPoint}</if>
+		<if test="currentPoint!=null">AND currentPoint=#{currentPoint}</if>
 		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
 		
@@ -61,12 +61,12 @@
 	<insert id="insertBatchPointuser" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO service_pointuser
-                (id,userId,currentPoint,delStatus,
+                (id,userId,currentPoint)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.userId},#{item.currentPoint},#{item.delStatus},
+			(#{item.id},#{item.userId},#{item.currentPoint})
 		</foreach>
 	</insert>
 

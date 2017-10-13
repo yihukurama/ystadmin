@@ -3,9 +3,7 @@ package com.gdyunst.ystadmin.prepare;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.gdyunst.ystadmin.application.utils.LogUtil;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenEntity;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenMapper;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Column;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.LogUtil;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Table;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +26,7 @@ import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Table;
 public class BaseMapperManager {
 
     @Test
-    public void batchGenBaseMapper() throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+    public void batchGenBaseMapper() throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, SQLException {
 
         Connection conn = null;
         try {
@@ -74,43 +72,106 @@ public class BaseMapperManager {
 
         // 2、遍历数据库表，获取各表的字段等信息
         for (int i=0;i<tables.size();i++) {
-            List<Column> columns = new ArrayList<>();
-            String sql = "select * from " + tables.get(i).getName();
-            try {
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                ResultSetMetaData meta = rs.getMetaData();
-                int columeCount = meta.getColumnCount();
-                LogUtil.DebugLog(this, "表名：----------->"+tables.get(i).getName());
-                for (int j = 1; j < columeCount + 1; j++) {
+            String tableName = tables.get(i).getName();  
+                ResultSet rs = conn.getMetaData().getColumns(null, "",tableName.toUpperCase(), "%");  
+                List<Column> columns = new ArrayList<>();
+                while(rs.next()){  
+                    //System.out.println("字段名："+rs.getString("COLUMN_NAME")+"--字段注释："+rs.getString("REMARKS")+"--字段数据类型："+rs.getString("TYPE_NAME"));  
+                    String colName = rs.getString("COLUMN_NAME");  
+                    String remarks = rs.getString("REMARKS");  
+                    if(remarks == null || remarks.equals("")){  
+                        remarks = colName;  
+                    }  
+                    
+                    String dbType = rs.getString("TYPE_NAME");  
+                    LogUtil.DebugLog(this, tableName+"------------"+ colName+"----------->"+dbType);
+                    String javaType = Column.sqlType2JavaType(dbType);
                     Column column = new Column();
-                    column.setName(meta.getColumnName(j));  
-                    column.setRemark(meta.getColumnLabel(j));
-                    int columnType = meta.getColumnType(j);
-                    LogUtil.DebugLog(this, column.getName()+"字段类型：----------->"+columnType);
-                    String sqlType = Column.getTypes(columnType);
-                    LogUtil.DebugLog(this, column.getName()+"字段类型2：----------->"+sqlType);
-                    String javaType = Column.sqlType2JavaType(sqlType);
-                    LogUtil.DebugLog(this, column.getName()+"字段类型3：----------->"+javaType);
+                    column.setName(colName);  
+                    column.setRemark(remarks);
                     column.setType(javaType);
-                    LogUtil.DebugLog(this, "字段名：----------->"+column.getName());
-                    columns.add(column);
+                    columns.add(column);  
                 }
                 tables.get(i).setColumns(columns);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            
-            genMapper.genMapper(tables.get(i));
-            genEntity.genEntity(tables.get(i));
+                genMapper.genMapper(tables.get(i));
+                genEntity.genEntity(tables.get(i));
+            }  
+              
         }
+    
+    
+        
+//        for (int i=0;i<tables.size();i++) {
+//            List<Column> columns = new ArrayList<>();
+//            String sql = "select * from " + tables.get(i).getName();
+//            try {
+//                PreparedStatement ps = conn.prepareStatement(sql);
+//                ResultSet rs = ps.executeQuery();
+//                ResultSetMetaData meta = rs.getMetaData();
+//                int columeCount = meta.getColumnCount();
+//                LogUtil.DebugLog(this, "表名：----------->"+tables.get(i).getName());
+//                
+//                
+//                ResultSet rsNew = conn.getMetaData().getColumns(null, "",tables.get(i).getName().toUpperCase(), "%");  
+//                
+//                
+//                for (int j = 1; j < columeCount + 1; j++) {
+//                    Column column = new Column();
+//                    column.setName(meta.getColumnName(j));  
+//                    
+//                    
+//                    column.setRemark(meta.getColumnLabel(j));
+//                    
+//                    
+//                    int columnType = meta.getColumnType(j);
+//                    LogUtil.DebugLog(this, column.getName()+"字段类型：----------->"+columnType);
+//                    String sqlType = Column.getTypes(columnType);
+//                    LogUtil.DebugLog(this, column.getName()+"字段类型2：----------->"+sqlType);
+//                    String javaType = Column.sqlType2JavaType(sqlType);
+//                    LogUtil.DebugLog(this, column.getName()+"字段类型3：----------->"+javaType);
+//                    column.setType(javaType);
+//                    LogUtil.DebugLog(this, "字段名：----------->"+column.getName());
+//                    columns.add(column);
+//                    
+//                }
+//                tables.get(i).setColumns(columns);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            
+//            genMapper.genMapper(tables.get(i));
+//            genEntity.genEntity(tables.get(i));
+//        }
 
-    }
+//    }
     @Autowired
     IGenEntity genEntity;
     @Autowired
     IGenMapper genMapper;
     
-    
+    private static String changeDbType(String dbType) {  
+        dbType = dbType.toUpperCase();  
+        switch(dbType){  
+            case "VARCHAR":  
+            case "VARCHAR2":  
+            case "CHAR":  
+                return "1";  
+            case "NUMBER":  
+            case "DECIMAL":  
+                return "4";  
+            case "INT":  
+            case "SMALLINT":  
+            case "INTEGER":  
+                return "2";  
+            case "BIGINT":  
+                return "6";  
+            case "DATETIME":  
+            case "TIMESTAMP":  
+            case "DATE":  
+                return "7";  
+            default:  
+                return "1";  
+        }  
+    }  
    
 }

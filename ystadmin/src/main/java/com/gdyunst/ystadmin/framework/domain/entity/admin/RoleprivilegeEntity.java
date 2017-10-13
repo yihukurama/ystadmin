@@ -17,18 +17,18 @@ import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 public class RoleprivilegeEntity extends BaseCrud<RoleprivilegeEntity>
 {
 	@Id
-	private String id;   //id
+	private String id;   //序列号
 	@Column(name="subSystemId")
-	private String subSystemId;  //subSystemId
+	private String subSystemId;  //子系统id
 	@Column(name="privilegeId")
-	private String privilegeId;  //privilegeId
+	private String privilegeId;  //菜单/功能id
 	@Column(name="roleId")
-	private String roleId;  //roleId
+	private String roleId;  //角色id
 	@Column(name="type")
-	private Integer type;  //type
+	private Integer type;  //权限类型,1系统,3菜单,4功能
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //createDate
+	private Date createDate;  //创建时间
 	
 	
 	//get  set 方法
