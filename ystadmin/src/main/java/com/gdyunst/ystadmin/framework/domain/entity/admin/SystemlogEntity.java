@@ -18,21 +18,21 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 {
 	@Id
 	private String id;   //序列号
-	@Column(name="userId")
-	private String userId;  //用户id
+	@Column(name="employeeId")
+	private String employeeId;  //操作员工id
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
+	private Date operateDate;  //操作时间
 	@Column(name="content")
 	private String content;  //日志内容
 	@Column(name="interfaceAddress")
 	private String interfaceAddress;  //访问接口地址
 	@Column(name="requestIP")
-	private String requestIP;  //请求的IP
+	private String requestIP;  //接口返回结果
 	@Column(name="note")
 	private String note;  //备注信息
 	@Column(name="delStatus")
 	private Integer delStatus;  //删除状态,0正常,1删除
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
-	private Date createDate;  //创建时间
 	
 	
 	//get  set 方法
@@ -44,12 +44,20 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 		this.id = id;
 	}
 
-	public String getUserId(){
-		return userId;
+	public String getEmployeeId(){
+		return employeeId;
 	}
 
-	public void setUserId(String userId){
-		this.userId = userId;
+	public void setEmployeeId(String employeeId){
+		this.employeeId = employeeId;
+	}
+
+	public Date getOperateDate(){
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate){
+		this.operateDate = operateDate;
 	}
 
 	public String getContent(){
@@ -90,14 +98,6 @@ public class SystemlogEntity extends BaseCrud<SystemlogEntity>
 
 	public void setDelStatus(Integer delStatus){
 		this.delStatus = delStatus;
-	}
-
-	public Date getCreateDate(){
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate){
-		this.createDate = createDate;
 	}
 
 	

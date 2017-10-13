@@ -5,9 +5,9 @@
 	<insert id="createSystemlog" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SystemlogEntity">
 		<![CDATA[
             INSERT INTO admin_systemlog
-                (id,userId,content,interfaceAddress,requestIP,note)
+                (id,employeeId,operateDate,content,interfaceAddress,requestIP,note)
             VALUES 
-                (#{id},#{userId},#{content},#{interfaceAddress},#{requestIP},#{note})
+                (#{id},#{employeeId},#{operateDate},#{content},#{interfaceAddress},#{requestIP},#{note})
         ]]>
 	</insert>
 
@@ -16,13 +16,13 @@
         <![CDATA[
             UPDATE admin_systemlog SET id=id
         ]]>
-		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="requestIP!=null and requestIP!=''">,requestIP=#{requestIP}</if>
 		<if test="interfaceAddress!=null and interfaceAddress!=''">,interfaceAddress=#{interfaceAddress}</if>
 		<if test="content!=null and content!=''">,content=#{content}</if>
-		<if test="userId!=null and userId!=''">,userId=#{userId}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
+		<if test="employeeId!=null and employeeId!=''">,employeeId=#{employeeId}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
 		
         <![CDATA[
@@ -42,14 +42,14 @@
         <![CDATA[
 	  		SELECT * FROM admin_systemlog WHERE 1=1
 	  	]]>
-		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
 		<if test="requestIP!=null and requestIP!=''">AND requestIP=#{requestIP}</if>
 		<if test="interfaceAddress!=null and interfaceAddress!=''">AND interfaceAddress=#{interfaceAddress}</if>
 		<if test="content!=null and content!=''">AND content=#{content}</if>
-		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="employeeId!=null and employeeId!=''">AND employeeId=#{employeeId}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
 		
 		<![CDATA[
@@ -67,12 +67,12 @@
 	<insert id="insertBatchSystemlog" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_systemlog
-                (id,userId,content,interfaceAddress,requestIP,note)
+                (id,employeeId,operateDate,content,interfaceAddress,requestIP,note)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.userId},#{item.content},#{item.interfaceAddress},#{item.requestIP},#{item.note})
+			(#{item.id},#{item.employeeId},#{item.operateDate},#{item.content},#{item.interfaceAddress},#{item.requestIP},#{item.note})
 		</foreach>
 	</insert>
 
