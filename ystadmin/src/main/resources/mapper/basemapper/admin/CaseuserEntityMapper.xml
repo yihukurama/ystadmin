@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Caseuser">
+	<!-- 保存对象 -->
+	<insert id="createCaseuser" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.CaseuserEntity">
+		<![CDATA[
+            INSERT INTO service_caseuser
+                (id,caseId,userId,type,point,realName)
+            VALUES 
+                (#{id},#{caseId},#{userId},#{type},#{point},#{realName})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateCaseuser" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.CaseuserEntity">
+        <![CDATA[
+            UPDATE service_caseuser SET id=id
+        ]]>
+		<if test="realName!=null and realName!=''">,realName=#{realName}</if>
+		<if test="point!=null and point!=''">,point=#{point}</if>
+		<if test="createDate!=null and createDate!=''">,createDate=#{createDate}</if>
+		<if test="type!=null and type!=''">,type=#{type}</if>
+		<if test="userId!=null and userId!=''">,userId=#{userId}</if>
+		<if test="caseId!=null and caseId!=''">,caseId=#{caseId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadCaseuser" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.CaseuserEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.CaseuserEntity">
+		SELECT * FROM service_caseuser WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listCaseuser" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.CaseuserEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.CaseuserEntity">
+        <![CDATA[
+	  		SELECT * FROM service_caseuser WHERE 1=1
+	  	]]>
+		<if test="realName!=null and realName!=''">AND realName=#{realName}</if>
+		<if test="point!=null and point!=''">AND point=#{point}</if>
+		<if test="createDate!=null and createDate!=''">AND createDate=#{createDate}</if>
+		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
+		<if test="caseId!=null and caseId!=''">AND caseId=#{caseId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY createDate DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeCaseuser" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.CaseuserEntity">
+		UPDATE
+		service_caseuser SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchCaseuser" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO service_caseuser
+                (id,caseId,userId,type,point,realName)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.caseId},#{item.userId},#{item.type},#{item.point},#{item.realName},
+		</foreach>
+	</insert>
+
+
+</mapper>
