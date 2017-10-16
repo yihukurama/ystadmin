@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.gdyunst.ystadmin.application.constant.Constant;
 import com.gdyunst.ystadmin.application.exception.CrudException;
-import com.gdyunst.ystadmin.application.utils.StringUtil;
+import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Result;
 
 
@@ -161,7 +161,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 			for (Object o : list) {
 				String json = JSON.toJSONString(o);
 				T t=(T)JSON.parseObject(json, clazz);
-				if(StringUtil.isEmpty(t.getId())){
+				if(EmptyUtil.isEmpty(t.getId())){
 					t.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 				}
 				l.add(t);
@@ -177,7 +177,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 		List<T> l=new ArrayList<>();
 		if(list!=null&&list.size()>0){
 			for (T t : list) {
-				if(StringUtil.isEmpty(t.getId())){
+				if(EmptyUtil.isEmpty(t.getId())){
 					t.setId(UUID.randomUUID().toString().replaceAll("-", ""));
 				}
 				l.add(t);

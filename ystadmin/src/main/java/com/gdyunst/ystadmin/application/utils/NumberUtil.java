@@ -23,7 +23,7 @@ public abstract class NumberUtil
 	 */
 	public static String convertToString(Number[] numbers) 
 	{
-		if(BaseParamValidator.isEmpty(numbers))
+		if(EmptyUtil.isEmpty(numbers))
 		{
 			return "";
 		}
@@ -46,7 +46,7 @@ public abstract class NumberUtil
 	 */
 	public static String convertToString(List<? extends Number> numbers) 
 	{
-		if(BaseParamValidator.isEmpty(numbers))
+		if(EmptyUtil.isEmpty(numbers))
 		{
 			return "";
 		}

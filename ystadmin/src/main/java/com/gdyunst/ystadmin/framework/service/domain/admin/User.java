@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 import com.gdyunst.ystadmin.application.exception.CrudException;
-import com.gdyunst.ystadmin.application.utils.JavaUtil;
+import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.DepartmentEntity;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity;
@@ -167,7 +167,7 @@ public class User extends UserEntity {
 	}
 
 	public List<RoleEntity> doGetRoles() throws CrudException {
-		if (!JavaUtil.isEmpty(roles)) {
+		if (!EmptyUtil.isEmpty(roles)) {
 			roles.clear();
 		} else {
 			roles = new ArrayList<>();
@@ -175,7 +175,7 @@ public class User extends UserEntity {
 		UserroleEntity userRole = new UserroleEntity();
 		userRole.setUserId(this.getId());
 		List<UserroleEntity> userRoles = userRole.list();
-		if (!JavaUtil.isEmpty(userRoles)) {
+		if (!EmptyUtil.isEmpty(userRoles)) {
 			for (UserroleEntity userroleEntity : userRoles) {
 				String roleId = userroleEntity.getRoleId();
 				RoleEntity role = new RoleEntity();
@@ -188,7 +188,7 @@ public class User extends UserEntity {
 	}
 
 	public List<RoleprivilegeEntity> doGetPrivileges() throws CrudException {
-		if (!JavaUtil.isEmpty(privileges)) {
+		if (!EmptyUtil.isEmpty(privileges)) {
 			privileges.clear();
 		} else {
 			privileges = new ArrayList<>();
@@ -198,7 +198,7 @@ public class User extends UserEntity {
 			RoleprivilegeEntity rolePrivlege = new RoleprivilegeEntity();
 			rolePrivlege.setRoleId(role.getId());
 			List<RoleprivilegeEntity> rolePrivleges = rolePrivlege.list();
-			if (!JavaUtil.isEmpty(rolePrivleges)) {
+			if (!EmptyUtil.isEmpty(rolePrivleges)) {
 				privileges.addAll(rolePrivleges);
 			}
 		}

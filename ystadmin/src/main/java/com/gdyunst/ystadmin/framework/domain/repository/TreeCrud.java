@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gdyunst.ystadmin.application.exception.CrudException;
-import com.gdyunst.ystadmin.application.utils.StringUtil;
+import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Result;
 
 
@@ -44,7 +44,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 		if(itlist!=null&&itlist.size()>0){
 			for (Object object : itlist) {
 				ITree it=(ITree)object;
-				if(it!=null&&!StringUtil.isEmpty(it.getPath())){
+				if(it!=null&&!EmptyUtil.isEmpty(it.getPath())){
 					this.setPath(it.getPath());
 					row+=CrudRespository.removeTree(this);
 				}
@@ -89,7 +89,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 		this.setId(id.toString().replaceAll("-", ""));
 		String path="/root/";
 		if(!"root".equals(this.getParentId())){
-			if(StringUtil.isEmpty(this.getParentId())){
+			if(EmptyUtil.isEmpty(this.getParentId())){
 				throw new CrudException("父类Id不能为空！");
 			}
 			T t=null;
@@ -102,7 +102,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 			t.setId(this.getParentId());
 			ITreeCrud<ITree> treeCurd = (ITreeCrud<ITree>)t;
 			t=(T) CrudRespository.load(t);
-			if(t!=null&&!StringUtil.isEmpty(t.getPath())){
+			if(t!=null&&!EmptyUtil.isEmpty(t.getPath())){
 				path=t.getPath();
 			}else{
 				throw new CrudException("没有对应id为"+this.getParentId()+"的父类！");
@@ -132,7 +132,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 	@Transactional
 	public Result drag() throws InstantiationException, IllegalAccessException, CrudException{
 		int row=0;
-		if(StringUtil.isEmpty(this.getParentId())||StringUtil.isEmpty(this.getId())){
+		if(EmptyUtil.isEmpty(this.getParentId())||EmptyUtil.isEmpty(this.getId())){
 			return Result.failed("父类Id不能为空！");
 		}
 		String path="/root/";
@@ -141,7 +141,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 			t.setId(this.getParentId());
 			ITreeCrud<ITree> treeCurd = (ITreeCrud<ITree>)t;
 			t=(T) CrudRespository.load(t);
-			if(t!=null&&!StringUtil.isEmpty(t.getPath())){
+			if(t!=null&&!EmptyUtil.isEmpty(t.getPath())){
 				path=t.getPath();
 			}else{
 				return Result.failed("没有对应id为"+this.getParentId()+"的父类！");

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gdyunst.ystadmin.application.exception.CrudException;
-import com.gdyunst.ystadmin.application.utils.StringUtil;
+import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.UserEntity;
 import com.gdyunst.ystadmin.framework.service.domain.admin.User;
 import com.gdyunst.ystadmin.framework.service.domainservice.admin.IPublicApi;
@@ -22,7 +22,7 @@ public class PublicApiService implements IPublicApi{
     @Override
     public Result login(Request<UserEntity> request) throws CrudException {
         UserEntity userEntity = request.getData();
-        if(userEntity == null || StringUtil.isEmpty(userEntity.getUsername()) || StringUtil.isEmpty(userEntity.getPassword())){
+        if(userEntity == null || EmptyUtil.isEmpty(userEntity.getUsername()) || EmptyUtil.isEmpty(userEntity.getPassword())){
             return Result.failed("参数错误，请检查接口参数");
         }
         //密码加密
