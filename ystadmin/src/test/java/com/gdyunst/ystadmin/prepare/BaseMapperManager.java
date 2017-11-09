@@ -149,29 +149,6 @@ public class BaseMapperManager {
     @Autowired
     IGenMapper genMapper;
     
-    private static String changeDbType(String dbType) {  
-        dbType = dbType.toUpperCase();  
-        switch(dbType){  
-            case "VARCHAR":  
-            case "VARCHAR2":  
-            case "CHAR":  
-                return "1";  
-            case "NUMBER":  
-            case "DECIMAL":  
-                return "4";  
-            case "INT":  
-            case "SMALLINT":  
-            case "INTEGER":  
-                return "2";  
-            case "BIGINT":  
-                return "6";  
-            case "DATETIME":  
-            case "TIMESTAMP":  
-            case "DATE":  
-                return "7";  
-            default:  
-                return "1";  
-        }  
-    }  
+
    
 }

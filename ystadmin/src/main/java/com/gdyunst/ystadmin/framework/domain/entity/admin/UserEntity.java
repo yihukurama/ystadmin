@@ -46,6 +46,8 @@ public class UserEntity extends BaseCrud<UserEntity>
 	private String note;  //备注信息
 	@Column(name="delStatus")
 	private Integer delStatus;  //删除状态,0正常,1删除
+	@Column(name="token")
+	private String token;  //协警APP用的token
 	
 	
 	//get  set 方法
@@ -159,6 +161,14 @@ public class UserEntity extends BaseCrud<UserEntity>
 
 	public void setDelStatus(Integer delStatus){
 		this.delStatus = delStatus;
+	}
+
+	public String getToken(){
+		return token;
+	}
+
+	public void setToken(String token){
+		this.token = token;
 	}
 
 	

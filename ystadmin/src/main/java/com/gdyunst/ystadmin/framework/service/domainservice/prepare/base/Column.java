@@ -58,6 +58,9 @@ public class Column {
         case "DOUBLE":
             javaType = "Double";
             break;
+        case "FLOAT":
+            javaType = "Float";
+            break;
         case "DATETIME":
             javaType = "Date";
             break;

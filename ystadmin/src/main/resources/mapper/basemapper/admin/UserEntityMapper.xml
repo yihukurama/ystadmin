@@ -5,9 +5,9 @@
 	<insert id="createUser" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserEntity">
 		<![CDATA[
             INSERT INTO admin_user
-                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note)
+                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note,token)
             VALUES 
-                (#{id},#{employeeId},#{username},#{password},#{status},#{type},#{creater},#{lastLoginDate},#{loginCount},#{ipAddr},#{indexOrder},#{note})
+                (#{id},#{employeeId},#{username},#{password},#{status},#{type},#{creater},#{lastLoginDate},#{loginCount},#{ipAddr},#{indexOrder},#{note},#{token})
         ]]>
 	</insert>
 
@@ -16,6 +16,7 @@
         <![CDATA[
             UPDATE admin_user SET id=id
         ]]>
+		<if test="token!=null and token!=''">,token=#{token}</if>
 		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
@@ -48,6 +49,7 @@
         <![CDATA[
 	  		SELECT * FROM admin_user WHERE 1=1
 	  	]]>
+		<if test="token!=null and token!=''">AND token=#{token}</if>
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
@@ -79,12 +81,12 @@
 	<insert id="insertBatchUser" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_user
-                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note)
+                (id,employeeId,username,password,status,type,creater,lastLoginDate,loginCount,ipAddr,indexOrder,note,token)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.employeeId},#{item.username},#{item.password},#{item.status},#{item.type},#{item.creater},#{item.lastLoginDate},#{item.loginCount},#{item.ipAddr},#{item.indexOrder},#{item.note})
+			(#{item.id},#{item.employeeId},#{item.username},#{item.password},#{item.status},#{item.type},#{item.creater},#{item.lastLoginDate},#{item.loginCount},#{item.ipAddr},#{item.indexOrder},#{item.note},#{item.token})
 		</foreach>
 	</insert>
 
