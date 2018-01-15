@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.gdyunst.ystadmin.application.component.SpringBeanTools;
-import com.gdyunst.ystadmin.application.exception.CrudException;
+import com.gdyunst.ystadmin.application.exception.BusinessRuntimeException;
+import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.LogUtil;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,7 +25,7 @@ public class CrudRespository {
 		return session;
 	} 
 	
-	public static Result listByPage(IObject condition, int page, int limit) throws CrudException
+	public static Result listByPage(IObject condition, int page, int limit)
 	{
 		
 		Result result = new Result();
@@ -51,14 +52,16 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			throw new CrudException(e.getMessage());
+			e.printStackTrace();
+			LogUtil.ErrorLog(CrudRespository.class, "分页查询出错"+e.getMessage());
+			throw new BusinessRuntimeException("分页查询出错"+e.getMessage());
 		}
 		
 
 		return result;
 	}
 
-	public static <T> List<T> list(T condition) throws CrudException{
+	public static <T> List<T> list(T condition){
 
 		String domainName = condition.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
@@ -74,13 +77,15 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "全量查询出错"+e.getMessage());
+            throw new BusinessRuntimeException("全量查询出错"+e.getMessage());
 		}
 
 		return new ArrayList<>();
 	}
 
-	public static int create(IObject t) throws CrudException{
+	public static int create(IObject t){
 		
 		int row = 0;
 		String domainName = t.getClass().getSimpleName();
@@ -100,13 +105,14 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "创建出错"+e.getMessage());
+            throw new BusinessRuntimeException("创建出错"+e.getMessage());
 		}
 		return row;
 	}
 
-	public static int remove(IObject t) throws CrudException{
+	public static int remove(IObject t){
 		int row = 0;
 		String domainName = t.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
@@ -121,13 +127,14 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "删除出错"+e.getMessage());
+            throw new BusinessRuntimeException ("删除出错"+e.getMessage());
 		}
 		return row;
 	}
 
-	public static int update(IObject t) throws CrudException{
+	public static int update(IObject t){
 		int row = 0;
 		String domainName = t.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
@@ -143,13 +150,14 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "更新出错"+e.getMessage());
+            throw new BusinessRuntimeException("更新出错"+e.getMessage());
 		}
 		return row;
 	}
 
-	public static <T> T load(T t) throws CrudException{
+	public static <T> T load(T t){
 		T object = null;
 		String domainName = t.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
@@ -164,13 +172,14 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "加载出错"+e.getMessage());
+            throw new BusinessRuntimeException("加载出错"+e.getMessage());
 		}
 		return object;
 	}
 
-	public static int updateTree(IObject t) throws CrudException{
+	public static int updateTree(IObject t){
 		int row = 0;
 		String domainName = t.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
@@ -185,13 +194,14 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			// TODO: handle exception
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "树型更新出错"+e.getMessage());
+            throw new BusinessRuntimeException("树型更新出错"+e.getMessage());
 		}
 		return row;
 	}
 	
-	public static int removeTree(IObject t) throws CrudException{
+	public static int removeTree(IObject t){
 		int row = 0;
 		String domainName = t.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
@@ -206,12 +216,14 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "树型删除出错"+e.getMessage());
+            throw new BusinessRuntimeException("树型删除出错"+e.getMessage());
 		}
 		return row;
 	}
 
-	public static int creates(IObject t,Object list) throws CrudException{
+	public static int creates(IObject t,Object list){
 		int row = 0;
 		String domainName = t.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
@@ -226,13 +238,15 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "批量创建出错"+e.getMessage());
+            throw new BusinessRuntimeException( "批量创建出错"+e.getMessage());
 		}
 		
 		return row;
 	}
 
-	public static <T> List<T> mlist(Object object,T baseCrud) throws CrudException {
+	public static <T> List<T> mlist(Object object,T baseCrud) {
 		String domainName = baseCrud.getClass().getSimpleName();
 		if(domainName.endsWith("Entity")){
 			domainName = domainName.replace("Entity", "");
@@ -248,14 +262,16 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "mlist出错"+e.getMessage());
+			throw new BusinessRuntimeException("mlist出错"+e.getMessage());
 		}
 		
 
 		return new ArrayList<>();
 	}
 
-	public static Result mlistByPage(Object object, IObject condition, Integer page, Integer limit) throws CrudException {
+	public static Result mlistByPage(Object object, IObject condition, Integer page, Integer limit){
 		Result result = new Result();
 
 		PageHelper.startPage(page, limit, true, true);
@@ -280,7 +296,9 @@ public class CrudRespository {
 				LOGGER.info("未获得sqlSession");
 			}
 		}catch (Exception e) {
-			throw new CrudException(e.getMessage());
+		    e.printStackTrace();
+            LogUtil.ErrorLog(CrudRespository.class, "mlist分页查询出错"+e.getMessage());
+            throw new BusinessRuntimeException("mlist全量查询出错"+e.getMessage());
 		}
 
 		return result;

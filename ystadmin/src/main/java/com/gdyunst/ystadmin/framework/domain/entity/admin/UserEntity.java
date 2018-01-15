@@ -28,8 +28,8 @@ public class UserEntity extends BaseCrud<UserEntity>
 	private Integer status;  //账号状态,1正常,2禁用
 	@Column(name="type")
 	private Integer type;  //账号类型,1,评估、报价员工,2,保险,3,交警,4,法院
-	@Column(name="creater")
-	private String creater;  //创建人id
+	@Column(name="createrId")
+	private String createrId;  //创建人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
 	private Date createDate;  //创建时间
@@ -48,6 +48,15 @@ public class UserEntity extends BaseCrud<UserEntity>
 	private Integer delStatus;  //删除状态,0正常,1删除
 	@Column(name="token")
 	private String token;  //协警APP用的token
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
+	private Date operateDate;  //最后修改时间
+	@Column(name="creater")
+	private String creater;  //创建人姓名
+	@Column(name="operatorId")
+	private String operatorId;  //最后更新人Id
+	@Column(name="operator")
+	private String operator;  //最后更新人姓名
 	
 	
 	//get  set 方法
@@ -99,12 +108,12 @@ public class UserEntity extends BaseCrud<UserEntity>
 		this.type = type;
 	}
 
-	public String getCreater(){
-		return creater;
+	public String getCreaterId(){
+		return createrId;
 	}
 
-	public void setCreater(String creater){
-		this.creater = creater;
+	public void setCreaterId(String createrId){
+		this.createrId = createrId;
 	}
 
 	public Date getCreateDate(){
@@ -169,6 +178,38 @@ public class UserEntity extends BaseCrud<UserEntity>
 
 	public void setToken(String token){
 		this.token = token;
+	}
+
+	public Date getOperateDate(){
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate){
+		this.operateDate = operateDate;
+	}
+
+	public String getCreater(){
+		return creater;
+	}
+
+	public void setCreater(String creater){
+		this.creater = creater;
+	}
+
+	public String getOperatorId(){
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId){
+		this.operatorId = operatorId;
+	}
+
+	public String getOperator(){
+		return operator;
+	}
+
+	public void setOperator(String operator){
+		this.operator = operator;
 	}
 
 	

@@ -13,7 +13,6 @@ public class SystemConfig {
     //系统id
     private String adminSystemId;	//管理后台
     
-    
 
 	public String getAdminSystemId() {
 		return adminSystemId;

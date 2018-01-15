@@ -3,7 +3,6 @@ package com.gdyunst.ystadmin.framework.service.domain.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gdyunst.ystadmin.application.exception.CrudException;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.MenuEntity;
 
 public class Menu extends MenuEntity{
@@ -19,7 +18,7 @@ public class Menu extends MenuEntity{
         this.subMenus = subMenus;
     }
     
-    public List<MenuEntity> doGetSubMenus() throws CrudException{
+    public List<MenuEntity> doGetSubMenus(){
         if(!this.hasId()){
             return new ArrayList<MenuEntity>();
         }

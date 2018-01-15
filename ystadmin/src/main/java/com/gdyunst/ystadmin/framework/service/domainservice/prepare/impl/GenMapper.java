@@ -1,24 +1,12 @@
 package com.gdyunst.ystadmin.framework.service.domainservice.prepare.impl;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.List;
-
+import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenMapper;
+import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenMapper;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Column;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.LogUtil;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Mapper;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.PrepareConstant;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Table;
+import java.io.*;
+import java.util.List;
 
 @Service
 public class GenMapper implements IGenMapper {
@@ -51,7 +39,15 @@ public class GenMapper implements IGenMapper {
             return 0;
 
         Mapper mapper = table2Mapper(table);
-        File mapperFile = new File(PrepareConstant.mapperPath + File.separator + mapper.getMapperName());
+        File mapperFile = null;
+        String tableName = table.getName();
+        if(tableName.startsWith("business_")){
+            mapperFile = new File(PrepareConstant.mapperBusinessPath + File.separator + mapper.getMapperName());
+        }else{
+            mapperFile = new File(PrepareConstant.mapperPath + File.separator + mapper.getMapperName());
+        }
+
+
         LogUtil.DebugLog(this.getClass(), "mapperFile is "+mapperFile.getPath());
         File tplFile = new File(PrepareConstant.NORMAL_MAPPERTPL_PATH);
         if (!mapperFile.exists()) {
@@ -128,7 +124,14 @@ public class GenMapper implements IGenMapper {
             return 0;
 
         Mapper mapper = table2Mapper(table);
-        File mapperFile = new File(PrepareConstant.mapperPath + File.separator + mapper.getMapperName());
+        File mapperFile = null;
+        String tableName = table.getName();
+        if(tableName.startsWith("business_")){
+            mapperFile = new File(PrepareConstant.mapperBusinessPath + File.separator + mapper.getMapperName());
+        }else{
+            mapperFile = new File(PrepareConstant.mapperPath + File.separator + mapper.getMapperName());
+        }
+
         LogUtil.DebugLog(this.getClass(), "mapperFile is "+mapperFile.getPath());
         File tplFile = new File(PrepareConstant.TREE_MAPPERTPL_PATH);
         if (!mapperFile.exists()) {
@@ -213,7 +216,12 @@ public class GenMapper implements IGenMapper {
         mapper.setEntName(entName);
         mapper.setTableName(table.getName());
         mapper.setBatchInsertColumns(genBatchInsertColumns(table));
-        mapper.setPackages(PrepareConstant.packages);
+        if(table.getName().startsWith("business_")){
+            mapper.setPackages(PrepareConstant.businesspackages);
+        }else{
+            mapper.setPackages(PrepareConstant.packages);
+        }
+
         return mapper;
     }
 

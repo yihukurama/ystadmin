@@ -1,24 +1,12 @@
 package com.gdyunst.ystadmin.framework.service.domainservice.prepare.impl;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.List;
-
+import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenEntity;
+import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.IGenEntity;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Column;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Entity;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.LogUtil;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.PrepareConstant;
-import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.Table;
+import java.io.*;
+import java.util.List;
 
 @Service
 public class GenEntityImpl implements IGenEntity {
@@ -32,7 +20,14 @@ public class GenEntityImpl implements IGenEntity {
             return 0;
 
         Entity entity = table2Entity(table);
-        File entityFile = new File(PrepareConstant.entityPath + File.separator + entity.getEntFileName());
+        File entityFile = null;
+        String tableName = table.getName();
+        if(tableName.startsWith("business_")){
+            entityFile = new File(PrepareConstant.entityBusinessPath + File.separator + entity.getEntFileName());
+        }else{
+            entityFile = new File(PrepareConstant.entityPath + File.separator + entity.getEntFileName());
+        }
+
         LogUtil.DebugLog(this.getClass(), "entityFile is "+entityFile.getPath());
         File tplFile = new File(PrepareConstant.ENTITYTPL_PATH);
         if (!entityFile.exists()) {
@@ -108,7 +103,11 @@ public class GenEntityImpl implements IGenEntity {
         entity.setEntGetSet(genEntGetSet(table));
         entity.setEntName(genEntName(table));
         entity.setEntFileName(genEntFileName(table));
-        entity.setPackages(PrepareConstant.packages);
+        if(table.getName().startsWith("business_")){
+            entity.setPackages(PrepareConstant.businesspackages);
+        }else{
+            entity.setPackages(PrepareConstant.packages);
+        }
         return entity;
     }
 

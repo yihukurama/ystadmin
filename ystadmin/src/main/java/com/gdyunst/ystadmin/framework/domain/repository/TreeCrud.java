@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gdyunst.ystadmin.application.exception.CrudException;
+import com.gdyunst.ystadmin.application.exception.BusinessRuntimeException;
 import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Result;
 
@@ -24,7 +24,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 
 	@Override
-	public T update() throws CrudException{
+	public T update(){
 		
 		int row = CrudRespository.update(this);
 		if(row>0){
@@ -38,7 +38,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 	@Override
 	@Transactional
-	public int remove() throws CrudException{
+	public int remove(){
 		int row=0;
 		List<Object> itlist= CrudRespository.list(this);
 		if(itlist!=null&&itlist.size()>0){
@@ -55,7 +55,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 
 	@Override
-	public T load() throws CrudException{
+	public T load(){
 		if(!this.hasId()){
 			LOGGER.info("{} do not has id,Load fail!",this.getClass());
 			return null;
@@ -83,21 +83,21 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 
 	@Override
-	public T create() throws CrudException {
+	public T create() {
 		Object result = null;
 		UUID id = UUID.randomUUID();
 		this.setId(id.toString().replaceAll("-", ""));
 		String path="/root/";
 		if(!"root".equals(this.getParentId())){
 			if(EmptyUtil.isEmpty(this.getParentId())){
-				throw new CrudException("父类Id不能为空！");
+				throw new BusinessRuntimeException("父类Id不能为空！");
 			}
 			T t=null;
 			try {
 				t = (T) this.getClass().newInstance();
 			} catch (Exception e) {
 				e.printStackTrace();
-				throw new CrudException("创建有异常");
+				throw new BusinessRuntimeException("创建有异常");
 			}
 			t.setId(this.getParentId());
 			ITreeCrud<ITree> treeCurd = (ITreeCrud<ITree>)t;
@@ -105,7 +105,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 			if(t!=null&&!EmptyUtil.isEmpty(t.getPath())){
 				path=t.getPath();
 			}else{
-				throw new CrudException("没有对应id为"+this.getParentId()+"的父类！");
+				throw new BusinessRuntimeException("没有对应id为"+this.getParentId()+"的父类！");
 			}
 		}
 		path=path+this.getId()+"/";
@@ -119,7 +119,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 	}
 
 	@Override
-	public Result list(int pageNum, int pageSize) throws CrudException{
+	public Result list(int pageNum, int pageSize) {
 		Object o = CrudRespository.list(this);
 		if(o!=null){
 			return Result.successed(o, "查询成功");
@@ -130,7 +130,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 	@Override
 	@Transactional
-	public Result drag() throws InstantiationException, IllegalAccessException, CrudException{
+	public Result drag() throws InstantiationException, IllegalAccessException{
 		int row=0;
 		if(EmptyUtil.isEmpty(this.getParentId())||EmptyUtil.isEmpty(this.getId())){
 			return Result.failed("父类Id不能为空！");
@@ -158,7 +158,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 		return Result.failed("没有修改，拖拽失败");
 	}
 	
-	public Result treeList(int pageNum, int pageSize)throws CrudException {
+	public Result treeList(int pageNum, int pageSize){
 		Object o = CrudRespository.list(this);
 		if(o!=null){
 			return Result.successed(o, "查询成功");
@@ -168,7 +168,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 
 	@Override
-	public List<Object> treeList() throws CrudException, InstantiationException, IllegalAccessException {
+	public List<Object> treeList() throws InstantiationException, IllegalAccessException {
 		List<Object> list = CrudRespository.list(this);
 		Boolean asyn=false;
 		if(this.getAsyn()!=null){
@@ -194,7 +194,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 	 * @Author:liujun
 	 * @Date:2017年1月5日 下午2:19:44
 	 */
-	private T recursionTreeList(T t,Boolean asyn) throws CrudException, InstantiationException, IllegalAccessException
+	private T recursionTreeList(T t,Boolean asyn) throws InstantiationException, IllegalAccessException
 	{
 		T tt=(T) t.getClass().newInstance();
 		tt.setParentId(t.getId());
@@ -221,14 +221,14 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 
 	@Override
-	public int creates(List<Object> list,Class<?> clazz) throws CrudException{
+	public int creates(List<Object> list,Class<?> clazz){
 		int row=0;
 		row=CrudRespository.creates(this,list);
 		return row;
 	}
 	
 	@Override
-	public int creates(List<T> list) throws CrudException{
+	public int creates(List<T> list){
 		int row=0;
 		row=CrudRespository.creates(this,list);
 		return row;
@@ -236,21 +236,15 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 
 	@Override
-	public List<T> list() throws CrudException{
+	public List<T> list(){
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	@Override
-	public IObject init() throws Exception {
-		// TODO Auto-generated method stub
-		return this;
-	}
-
 
 	@Override
-	public Result mlist(Object object, Integer page, Integer limit) throws CrudException {
+	public Result mlist(Object object, Integer page, Integer limit) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,15 +1,70 @@
 package com.gdyunst.ystadmin.framework.domain.repository;
 
+import java.util.Date;
 import java.util.List;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class IObject implements DomainInterface<IObject>{
+import javax.persistence.Column;
+
+public abstract class IObject {
 	public static Logger LOGGER = LoggerFactory.getLogger(IObject.class);
 	protected String id;
-	
-	protected Long total;     		// 总记录数;
+
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
+	protected Date operateDate;  //最后修改时间
+	@Column(name="createrId")
+	protected String createrId;  //创建人Id
+	@Column(name="creater")
+	protected String creater;  //创建人姓名
+	@Column(name="operatorId")
+	protected String operatorId;  //最后更新人Id
+	@Column(name="operator")
+	protected String operator;  //最后更新人姓名
+
+	public Date getOperateDate() {
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
+	}
+
+	public String getCreaterId() {
+		return createrId;
+	}
+
+	public void setCreaterId(String createrId) {
+		this.createrId = createrId;
+	}
+
+	public String getCreater() {
+		return creater;
+	}
+
+	public void setCreater(String creater) {
+		this.creater = creater;
+	}
+
+	public String getOperatorId() {
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId) {
+		this.operatorId = operatorId;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
 
 	protected List<String> ids;
 

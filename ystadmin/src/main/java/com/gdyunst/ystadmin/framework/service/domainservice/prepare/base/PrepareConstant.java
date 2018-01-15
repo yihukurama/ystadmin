@@ -12,7 +12,9 @@ public class PrepareConstant {
     
     
     public static String packages = "com.gdyunst."+PROJECT+".framework.domain.entity.admin";
+    public static String businesspackages = "com.gdyunst."+PROJECT+".framework.domain.entity.business";
     public static String mapperPath = "src/main/resources/mapper/basemapper/admin";
+    public static String mapperBusinessPath = "src/main/resources/mapper/basemapper/business";
     public static String entityPath = "src/main/java/com/gdyunst/"+PROJECT+"/framework/domain/entity/admin";
     public static String entityBusinessPath = "src/main/java/com/gdyunst/"+PROJECT+"/framework/domain/entity/business";
     

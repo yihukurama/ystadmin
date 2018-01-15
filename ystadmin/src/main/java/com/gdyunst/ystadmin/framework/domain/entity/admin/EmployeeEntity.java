@@ -29,7 +29,7 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 	@Column(name="mobile")
 	private String mobile;  //员工手机号码
 	@Column(name="tel")
-	private String tel;  //联系电话
+	private String tel;  //公司联系电话
 	@Column(name="email")
 	private String email;  //邮箱地址
 	@Column(name="address")
@@ -48,13 +48,13 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 	private String emContact;  //紧急联系人姓名
 	@Column(name="emTel")
 	private String emTel;  //紧急联系电话
-	@Column(name="creater")
-	private String creater;  //创建人id
+	@Column(name="createrId")
+	private String createrId;  //创建人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
 	private Date createDate;  //创建时间
-	@Column(name="operator")
-	private String operator;  //最后修改人id
+	@Column(name="operatorId")
+	private String operatorId;  //最后修改人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
 	private Date operateDate;  //最后修改日期
@@ -64,6 +64,14 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 	private String note;  //备注信息
 	@Column(name="delStatus")
 	private Integer delStatus;  //删除状态,0正常,1删除
+	@Column(name="orgName")
+	private String orgName;  //机构名
+	@Column(name="departmentName")
+	private String departmentName;  //部门名
+	@Column(name="creater")
+	private String creater;  //创建人姓名
+	@Column(name="operator")
+	private String operator;  //最后更新人姓名
 	
 	
 	//get  set 方法
@@ -187,12 +195,12 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 		this.emTel = emTel;
 	}
 
-	public String getCreater(){
-		return creater;
+	public String getCreaterId(){
+		return createrId;
 	}
 
-	public void setCreater(String creater){
-		this.creater = creater;
+	public void setCreaterId(String createrId){
+		this.createrId = createrId;
 	}
 
 	public Date getCreateDate(){
@@ -203,12 +211,12 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 		this.createDate = createDate;
 	}
 
-	public String getOperator(){
-		return operator;
+	public String getOperatorId(){
+		return operatorId;
 	}
 
-	public void setOperator(String operator){
-		this.operator = operator;
+	public void setOperatorId(String operatorId){
+		this.operatorId = operatorId;
 	}
 
 	public Date getOperateDate(){
@@ -241,6 +249,38 @@ public class EmployeeEntity extends BaseCrud<EmployeeEntity>
 
 	public void setDelStatus(Integer delStatus){
 		this.delStatus = delStatus;
+	}
+
+	public String getOrgName(){
+		return orgName;
+	}
+
+	public void setOrgName(String orgName){
+		this.orgName = orgName;
+	}
+
+	public String getDepartmentName(){
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName){
+		this.departmentName = departmentName;
+	}
+
+	public String getCreater(){
+		return creater;
+	}
+
+	public void setCreater(String creater){
+		this.creater = creater;
+	}
+
+	public String getOperator(){
+		return operator;
+	}
+
+	public void setOperator(String operator){
+		this.operator = operator;
 	}
 
 	

@@ -1,5 +1,6 @@
 package com.gdyunst.ystadmin.framework.web.restful.admin;
 
+import com.gdyunst.ystadmin.framework.service.domain.admin.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class PublicApi {
     @Autowired
     IPublicApi publicApiService;
     @RequestMapping(value="/login",method = RequestMethod.POST)
-    public Result login(@RequestBody Request<UserEntity> request) throws Exception {
+    public Result login(@RequestBody Request<User> request) throws Exception {
         
         
        
@@ -33,4 +34,11 @@ public class PublicApi {
 
         return Result.failed("注销失败");
     }
+
+    @RequestMapping(value="/getAuths",method = RequestMethod.POST)
+    public Result getAuths(@RequestBody Request<User> request) {
+
+        return publicApiService.getAuths(request);
+    }
+
 }

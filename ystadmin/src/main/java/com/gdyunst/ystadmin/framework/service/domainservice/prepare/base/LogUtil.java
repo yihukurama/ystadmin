@@ -21,4 +21,19 @@ public class LogUtil {
         Logger logger = LoggerFactory.getLogger(o.getClass());
         logger.error(msg);
     }
+    
+    public static void DebugLog(Class<?> o,String msg){
+        Logger logger = LoggerFactory.getLogger(o);
+        logger.debug(msg);
+    }
+    
+    public static void InfoLog(Class<?> o,String msg){
+        Logger logger = LoggerFactory.getLogger(o);
+        logger.info(msg);
+    }
+    
+    public static void ErrorLog(Class<?> o,String msg){
+        Logger logger = LoggerFactory.getLogger(o);
+        logger.error(msg);
+    }
 }

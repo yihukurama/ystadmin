@@ -44,20 +44,22 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 	private Double lat;  //机构所在地纬度
 	@Column(name="note")
 	private String note;  //备注信息
-	@Column(name="creater")
-	private String creater;  //创建人id
+	@Column(name="delStatus")
+	private Integer delStatus;  //删除状态,0未删除,1删除
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
 	private Date createDate;  //创建时间
-	@Column(name="operator")
-	private String operator;  //最后修改人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //最后修改日期
-	@Column(name="printQuotor")
-	private Boolean printQuotor;  //是否打印报价人姓名,默认不打印
-	@Column(name="delStatus")
-	private Integer delStatus;  //删除状态,0未删除,1删除
+	private Date operateDate;  //最后修改时间
+	@Column(name="createrId")
+	private String createrId;  //创建人Id
+	@Column(name="creater")
+	private String creater;  //创建人姓名
+	@Column(name="operatorId")
+	private String operatorId;  //最后更新人Id
+	@Column(name="operator")
+	private String operator;  //最后更新人姓名
 	
 	
 	//get  set 方法
@@ -173,12 +175,12 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 		this.note = note;
 	}
 
-	public String getCreater(){
-		return creater;
+	public Integer getDelStatus(){
+		return delStatus;
 	}
 
-	public void setCreater(String creater){
-		this.creater = creater;
+	public void setDelStatus(Integer delStatus){
+		this.delStatus = delStatus;
 	}
 
 	public Date getCreateDate(){
@@ -189,14 +191,6 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 		this.createDate = createDate;
 	}
 
-	public String getOperator(){
-		return operator;
-	}
-
-	public void setOperator(String operator){
-		this.operator = operator;
-	}
-
 	public Date getOperateDate(){
 		return operateDate;
 	}
@@ -205,20 +199,36 @@ public class OrganizationEntity extends BaseCrud<OrganizationEntity>
 		this.operateDate = operateDate;
 	}
 
-	public Boolean getPrintQuotor(){
-		return printQuotor;
+	public String getCreaterId(){
+		return createrId;
 	}
 
-	public void setPrintQuotor(Boolean printQuotor){
-		this.printQuotor = printQuotor;
+	public void setCreaterId(String createrId){
+		this.createrId = createrId;
 	}
 
-	public Integer getDelStatus(){
-		return delStatus;
+	public String getCreater(){
+		return creater;
 	}
 
-	public void setDelStatus(Integer delStatus){
-		this.delStatus = delStatus;
+	public void setCreater(String creater){
+		this.creater = creater;
+	}
+
+	public String getOperatorId(){
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId){
+		this.operatorId = operatorId;
+	}
+
+	public String getOperator(){
+		return operator;
+	}
+
+	public void setOperator(String operator){
+		this.operator = operator;
 	}
 
 	

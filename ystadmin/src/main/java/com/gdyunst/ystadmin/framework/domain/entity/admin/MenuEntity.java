@@ -9,12 +9,13 @@ import javax.persistence.Table;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
+import com.gdyunst.ystadmin.framework.domain.repository.TreeCrud;
 
 /**
  * 功能描述:保存系统菜单数据;
  */
 @Table(name="admin_menu")
-public class MenuEntity extends BaseCrud<MenuEntity>
+public class MenuEntity extends TreeCrud<MenuEntity>
 {
 	@Id
 	private String id;   //序列号
@@ -34,20 +35,26 @@ public class MenuEntity extends BaseCrud<MenuEntity>
 	private String serverUrl;  //菜单接口地址
 	@Column(name="iconClass")
 	private String iconClass;  //图标样式
-	@Column(name="indexOrder")
-	private String indexOrder;  //排序字段
-	@Column(name="creater")
-	private String creater;  //创建人id
+	@Column(name="note")
+	private String note;  //备注信息
+	@Column(name="delStatus")
+	private Integer delStatus;  //删除状态,0未删除,1删除
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
 	private Date createDate;  //创建时间
-	@Column(name="operator")
-	private String operator;  //最后修改人id
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
-	private Date operateDate;  //最后修改日期
-	@Column(name="note")
-	private String note;  //备注信息
+	private Date operateDate;  //最后修改时间
+	@Column(name="createrId")
+	private String createrId;  //创建人Id
+	@Column(name="creater")
+	private String creater;  //创建人姓名
+	@Column(name="operatorId")
+	private String operatorId;  //最后更新人Id
+	@Column(name="operator")
+	private String operator;  //最后更新人姓名
+	@Column(name="indexOrder")
+	private Integer indexOrder;  //排序字段
 	
 	
 	//get  set 方法
@@ -123,20 +130,20 @@ public class MenuEntity extends BaseCrud<MenuEntity>
 		this.iconClass = iconClass;
 	}
 
-	public String getIndexOrder(){
-		return indexOrder;
+	public String getNote(){
+		return note;
 	}
 
-	public void setIndexOrder(String indexOrder){
-		this.indexOrder = indexOrder;
+	public void setNote(String note){
+		this.note = note;
 	}
 
-	public String getCreater(){
-		return creater;
+	public Integer getDelStatus(){
+		return delStatus;
 	}
 
-	public void setCreater(String creater){
-		this.creater = creater;
+	public void setDelStatus(Integer delStatus){
+		this.delStatus = delStatus;
 	}
 
 	public Date getCreateDate(){
@@ -147,14 +154,6 @@ public class MenuEntity extends BaseCrud<MenuEntity>
 		this.createDate = createDate;
 	}
 
-	public String getOperator(){
-		return operator;
-	}
-
-	public void setOperator(String operator){
-		this.operator = operator;
-	}
-
 	public Date getOperateDate(){
 		return operateDate;
 	}
@@ -163,12 +162,44 @@ public class MenuEntity extends BaseCrud<MenuEntity>
 		this.operateDate = operateDate;
 	}
 
-	public String getNote(){
-		return note;
+	public String getCreaterId(){
+		return createrId;
 	}
 
-	public void setNote(String note){
-		this.note = note;
+	public void setCreaterId(String createrId){
+		this.createrId = createrId;
+	}
+
+	public String getCreater(){
+		return creater;
+	}
+
+	public void setCreater(String creater){
+		this.creater = creater;
+	}
+
+	public String getOperatorId(){
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId){
+		this.operatorId = operatorId;
+	}
+
+	public String getOperator(){
+		return operator;
+	}
+
+	public void setOperator(String operator){
+		this.operator = operator;
+	}
+
+	public Integer getIndexOrder(){
+		return indexOrder;
+	}
+
+	public void setIndexOrder(Integer indexOrder){
+		this.indexOrder = indexOrder;
 	}
 
 	

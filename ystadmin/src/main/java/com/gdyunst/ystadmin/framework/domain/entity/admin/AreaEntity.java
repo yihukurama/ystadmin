@@ -35,6 +35,17 @@ public class AreaEntity extends BaseCrud<AreaEntity>
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
 	private Date createDate;  //创建时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
+	private Date operateDate;  //最后修改时间
+	@Column(name="createrId")
+	private String createrId;  //创建人Id
+	@Column(name="creater")
+	private String creater;  //创建人姓名
+	@Column(name="operatorId")
+	private String operatorId;  //最后更新人Id
+	@Column(name="operator")
+	private String operator;  //最后更新人姓名
 	
 	
 	//get  set 方法
@@ -108,6 +119,46 @@ public class AreaEntity extends BaseCrud<AreaEntity>
 
 	public void setCreateDate(Date createDate){
 		this.createDate = createDate;
+	}
+
+	public Date getOperateDate(){
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate){
+		this.operateDate = operateDate;
+	}
+
+	public String getCreaterId(){
+		return createrId;
+	}
+
+	public void setCreaterId(String createrId){
+		this.createrId = createrId;
+	}
+
+	public String getCreater(){
+		return creater;
+	}
+
+	public void setCreater(String creater){
+		this.creater = creater;
+	}
+
+	public String getOperatorId(){
+		return operatorId;
+	}
+
+	public void setOperatorId(String operatorId){
+		this.operatorId = operatorId;
+	}
+
+	public String getOperator(){
+		return operator;
+	}
+
+	public void setOperator(String operator){
+		this.operator = operator;
 	}
 
 	

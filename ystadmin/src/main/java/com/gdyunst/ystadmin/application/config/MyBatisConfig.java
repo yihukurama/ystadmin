@@ -70,10 +70,6 @@ public class MyBatisConfig implements TransactionManagementConfigurer
 			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 			Resource[] baseRes = resolver.getResources("classpath*:mapper/basemapper/**/*.xml");
 			Resource[] res = baseRes;
-//			Resource[] clientRes = resolver.getResources("classpath:adminmapper/*.xml");
-//			Resource[] serviceRes = resolver.getResources("classpath:servicemapper/*.xml");
-//			Resource[] res1 = ArrayUtils.addAll(baseRes, clientRes);
-//			Resource[] res = ArrayUtils.addAll(res1, serviceRes);
 			bean.setMapperLocations(res);
 			bean.getObject().getConfiguration().setLogImpl(Log4jImpl.class);
 				

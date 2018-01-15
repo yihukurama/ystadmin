@@ -2,6 +2,9 @@ package com.gdyunst.ystadmin.application.constant;
 
 public abstract class Constant {
 
+    public static final String encryptKey = "ystadmin";//用于加密的密钥不同系统不同，避免撞库
+    public static final String JWTSECRET = "com.gdyunst";//token密钥
+    
     public static final int DEL_STATUS_1 = 1;
     public static final int DEL_STATUS_0 = 0;
 
@@ -11,7 +14,7 @@ public abstract class Constant {
     public static final int DB_TYPE_3 = 3; // 数据库:[角色权限表type 菜单] 程序[员工类型type 交警]
     public static final int DB_TYPE_4 = 4; // 数据库:[角色权限表type 功能] 程序[员工类型type 法院]
 
-    public static final String JWTSECRET = "com.gdyunst";
+    
 
     public static final Integer PAGE_NUMBER = 1; // 分页查询默认页码;
     public static final Integer PAGE_SIZE = 10; // 分页查询默认每页显示数据条数;

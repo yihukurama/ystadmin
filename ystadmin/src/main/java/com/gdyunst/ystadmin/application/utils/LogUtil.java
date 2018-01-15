@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.gdyunst.ystadmin.application.exception.CrudException;
 import com.gdyunst.ystadmin.framework.service.domain.admin.Systemlog;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Request;
 
@@ -81,12 +80,7 @@ public class LogUtil {
 					}
 				}
 				String conent="\r\n"+ip+"\t"+date+"\t"+url+"\t"+jsonStr;
-				try {
-                    new Systemlog().addSystemLog(ip, url,jsonStr);
-                } catch (CrudException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+				new Systemlog().addSystemLog(ip, url,jsonStr);
 				BufferedWriter out = null;
 				try {
 					out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
@@ -146,12 +140,7 @@ public class LogUtil {
                     }
                 }
                 String conent="\r\n"+ip+"\t"+date+"\t"+url+"\t"+jsonStr;
-                try {
-                    new Systemlog().addSystemLog(ip, url,jsonStr);
-                } catch (CrudException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+                new Systemlog().addSystemLog(ip, url,jsonStr);
                 BufferedWriter out = null;
                 try {
                     out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));

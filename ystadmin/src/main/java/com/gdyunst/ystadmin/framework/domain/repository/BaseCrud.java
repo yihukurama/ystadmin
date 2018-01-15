@@ -3,17 +3,14 @@ package com.gdyunst.ystadmin.framework.domain.repository;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
+import com.gdyunst.ystadmin.framework.service.domain.admin.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.gdyunst.ystadmin.application.constant.Constant;
-import com.gdyunst.ystadmin.application.exception.CrudException;
 import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Result;
 
@@ -30,7 +27,14 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public T update() throws CrudException{
+	public T update(){
+		if(this.getOperatorId()!=null){
+			User user = new User();
+			user.setId(this.getOperatorId());
+			String operator = user.doGetRealName();
+			this.setOperator(operator);
+		}
+		this.setOperateDate(new Date());
 		T o = null;
 		int row = CrudRespository.update(this);
 		if(row>0){
@@ -43,7 +47,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public int remove() throws CrudException{
+	public int remove(){
 		
 		int row = 0;
 		Method method = null;
@@ -73,7 +77,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public T load() throws CrudException{
+	public T load(){
 		if(!this.hasId()){
 			LOGGER.info("{} do not has id,Load fail!",this.getClass());
 			return null;
@@ -101,7 +105,20 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public T create() throws CrudException{
+	public T create(){
+		if(this.getOperatorId()!=null){
+			User user = new User();
+			user.setId(this.getOperatorId());
+			String operator = user.doGetRealName();
+			this.setOperator(operator);
+		}
+		if(this.getCreaterId()!=null){
+			User user = new User();
+			user.setId(this.getOperatorId());
+			String creater = user.doGetRealName();
+			this.setCreater(creater);
+		}
+		this.setOperateDate(new Date());
 		T object = null;
 		if(this.getId()==null || this.getId().equals("") || this.getId().length() < 32){
 			UUID id = UUID.randomUUID();
@@ -118,7 +135,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public Result list(int page, int limit) throws CrudException
+	public Result list(int page, int limit)
 	{
 		Method method = null;
 
@@ -154,7 +171,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public int creates(List<Object> list,Class<?> clazz) throws CrudException{
+	public int creates(List<Object> list,Class<?> clazz){
 		int row=0;
 		List<T> l=new ArrayList<>();
 		if(list!=null&&list.size()>0){
@@ -172,7 +189,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 	}
 	
 	@Override
-	public int creates(List<T> list) throws CrudException{
+	public int creates(List<T> list){
 		int row=0;
 		List<T> l=new ArrayList<>();
 		if(list!=null&&list.size()>0){
@@ -189,20 +206,16 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public List<T> list() throws CrudException{
+	public List<T> list(){
 		return (List<T>) CrudRespository.list(this);
 	}
 
 
-	@Override
-	public IObject init() throws CrudException {
-		// TODO Auto-generated method stub
-		return this;
-	}
+	
 
 
 	@Override
-	public Result mlist(Object object, Integer page, Integer limit) throws CrudException {
+	public Result mlist(Object object, Integer page, Integer limit){
 		Method method = null;
 		Map map=(Map) object;
 		try 

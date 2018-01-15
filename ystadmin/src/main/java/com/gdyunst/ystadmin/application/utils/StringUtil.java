@@ -114,4 +114,13 @@ public abstract class StringUtil
 		return DateUtil.toString(new Date(), "yyyyMMddHHmm")+NumberUtil.getRandNum(5);
 	}
 	
+	public static String replaceBlanks(String str) {  
+        String dest = "";  
+        if (str!=null) {  
+            Pattern p = Pattern.compile("\\s*|\t|\r|\n");  
+            Matcher m = p.matcher(str);  
+            dest = m.replaceAll("");  
+        }  
+        return dest.trim();  
+    }  
 }
