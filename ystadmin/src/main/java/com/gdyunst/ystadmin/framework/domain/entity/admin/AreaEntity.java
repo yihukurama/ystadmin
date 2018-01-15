@@ -8,13 +8,13 @@ import javax.persistence.Table;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
+import com.gdyunst.ystadmin.framework.domain.repository.TreeCrud;
 
 /**
  * 功能描述:保存区域数据
  */
 @Table(name="admin_area")
-public class AreaEntity extends BaseCrud<AreaEntity>
+public class AreaEntity extends TreeCrud<AreaEntity>
 {
 	@Id
 	private String id;   //序列号

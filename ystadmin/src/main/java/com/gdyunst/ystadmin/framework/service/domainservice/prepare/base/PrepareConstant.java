@@ -7,6 +7,7 @@ public class PrepareConstant {
     public final static String DBCOLUMN_DELSTATUS="delStatus";
     public final static String DBCOLUMN_PARENTID="parentId";
     public static final String ENTITYTPL_PATH = "src/main/java/com/gdyunst/"+PROJECT+"/framework/service/domainservice/prepare/base/templates/framework/entity/BaseEntity.tpl";
+    public static final String TREEENTITY_PATH = "src/main/java/com/gdyunst/"+PROJECT+"/framework/service/domainservice/prepare/base/templates/framework/entity/TreeEntity.tpl";
     public static final String TREE_MAPPERTPL_PATH = "src/main/java/com/gdyunst/"+PROJECT+"/framework/service/domainservice/prepare/base/templates/framework/mapper/BaseTreeMapper.xml";
     public static final String NORMAL_MAPPERTPL_PATH = "src/main/java/com/gdyunst/"+PROJECT+"/framework/service/domainservice/prepare/base/templates/framework/mapper/BaseNormalMapper.xml";
     

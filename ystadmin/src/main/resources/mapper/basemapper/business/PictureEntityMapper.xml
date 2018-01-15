@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Picture">
+	<!-- 保存对象 -->
+	<insert id="createPicture" parameterType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity">
+		<![CDATA[
+            INSERT INTO business_picture
+                (id,relateId,type,filePath,picIndex,origin,relateType)
+            VALUES 
+                (#{id},#{relateId},#{type},#{filePath},#{picIndex},#{origin},#{relateType})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updatePicture" parameterType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity">
+        <![CDATA[
+            UPDATE business_picture SET id=id
+        ]]>
+		<if test="relateType!=null ">,relateType=#{relateType}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
+		<if test="origin!=null ">,origin=#{origin}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
+		<if test="picIndex!=null ">,picIndex=#{picIndex}</if>
+		<if test="filePath!=null and filePath!=''">,filePath=#{filePath}</if>
+		<if test="type!=null ">,type=#{type}</if>
+		<if test="relateId!=null and relateId!=''">,relateId=#{relateId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadPicture" resultType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity">
+		SELECT * FROM business_picture WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listPicture" resultType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity">
+        <![CDATA[
+	  		SELECT * FROM business_picture WHERE 1=1
+	  	]]>
+		<if test="relateType!=null">AND relateType=#{relateType}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="origin!=null">AND origin=#{origin}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="picIndex!=null">AND picIndex=#{picIndex}</if>
+		<if test="filePath!=null and filePath!=''">AND filePath=#{filePath}</if>
+		<if test="type!=null">AND type=#{type}</if>
+		<if test="relateId!=null and relateId!=''">AND relateId=#{relateId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY createDate DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removePicture" parameterType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity">
+		UPDATE
+		business_picture SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchPicture" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO business_picture
+                (id,relateId,type,filePath,picIndex,origin,relateType)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.relateId},#{item.type},#{item.filePath},#{item.picIndex},#{item.origin},#{item.relateType})
+		</foreach>
+	</insert>
+
+
+</mapper>

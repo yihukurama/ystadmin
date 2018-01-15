@@ -30,6 +30,10 @@ public class GenEntityImpl implements IGenEntity {
 
         LogUtil.DebugLog(this.getClass(), "entityFile is "+entityFile.getPath());
         File tplFile = new File(PrepareConstant.ENTITYTPL_PATH);
+        if(entity.getEntColumns().contains("parentId")){//树形结构
+            tplFile = new File(PrepareConstant.TREEENTITY_PATH);
+        }
+
         if (!entityFile.exists()) {
             try {
                 entityFile.createNewFile();

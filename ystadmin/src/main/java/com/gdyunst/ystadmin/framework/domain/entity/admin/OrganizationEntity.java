@@ -8,13 +8,13 @@ import javax.persistence.Table;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
+import com.gdyunst.ystadmin.framework.domain.repository.TreeCrud;
 
 /**
  * 功能描述:保存评估机构数据;
  */
 @Table(name="admin_organization")
-public class OrganizationEntity extends BaseCrud<OrganizationEntity>
+public class OrganizationEntity extends TreeCrud<OrganizationEntity>
 {
 	@Id
 	private String id;   //序列号

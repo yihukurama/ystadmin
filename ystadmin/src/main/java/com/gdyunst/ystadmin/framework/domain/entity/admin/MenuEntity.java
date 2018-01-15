@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.gdyunst.ystadmin.framework.domain.repository.BaseCrud;
 import com.gdyunst.ystadmin.framework.domain.repository.TreeCrud;
 
 /**
