@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Smsrecord">
+	<!-- 保存对象 -->
+	<insert id="createSmsrecord" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity">
+		<![CDATA[
+            INSERT INTO admin_smsrecord
+                (id,type,msg,responseUrl,tel,sid,status,costate,tplId,reason,operateDate,createrId,creater,operatorId,operator)
+            VALUES 
+                (#{id},#{type},#{msg},#{responseUrl},#{tel},#{sid},#{status},#{costate},#{tplId},#{reason},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateSmsrecord" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity">
+        <![CDATA[
+            UPDATE admin_smsrecord SET id=id
+        ]]>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">,operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">,createrId=#{createrId}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
+		<if test="reason!=null and reason!=''">,reason=#{reason}</if>
+		<if test="tplId!=null ">,tplId=#{tplId}</if>
+		<if test="costate!=null ">,costate=#{costate}</if>
+		<if test="status!=null ">,status=#{status}</if>
+		<if test="sid!=null and sid!=''">,sid=#{sid}</if>
+		<if test="tel!=null and tel!=''">,tel=#{tel}</if>
+		<if test="responseUrl!=null and responseUrl!=''">,responseUrl=#{responseUrl}</if>
+		<if test="msg!=null and msg!=''">,msg=#{msg}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
+		<if test="type!=null ">,type=#{type}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadSmsrecord" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity">
+		SELECT * FROM admin_smsrecord WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listSmsrecord" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_smsrecord WHERE 1=1
+	  	]]>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="reason!=null and reason!=''">AND reason=#{reason}</if>
+		<if test="tplId!=null">AND tplId=#{tplId}</if>
+		<if test="costate!=null">AND costate=#{costate}</if>
+		<if test="status!=null">AND status=#{status}</if>
+		<if test="sid!=null and sid!=''">AND sid=#{sid}</if>
+		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
+		<if test="responseUrl!=null and responseUrl!=''">AND responseUrl=#{responseUrl}</if>
+		<if test="msg!=null and msg!=''">AND msg=#{msg}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="type!=null">AND type=#{type}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY createDate DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeSmsrecord" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity">
+		UPDATE
+		admin_smsrecord SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchSmsrecord" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_smsrecord
+                (id,type,msg,responseUrl,tel,sid,status,costate,tplId,reason,operateDate,createrId,creater,operatorId,operator)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.type},#{item.msg},#{item.responseUrl},#{item.tel},#{item.sid},#{item.status},#{item.costate},#{item.tplId},#{item.reason},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator})
+		</foreach>
+	</insert>
+
+
+</mapper>

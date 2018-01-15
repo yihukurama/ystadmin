@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Empservbranch">
+	<!-- 保存对象 -->
+	<insert id="createEmpservbranch" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity">
+		<![CDATA[
+            INSERT INTO admin_empservbranch
+                (id,serviceBranchId,employeeId)
+            VALUES 
+                (#{id},#{serviceBranchId},#{employeeId})
+        ]]>
+	</insert>
+
+	<!-- 更新对象 -->
+	<update id="updateEmpservbranch" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity">
+        <![CDATA[
+            UPDATE admin_empservbranch SET id=id
+        ]]>
+		<if test="employeeId!=null and employeeId!=''">,employeeId=#{employeeId}</if>
+		<if test="serviceBranchId!=null and serviceBranchId!=''">,serviceBranchId=#{serviceBranchId}</if>
+		<if test="id!=null and id!=''">,id=#{id}</if>
+		
+        <![CDATA[
+            WHERE id=#{id}
+        ]]>
+	</update>
+
+	<!-- 查找单个对象 -->
+	<select id="loadEmpservbranch" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity">
+		SELECT * FROM admin_empservbranch WHERE id=#{id}
+	</select>
+
+	<!-- 查询数据列表 -->
+	<select id="listEmpservbranch" resultType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity"
+		parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity">
+        <![CDATA[
+	  		SELECT * FROM admin_empservbranch WHERE 1=1
+	  	]]>
+		<if test="employeeId!=null and employeeId!=''">AND employeeId=#{employeeId}</if>
+		<if test="serviceBranchId!=null and serviceBranchId!=''">AND serviceBranchId=#{serviceBranchId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
+		<![CDATA[
+			ORDER BY createDate DESC
+		]]>
+	</select>
+
+	<!-- 删除单个对象 -->
+	<delete id="removeEmpservbranch" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity">
+		UPDATE
+		admin_empservbranch SET delStatus=1 WHERE id=#{id}
+	</delete>
+
+	<!-- 批量插入 -->
+	<insert id="insertBatchEmpservbranch" parameterType="java.util.List">
+		<![CDATA[
+            INSERT INTO admin_empservbranch
+                (id,serviceBranchId,employeeId)
+            VALUES
+        ]]>
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.serviceBranchId},#{item.employeeId})
+		</foreach>
+	</insert>
+
+
+</mapper>
