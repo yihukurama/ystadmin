@@ -21,29 +21,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ReplacePackage {
 
-    public String entityOldString = "com.gdyunst.kckpcomm.entity.admin";
-    public String entityNewString = "com.gdyunst.jqzy.framework.domain.entity.admin";
-    public String domainNewString = "com.gdyunst.jqzy.framework.service.admin.domain";
-    public String domainOldString = "com.gdyunst.kckpadmin.framework.domain";
-    public String dtoOldString = "";
-   
-    
-    public String sentityOldString = "com.gdyunst.kckpcomm.entity.service";
-    public String sentityNewString = "com.gdyunst.jqzy.framework.domain.entity.service";
-    public String sdomainNewString = "com.gdyunst.jqzy.framework.service.service.domain";
-    public String sdomainOldString = "com.gdyunst.kckpservice.framework.domain";
+    public String entityOldString = "com.gdyunst.ystadmin";
+    public String entityNewString = "com.gdyunst.cxtravel";
     
     @Test
     public void test(){
         System.out.println("hello world");
-        File file = new File("E:/Workbench/jqzy/src/main/resources/basemapper");
+        File file = new File("D:\\work\\workspace\\versionOne\\CXTravel\\src\\main\\resources\\mapper\\basemapper");
         List<File> files = listAllFile(file);
         for (int i = 0; i < files.size(); i++) {
             String filePath = files.get(i).getAbsolutePath();
-            replacePackage(filePath,sentityOldString,sentityNewString);
-            replacePackage(filePath,sdomainOldString,sdomainNewString);
             replacePackage(filePath,entityOldString,entityNewString);
-            replacePackage(filePath,domainOldString,domainNewString);
         }
         
    
@@ -56,6 +44,11 @@ public class ReplacePackage {
         for(int i=0;i<array.length;i++){   
             if(array[i].isFile()){    
                 fileList.add(array[i]);
+            }else if(array[i].isDirectory()){
+                List<File> dirFiles = listAllFile(array[i]);
+                if(dirFiles!=null && dirFiles.size()!=0){
+                    fileList.addAll(dirFiles);
+                }
             }
         }   
         return fileList;

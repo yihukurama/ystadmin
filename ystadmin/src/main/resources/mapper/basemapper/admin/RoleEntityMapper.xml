@@ -5,9 +5,9 @@
 	<insert id="createRole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleEntity">
 		<![CDATA[
             INSERT INTO admin_role
-                (id,text,note,creater,operator,operateDate,orgId)
+                (id,text,note,orgId,orgName,operateDate,createrId,creater,operatorId,operator)
             VALUES 
-                (#{id},#{text},#{note},#{creater},#{operator},#{operateDate},#{orgId})
+                (#{id},#{text},#{note},#{orgId},#{orgName},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator})
         ]]>
 	</insert>
 
@@ -16,11 +16,15 @@
         <![CDATA[
             UPDATE admin_role SET id=id
         ]]>
-		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
-		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
-		<if test="createDate!=null">,createDate=#{createDate}</if>
+		<if test="operatorId!=null and operatorId!=''">,operatorId=#{operatorId}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">,createrId=#{createrId}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
+		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
+		<if test="orgName!=null and orgName!=''">,orgName=#{orgName}</if>
+		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="text!=null and text!=''">,text=#{text}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
@@ -42,11 +46,16 @@
         <![CDATA[
 	  		SELECT * FROM admin_role WHERE 1=1
 	  	]]>
-		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
-		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
-		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="orgName!=null and orgName!=''">AND orgName=#{orgName}</if>
+		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
 		<if test="text!=null and text!=''">AND text=#{text}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
@@ -66,12 +75,12 @@
 	<insert id="insertBatchRole" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_role
-                (id,text,note,creater,operator,operateDate,orgId)
+                (id,text,note,orgId,orgName,operateDate,createrId,creater,operatorId,operator)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.text},#{item.note},#{item.creater},#{item.operator},#{item.operateDate},#{item.orgId})
+			(#{item.id},#{item.text},#{item.note},#{item.orgId},#{item.orgName},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator})
 		</foreach>
 	</insert>
 

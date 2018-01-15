@@ -5,9 +5,9 @@
 	<insert id="createConfiguration" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ConfigurationEntity">
 		<![CDATA[
             INSERT INTO admin_configuration
-                (id,code,value,type,indexOrder,creater,operator,operateDate,note)
+                (id,code,value,type,indexOrder,note,operateDate,createrId,creater,operatorId,operator)
             VALUES 
-                (#{id},#{code},#{value},#{type},#{indexOrder},#{creater},#{operator},#{operateDate},#{note})
+                (#{id},#{code},#{value},#{type},#{indexOrder},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator})
         ]]>
 	</insert>
 
@@ -16,12 +16,14 @@
         <![CDATA[
             UPDATE admin_configuration SET id=id
         ]]>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">,operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">,createrId=#{createrId}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
-		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
-		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
-		<if test="createDate!=null">,createDate=#{createDate}</if>
-		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
 		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
 		<if test="type!=null ">,type=#{type}</if>
 		<if test="value!=null and value!=''">,value=#{value}</if>
@@ -45,13 +47,15 @@
         <![CDATA[
 	  		SELECT * FROM admin_configuration WHERE 1=1
 	  	]]>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
-		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
-		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
-		<if test="createDate!=null">AND createDate=#{createDate}</if>
-		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
 		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
 		<if test="type!=null">AND type=#{type}</if>
 		<if test="value!=null and value!=''">AND value=#{value}</if>
@@ -73,12 +77,12 @@
 	<insert id="insertBatchConfiguration" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_configuration
-                (id,code,value,type,indexOrder,creater,operator,operateDate,note)
+                (id,code,value,type,indexOrder,note,operateDate,createrId,creater,operatorId,operator)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.code},#{item.value},#{item.type},#{item.indexOrder},#{item.creater},#{item.operator},#{item.operateDate},#{item.note})
+			(#{item.id},#{item.code},#{item.value},#{item.type},#{item.indexOrder},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator})
 		</foreach>
 	</insert>
 

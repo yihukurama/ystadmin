@@ -5,9 +5,9 @@
 	<insert id="createEmployee" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
 		<![CDATA[
             INSERT INTO admin_employee
-                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note)
+                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,createrId,operatorId,operateDate,indexOrder,note,orgName,departmentName,creater,operator)
             VALUES 
-                (#{id},#{orgId},#{departmentId},#{code},#{realName},#{mobile},#{tel},#{email},#{address},#{status},#{dateJoined},#{dateLeft},#{workAge},#{emContact},#{emTel},#{creater},#{operator},#{operateDate},#{indexOrder},#{note})
+                (#{id},#{orgId},#{departmentId},#{code},#{realName},#{mobile},#{tel},#{email},#{address},#{status},#{dateJoined},#{dateLeft},#{workAge},#{emContact},#{emTel},#{createrId},#{operatorId},#{operateDate},#{indexOrder},#{note},#{orgName},#{departmentName},#{creater},#{operator})
         ]]>
 	</insert>
 
@@ -16,13 +16,17 @@
         <![CDATA[
             UPDATE admin_employee SET id=id
         ]]>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="departmentName!=null and departmentName!=''">,departmentName=#{departmentName}</if>
+		<if test="orgName!=null and orgName!=''">,orgName=#{orgName}</if>
 		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
 		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
 		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
-		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">,operatorId=#{operatorId}</if>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
-		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">,createrId=#{createrId}</if>
 		<if test="emTel!=null and emTel!=''">,emTel=#{emTel}</if>
 		<if test="emContact!=null and emContact!=''">,emContact=#{emContact}</if>
 		<if test="workAge!=null ">,workAge=#{workAge}</if>
@@ -56,14 +60,18 @@
         <![CDATA[
 	  		SELECT * FROM admin_employee WHERE 1=1
 	  	]]>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="departmentName!=null and departmentName!=''">AND departmentName=#{departmentName}</if>
+		<if test="orgName!=null and orgName!=''">AND orgName=#{orgName}</if>
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
 		<if test="note!=null and note!=''">AND note=#{note}</if>
 		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
 		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
-		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
-		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
 		<if test="emTel!=null and emTel!=''">AND emTel=#{emTel}</if>
 		<if test="emContact!=null and emContact!=''">AND emContact=#{emContact}</if>
 		<if test="workAge!=null">AND workAge=#{workAge}</if>
@@ -95,12 +103,12 @@
 	<insert id="insertBatchEmployee" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_employee
-                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,creater,operator,operateDate,indexOrder,note)
+                (id,orgId,departmentId,code,realName,mobile,tel,email,address,status,dateJoined,dateLeft,workAge,emContact,emTel,createrId,operatorId,operateDate,indexOrder,note,orgName,departmentName,creater,operator)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.orgId},#{item.departmentId},#{item.code},#{item.realName},#{item.mobile},#{item.tel},#{item.email},#{item.address},#{item.status},#{item.dateJoined},#{item.dateLeft},#{item.workAge},#{item.emContact},#{item.emTel},#{item.creater},#{item.operator},#{item.operateDate},#{item.indexOrder},#{item.note})
+			(#{item.id},#{item.orgId},#{item.departmentId},#{item.code},#{item.realName},#{item.mobile},#{item.tel},#{item.email},#{item.address},#{item.status},#{item.dateJoined},#{item.dateLeft},#{item.workAge},#{item.emContact},#{item.emTel},#{item.createrId},#{item.operatorId},#{item.operateDate},#{item.indexOrder},#{item.note},#{item.orgName},#{item.departmentName},#{item.creater},#{item.operator})
 		</foreach>
 	</insert>
 

@@ -5,9 +5,9 @@
 	<insert id="createArea" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.AreaEntity">
 		<![CDATA[
 			INSERT INTO admin_area
-				(id,parentId,path,text,type,indexOrder,note)
+				(id,parentId,path,text,type,indexOrder,note,operateDate,createrId,creater,operatorId,operator)
 			VALUES 
-				(#{id},#{parentId},#{path},#{text},#{type},#{indexOrder},#{note})
+				(#{id},#{parentId},#{path},#{text},#{type},#{indexOrder},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator})
         ]]>
 	</insert>
 
@@ -16,6 +16,11 @@
         <![CDATA[
 			UPDATE admin_area SET id=id
 		]]>
+		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">,operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">,createrId=#{createrId}</if>
+		<if test="operateDate!=null ">,operateDate=#{operateDate}</if>
 		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="delStatus!=null ">,delStatus=#{delStatus}</if>
 		<if test="note!=null and note!=''">,note=#{note}</if>
@@ -45,6 +50,11 @@
         <![CDATA[
 	  	 	SELECT * FROM admin_area WHERE 1=1
 	  	]]>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
 		<if test="delStatus==null">AND delStatus=0</if>
@@ -88,12 +98,12 @@
 	<insert id="insertBatchArea" parameterType="java.util.List">
     	<![CDATA[
     		INSERT INTO admin_area
-        		(id,parentId,path,text,type,indexOrder,note)
+        		(id,parentId,path,text,type,indexOrder,note,operateDate,createrId,creater,operatorId,operator)
         	VALUES
     	]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.parentId},#{item.path},#{item.text},#{item.type},#{item.indexOrder},#{item.note})
+			(#{item.id},#{item.parentId},#{item.path},#{item.text},#{item.type},#{item.indexOrder},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator})
 		</foreach>
 	</insert>
 
