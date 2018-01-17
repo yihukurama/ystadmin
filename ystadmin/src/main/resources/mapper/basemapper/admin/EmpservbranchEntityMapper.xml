@@ -5,9 +5,9 @@
 	<insert id="createEmpservbranch" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity">
 		<![CDATA[
             INSERT INTO admin_empservbranch
-                (id,serviceBranchId,employeeId)
+                (id,serviceBranchId,employeeId,createrId,creater)
             VALUES 
-                (#{id},#{serviceBranchId},#{employeeId})
+                (#{id},#{serviceBranchId},#{employeeId},#{createrId},#{creater})
         ]]>
 	</insert>
 
@@ -16,6 +16,9 @@
         <![CDATA[
             UPDATE admin_empservbranch SET id=id
         ]]>
+		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">,createrId=#{createrId}</if>
+		<if test="createDate!=null">,createDate=#{createDate}</if>
 		<if test="employeeId!=null and employeeId!=''">,employeeId=#{employeeId}</if>
 		<if test="serviceBranchId!=null and serviceBranchId!=''">,serviceBranchId=#{serviceBranchId}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
@@ -37,6 +40,9 @@
         <![CDATA[
 	  		SELECT * FROM admin_empservbranch WHERE 1=1
 	  	]]>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="employeeId!=null and employeeId!=''">AND employeeId=#{employeeId}</if>
 		<if test="serviceBranchId!=null and serviceBranchId!=''">AND serviceBranchId=#{serviceBranchId}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
@@ -46,22 +52,29 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeEmpservbranch" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmpservbranchEntity">
-		UPDATE
-		admin_empservbranch SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_empservbranch WHERE id=#{id}
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="employeeId!=null and employeeId!=''">AND employeeId=#{employeeId}</if>
+		<if test="serviceBranchId!=null and serviceBranchId!=''">AND serviceBranchId=#{serviceBranchId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->
 	<insert id="insertBatchEmpservbranch" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_empservbranch
-                (id,serviceBranchId,employeeId)
+                (id,serviceBranchId,employeeId,createrId,creater)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.serviceBranchId},#{item.employeeId})
+			(#{item.id},#{item.serviceBranchId},#{item.employeeId},#{item.createrId},#{item.creater})
 		</foreach>
 	</insert>
 

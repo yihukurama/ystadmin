@@ -1,5 +1,6 @@
 package com.gdyunst.ystadmin.framework.service.domainservice.admin.impl;
 
+import com.gdyunst.ystadmin.application.utils.LogUtil;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity;
 import com.gdyunst.ystadmin.framework.service.domain.admin.Roleprivilege;
 import com.gdyunst.ystadmin.framework.service.domain.admin.User;
@@ -45,6 +46,7 @@ public class SecurityService implements ISecurity{
             return false;
         }
         if(loginUser.getUsername().equals("admin")){
+            LogUtil.DebugLog(this,"超级管理员拥有所有权限");
             return true;
         }
         loginUser.doGetRelationData();

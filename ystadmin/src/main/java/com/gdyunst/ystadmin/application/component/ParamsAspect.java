@@ -110,14 +110,14 @@ public class ParamsAspect {
 				}
 
 				// 判断用户是否登录
-				if (!url.contains("/public/") && !redisUtils.exists(request.getUid())) {
+				if (!url.contains("/public/") && !redisUtils.exists(request.getUid()+Constant.encryptKey)) {
 				    LOGGER.debug("获得的请求数据是>>>>>>",JSON.toJSONString(request));
 					return Result.failed(ResponseEnum.ERROR_CODE_4003.getCode());
 				}else{
 					//更新缓存
-					if (redisUtils.exists(request.getUid())) {
-						String token = (String) redisUtils.get(request.getUid());
-						redisUtils.set(request.getUid(), token, Constant.LOGIN_EXPIRETIME);
+					if (redisUtils.exists(request.getUid()+Constant.encryptKey)) {
+						String token = (String) redisUtils.get(request.getUid()+Constant.encryptKey);
+						redisUtils.set(request.getUid()+Constant.encryptKey, token, Constant.LOGIN_EXPIRETIME);
 						LOGGER.debug("更新登录状态...延长{}",Constant.LOGIN_EXPIRETIME);
 					}
 				}

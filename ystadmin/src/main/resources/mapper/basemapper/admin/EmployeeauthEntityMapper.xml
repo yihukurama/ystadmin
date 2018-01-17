@@ -58,10 +58,20 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeEmployeeauth" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeauthEntity">
-		UPDATE
-		admin_employeeauth SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_employeeauth WHERE id=#{id}
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="employeeId!=null and employeeId!=''">AND employeeId=#{employeeId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

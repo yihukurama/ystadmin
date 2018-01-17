@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.transaction.Transactional;
 
+import com.gdyunst.ystadmin.application.exception.TipsException;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -168,7 +169,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 
 	@Override
-	public List<Object> treeList() throws InstantiationException, IllegalAccessException {
+	public List<Object> treeList() throws InstantiationException, IllegalAccessException, TipsException {
 		List<Object> list = CrudRespository.list(this);
 		Boolean asyn=false;
 		if(this.getAsyn()!=null){
@@ -194,8 +195,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 	 * @Author:liujun
 	 * @Date:2017年1月5日 下午2:19:44
 	 */
-	private T recursionTreeList(T t,Boolean asyn) throws InstantiationException, IllegalAccessException
-	{
+	private T recursionTreeList(T t,Boolean asyn) throws InstantiationException, IllegalAccessException, TipsException {
 		T tt=(T) t.getClass().newInstance();
 		tt.setParentId(t.getId());
 		ITreeCrud<ITree> treeCurd = (ITreeCrud<ITree>)tt;
@@ -237,8 +237,7 @@ public class TreeCrud<T extends ITree> extends ITree implements ITreeCrud<T> {
 
 	@Override
 	public List<T> list(){
-		// TODO Auto-generated method stub
-		return null;
+		return (List<T>) CrudRespository.list(this);
 	}
 
 

@@ -40,10 +40,11 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="remove${domainName}" parameterType="${package}.${entityName}">
-		UPDATE
-		${tableName} SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		${tableName} WHERE id=#{id}
+		${listColumns}
 	</delete>
 
 	<!-- 批量插入 -->

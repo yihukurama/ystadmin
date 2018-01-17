@@ -48,10 +48,15 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeUserrole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
-		UPDATE
-		admin_userrole SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_userrole WHERE userId=#{userId}
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
+		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

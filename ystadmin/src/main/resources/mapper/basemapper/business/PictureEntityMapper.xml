@@ -59,10 +59,21 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removePicture" parameterType="com.gdyunst.ystadmin.framework.domain.entity.business.PictureEntity">
-		UPDATE
-		business_picture SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		business_picture WHERE id=#{id}
+		<if test="relateType!=null">AND relateType=#{relateType}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="origin!=null">AND origin=#{origin}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="picIndex!=null">AND picIndex=#{picIndex}</if>
+		<if test="filePath!=null and filePath!=''">AND filePath=#{filePath}</if>
+		<if test="type!=null">AND type=#{type}</if>
+		<if test="relateId!=null and relateId!=''">AND relateId=#{relateId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

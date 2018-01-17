@@ -52,10 +52,17 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeRoleprivilege" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity">
-		UPDATE
-		admin_roleprivilege SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_roleprivilege WHERE id=#{id}
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="type!=null">AND type=#{type}</if>
+		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
+		<if test="privilegeId!=null and privilegeId!=''">AND privilegeId=#{privilegeId}</if>
+		<if test="subSystemId!=null and subSystemId!=''">AND subSystemId=#{subSystemId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

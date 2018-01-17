@@ -67,10 +67,25 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeSubsystem" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SubsystemEntity">
-		UPDATE
-		admin_subsystem SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_subsystem WHERE id=#{id}
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
+		<if test="url!=null and url!=''">AND url=#{url}</if>
+		<if test="text!=null and text!=''">AND text=#{text}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

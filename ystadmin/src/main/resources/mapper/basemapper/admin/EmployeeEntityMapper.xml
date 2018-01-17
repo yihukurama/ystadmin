@@ -93,10 +93,38 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeEmployee" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.EmployeeEntity">
-		UPDATE
-		admin_employee SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_employee WHERE id=#{id}
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="departmentName!=null and departmentName!=''">AND departmentName=#{departmentName}</if>
+		<if test="orgName!=null and orgName!=''">AND orgName=#{orgName}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="emTel!=null and emTel!=''">AND emTel=#{emTel}</if>
+		<if test="emContact!=null and emContact!=''">AND emContact=#{emContact}</if>
+		<if test="workAge!=null">AND workAge=#{workAge}</if>
+		<if test="dateLeft!=null">AND dateLeft=#{dateLeft}</if>
+		<if test="dateJoined!=null">AND dateJoined=#{dateJoined}</if>
+		<if test="status!=null">AND status=#{status}</if>
+		<if test="address!=null and address!=''">AND address=#{address}</if>
+		<if test="email!=null and email!=''">AND email=#{email}</if>
+		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
+		<if test="mobile!=null and mobile!=''">AND mobile=#{mobile}</if>
+		<if test="realName!=null and realName!=''">AND realName=#{realName}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="departmentId!=null and departmentId!=''">AND departmentId=#{departmentId}</if>
+		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

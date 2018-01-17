@@ -18,8 +18,12 @@ public class ServicebranchEntity extends BaseCrud<ServicebranchEntity>
 {
 	@Id
 	private String id;   //序列号
+	@Column(name="orgName")
+	private String orgName;  //orgName
 	@Column(name="orgId")
 	private String orgId;  //网点所属机构id
+	@Column(name="departmentName")
+	private String departmentName;  //departmentName
 	@Column(name="departmentId")
 	private String departmentId;  //网点所属部门id
 	@Column(name="code")
@@ -73,12 +77,28 @@ public class ServicebranchEntity extends BaseCrud<ServicebranchEntity>
 		this.id = id;
 	}
 
+	public String getOrgName(){
+		return orgName;
+	}
+
+	public void setOrgName(String orgName){
+		this.orgName = orgName;
+	}
+
 	public String getOrgId(){
 		return orgId;
 	}
 
 	public void setOrgId(String orgId){
 		this.orgId = orgId;
+	}
+
+	public String getDepartmentName(){
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName){
+		this.departmentName = departmentName;
 	}
 
 	public String getDepartmentId(){

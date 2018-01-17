@@ -18,12 +18,16 @@ public class UserEntity extends BaseCrud<UserEntity>
 {
 	@Id
 	private String id;   //序列号
+	@Column(name="employeeName")
+	private String employeeName;  //员工姓名
 	@Column(name="employeeId")
 	private String employeeId;  //账号关联员工id
 	@Column(name="username")
 	private String username;  //账号名称
 	@Column(name="password")
 	private String password;  //账号密码
+	@Column(name="rolelist")
+	private String rolelist;  //拥有的角色名，用逗号区分
 	@Column(name="status")
 	private Integer status;  //账号状态,1正常,2禁用
 	@Column(name="type")
@@ -68,6 +72,14 @@ public class UserEntity extends BaseCrud<UserEntity>
 		this.id = id;
 	}
 
+	public String getEmployeeName(){
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName){
+		this.employeeName = employeeName;
+	}
+
 	public String getEmployeeId(){
 		return employeeId;
 	}
@@ -90,6 +102,14 @@ public class UserEntity extends BaseCrud<UserEntity>
 
 	public void setPassword(String password){
 		this.password = password;
+	}
+
+	public String getRolelist(){
+		return rolelist;
+	}
+
+	public void setRolelist(String rolelist){
+		this.rolelist = rolelist;
 	}
 
 	public Integer getStatus(){

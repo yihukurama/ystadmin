@@ -29,11 +29,7 @@ public class PublicApi {
         return publicApiService.login(request);
     }
     
-    @RequestMapping(value="/logout",method = RequestMethod.POST)
-    public Result logout(@RequestBody Request<UserEntity> request) {
 
-        return Result.failed("注销失败");
-    }
 
     @RequestMapping(value="/getAuths",method = RequestMethod.POST)
     public Result getAuths(@RequestBody Request<User> request) {

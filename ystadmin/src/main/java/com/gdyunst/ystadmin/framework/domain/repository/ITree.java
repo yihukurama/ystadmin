@@ -9,7 +9,7 @@ public abstract class ITree extends IObject {
 	protected String text;
 	protected String path;
 	protected Integer indexOrder;
-	protected List<Object> children;
+	protected List children;
 	protected Boolean leaf;
 	protected Boolean asyn;
 	

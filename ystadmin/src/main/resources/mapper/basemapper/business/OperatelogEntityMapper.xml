@@ -57,10 +57,20 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeOperatelog" parameterType="com.gdyunst.ystadmin.framework.domain.entity.business.OperatelogEntity">
-		UPDATE
-		business_operatelog SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		business_operatelog WHERE id=#{id}
+		<if test="result!=null">AND result=#{result}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="realName!=null and realName!=''">AND realName=#{realName}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="type!=null and type!=''">AND type=#{type}</if>
+		<if test="relateId!=null and relateId!=''">AND relateId=#{relateId}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

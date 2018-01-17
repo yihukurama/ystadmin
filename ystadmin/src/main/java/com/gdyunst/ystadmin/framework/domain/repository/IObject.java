@@ -1,19 +1,32 @@
 package com.gdyunst.ystadmin.framework.domain.repository;
 
-import java.util.Date;
-import java.util.List;
-
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
+import java.util.Date;
+import java.util.List;
 
 public abstract class IObject {
 	public static Logger LOGGER = LoggerFactory.getLogger(IObject.class);
 	protected String id;
+	protected Boolean loadRelate = true;	//加载时默认加载关联数据
 
+
+	public Boolean getLoadRelate() {
+		return loadRelate;
+	}
+
+	public void setLoadRelate(Boolean loadRelate) {
+		this.loadRelate = loadRelate;
+	}
+
+	public IObject doGetRelationData() {
+
+		return this;
+	}
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="operateDate")
 	protected Date operateDate;  //最后修改时间

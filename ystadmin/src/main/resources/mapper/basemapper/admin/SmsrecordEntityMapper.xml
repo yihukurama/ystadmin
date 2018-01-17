@@ -75,10 +75,29 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeSmsrecord" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.SmsrecordEntity">
-		UPDATE
-		admin_smsrecord SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_smsrecord WHERE id=#{id}
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="reason!=null and reason!=''">AND reason=#{reason}</if>
+		<if test="tplId!=null">AND tplId=#{tplId}</if>
+		<if test="costate!=null">AND costate=#{costate}</if>
+		<if test="status!=null">AND status=#{status}</if>
+		<if test="sid!=null and sid!=''">AND sid=#{sid}</if>
+		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
+		<if test="responseUrl!=null and responseUrl!=''">AND responseUrl=#{responseUrl}</if>
+		<if test="msg!=null and msg!=''">AND msg=#{msg}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="type!=null">AND type=#{type}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->

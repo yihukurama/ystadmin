@@ -11,6 +11,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.gdyunst.ystadmin.application.exception.TipsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +46,10 @@ public class LogUtil {
     	new Thread(){
 			@Override
 			public void run() {
+			    if(request == null){
+			        LogUtil.InfoLog(this,"请求中无法获得request");
+			        return;
+                }
 				//获取IP地址
 				String ip=getIpAddr(request);
 				//获取请求链接
@@ -80,8 +85,12 @@ public class LogUtil {
 					}
 				}
 				String conent="\r\n"+ip+"\t"+date+"\t"+url+"\t"+jsonStr;
-				new Systemlog().addSystemLog(ip, url,jsonStr);
-				BufferedWriter out = null;
+                try {
+                    new Systemlog().addSystemLog(ip, url,jsonStr);
+                } catch (TipsException e) {
+                    e.printStackTrace();
+                }
+                BufferedWriter out = null;
 				try {
 					out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
 					out.write(conent);
@@ -140,7 +149,11 @@ public class LogUtil {
                     }
                 }
                 String conent="\r\n"+ip+"\t"+date+"\t"+url+"\t"+jsonStr;
-                new Systemlog().addSystemLog(ip, url,jsonStr);
+                try {
+                    new Systemlog().addSystemLog(ip, url,jsonStr);
+                } catch (TipsException e) {
+                    e.printStackTrace();
+                }
                 BufferedWriter out = null;
                 try {
                     out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));

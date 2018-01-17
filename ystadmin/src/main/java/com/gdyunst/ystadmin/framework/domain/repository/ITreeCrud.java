@@ -2,6 +2,7 @@ package com.gdyunst.ystadmin.framework.domain.repository;
 
 import java.util.List;
 
+import com.gdyunst.ystadmin.application.exception.TipsException;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Result;
 
 
@@ -29,6 +30,6 @@ public interface ITreeCrud<T extends ITree> extends IBaseCrud<T> {
 	 * @Author:Jieyq
 	 * @Date:2017年1月10日 下午2:52:45
 	 */
-	public List<Object> treeList() throws 
-		InstantiationException, IllegalAccessException, ClassNotFoundException;
+	public List<Object> treeList() throws
+            InstantiationException, IllegalAccessException, ClassNotFoundException, TipsException;
 }

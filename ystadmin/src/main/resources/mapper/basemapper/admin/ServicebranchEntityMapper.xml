@@ -5,9 +5,9 @@
 	<insert id="createServicebranch" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ServicebranchEntity">
 		<![CDATA[
             INSERT INTO admin_servicebranch
-                (id,orgId,departmentId,code,text,areaId,areaText,address,tel,principalId,principal,indexOrder,lng,lat,note,operateDate,createrId,creater,operatorId,operator)
+                (id,orgName,orgId,departmentName,departmentId,code,text,areaId,areaText,address,tel,principalId,principal,indexOrder,lng,lat,note,operateDate,createrId,creater,operatorId,operator)
             VALUES 
-                (#{id},#{orgId},#{departmentId},#{code},#{text},#{areaId},#{areaText},#{address},#{tel},#{principalId},#{principal},#{indexOrder},#{lng},#{lat},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator})
+                (#{id},#{orgName},#{orgId},#{departmentName},#{departmentId},#{code},#{text},#{areaId},#{areaText},#{address},#{tel},#{principalId},#{principal},#{indexOrder},#{lng},#{lat},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator})
         ]]>
 	</insert>
 
@@ -36,7 +36,9 @@
 		<if test="text!=null and text!=''">,text=#{text}</if>
 		<if test="code!=null and code!=''">,code=#{code}</if>
 		<if test="departmentId!=null and departmentId!=''">,departmentId=#{departmentId}</if>
+		<if test="departmentName!=null and departmentName!=''">,departmentName=#{departmentName}</if>
 		<if test="orgId!=null and orgId!=''">,orgId=#{orgId}</if>
+		<if test="orgName!=null and orgName!=''">,orgName=#{orgName}</if>
 		<if test="id!=null and id!=''">,id=#{id}</if>
 		
         <![CDATA[
@@ -75,7 +77,9 @@
 		<if test="text!=null and text!=''">AND text=#{text}</if>
 		<if test="code!=null and code!=''">AND code=#{code}</if>
 		<if test="departmentId!=null and departmentId!=''">AND departmentId=#{departmentId}</if>
+		<if test="departmentName!=null and departmentName!=''">AND departmentName=#{departmentName}</if>
 		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
+		<if test="orgName!=null and orgName!=''">AND orgName=#{orgName}</if>
 		<if test="id!=null and id!=''">AND id=#{id}</if>
 		
 		<![CDATA[
@@ -83,22 +87,46 @@
 		]]>
 	</select>
 
-	<!-- 删除单个对象 -->
+	<!-- 删除对象 -->
 	<delete id="removeServicebranch" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.ServicebranchEntity">
-		UPDATE
-		admin_servicebranch SET delStatus=1 WHERE id=#{id}
+		DELETE FROM
+		admin_servicebranch WHERE id=#{id}
+		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
+		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
+		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
+		<if test="createrId!=null and createrId!=''">AND createrId=#{createrId}</if>
+		<if test="operateDate!=null">AND operateDate=#{operateDate}</if>
+		<if test="createDate!=null">AND createDate=#{createDate}</if>
+		<if test="delStatus!=null ">AND delStatus=#{delStatus}</if>
+		<if test="delStatus==null">AND delStatus=0</if>
+		<if test="note!=null and note!=''">AND note=#{note}</if>
+		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
+		<if test="principal!=null and principal!=''">AND principal=#{principal}</if>
+		<if test="principalId!=null and principalId!=''">AND principalId=#{principalId}</if>
+		<if test="tel!=null and tel!=''">AND tel=#{tel}</if>
+		<if test="address!=null and address!=''">AND address=#{address}</if>
+		<if test="areaText!=null and areaText!=''">AND areaText=#{areaText}</if>
+		<if test="areaId!=null and areaId!=''">AND areaId=#{areaId}</if>
+		<if test="text!=null and text!=''">AND text=#{text}</if>
+		<if test="code!=null and code!=''">AND code=#{code}</if>
+		<if test="departmentId!=null and departmentId!=''">AND departmentId=#{departmentId}</if>
+		<if test="departmentName!=null and departmentName!=''">AND departmentName=#{departmentName}</if>
+		<if test="orgId!=null and orgId!=''">AND orgId=#{orgId}</if>
+		<if test="orgName!=null and orgName!=''">AND orgName=#{orgName}</if>
+		<if test="id!=null and id!=''">AND id=#{id}</if>
+		
 	</delete>
 
 	<!-- 批量插入 -->
 	<insert id="insertBatchServicebranch" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_servicebranch
-                (id,orgId,departmentId,code,text,areaId,areaText,address,tel,principalId,principal,indexOrder,lng,lat,note,operateDate,createrId,creater,operatorId,operator)
+                (id,orgName,orgId,departmentName,departmentId,code,text,areaId,areaText,address,tel,principalId,principal,indexOrder,lng,lat,note,operateDate,createrId,creater,operatorId,operator)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.orgId},#{item.departmentId},#{item.code},#{item.text},#{item.areaId},#{item.areaText},#{item.address},#{item.tel},#{item.principalId},#{item.principal},#{item.indexOrder},#{item.lng},#{item.lat},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator})
+			(#{item.id},#{item.orgName},#{item.orgId},#{item.departmentName},#{item.departmentId},#{item.code},#{item.text},#{item.areaId},#{item.areaText},#{item.address},#{item.tel},#{item.principalId},#{item.principal},#{item.indexOrder},#{item.lng},#{item.lat},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator})
 		</foreach>
 	</insert>
 

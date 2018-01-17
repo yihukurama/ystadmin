@@ -22,6 +22,13 @@ public class EmpservbranchEntity extends BaseCrud<EmpservbranchEntity>
 	private String serviceBranchId;  //网点id
 	@Column(name="employeeId")
 	private String employeeId;  //员工id
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@JSONField(format="yyyy-MM-dd HH:mm:ss")@Column(name="createDate")
+	private Date createDate;  //创建时间
+	@Column(name="createrId")
+	private String createrId;  //创建人Id
+	@Column(name="creater")
+	private String creater;  //创建人姓名
 	
 	
 	//get  set 方法
@@ -47,6 +54,30 @@ public class EmpservbranchEntity extends BaseCrud<EmpservbranchEntity>
 
 	public void setEmployeeId(String employeeId){
 		this.employeeId = employeeId;
+	}
+
+	public Date getCreateDate(){
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate){
+		this.createDate = createDate;
+	}
+
+	public String getCreaterId(){
+		return createrId;
+	}
+
+	public void setCreaterId(String createrId){
+		this.createrId = createrId;
+	}
+
+	public String getCreater(){
+		return creater;
+	}
+
+	public void setCreater(String creater){
+		this.creater = creater;
 	}
 
 	

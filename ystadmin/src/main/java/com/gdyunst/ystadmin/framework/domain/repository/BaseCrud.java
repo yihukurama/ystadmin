@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
+import com.gdyunst.ystadmin.application.exception.TipsException;
 import com.gdyunst.ystadmin.framework.service.domain.admin.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public T update(){
+	public T update() throws TipsException {
 		if(this.getOperatorId()!=null){
 			User user = new User();
 			user.setId(this.getOperatorId());
@@ -105,7 +106,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public T create(){
+	public T create() throws TipsException {
 		if(this.getOperatorId()!=null){
 			User user = new User();
 			user.setId(this.getOperatorId());
@@ -171,7 +172,7 @@ public class BaseCrud<T extends IObject> extends IObject implements IBaseCrud<T>
 
 
 	@Override
-	public int creates(List<Object> list,Class<?> clazz){
+	public int creates(List<Object> list,Class<?> clazz) throws TipsException {
 		int row=0;
 		List<T> l=new ArrayList<>();
 		if(list!=null&&list.size()>0){
