@@ -27,7 +27,7 @@ public class ReplacePackage {
     @Test
     public void test(){
         System.out.println("hello world");
-        File file = new File("D:\\work\\workspace\\versionOne\\CXTravel\\src\\main\\resources\\mapper\\basemapper");
+        File file = new File("D:\\work\\workspace\\versionOne\\CXTravel");
         List<File> files = listAllFile(file);
         for (int i = 0; i < files.size(); i++) {
             String filePath = files.get(i).getAbsolutePath();

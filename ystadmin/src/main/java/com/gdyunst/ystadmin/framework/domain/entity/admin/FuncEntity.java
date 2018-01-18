@@ -46,6 +46,8 @@ public class FuncEntity extends BaseCrud<FuncEntity>
 	private String operatorId;  //最后更新人Id
 	@Column(name="operator")
 	private String operator;  //最后更新人姓名
+	@Column(name="subSystemName")
+	private String subSystemName;  //所属系统名
 	
 	
 	//get  set 方法
@@ -159,6 +161,14 @@ public class FuncEntity extends BaseCrud<FuncEntity>
 
 	public void setOperator(String operator){
 		this.operator = operator;
+	}
+
+	public String getSubSystemName(){
+		return subSystemName;
+	}
+
+	public void setSubSystemName(String subSystemName){
+		this.subSystemName = subSystemName;
 	}
 
 	

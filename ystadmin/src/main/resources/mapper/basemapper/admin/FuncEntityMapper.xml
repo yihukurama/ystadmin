@@ -5,9 +5,9 @@
 	<insert id="createFunc" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity">
 		<![CDATA[
             INSERT INTO admin_func
-                (id,subSystemId,code,text,serverUrl,indexOrder,note,operateDate,createrId,creater,operatorId,operator)
+                (id,subSystemId,code,text,serverUrl,indexOrder,note,operateDate,createrId,creater,operatorId,operator,subSystemName)
             VALUES 
-                (#{id},#{subSystemId},#{code},#{text},#{serverUrl},#{indexOrder},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator})
+                (#{id},#{subSystemId},#{code},#{text},#{serverUrl},#{indexOrder},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator},#{subSystemName})
         ]]>
 	</insert>
 
@@ -16,6 +16,7 @@
         <![CDATA[
             UPDATE admin_func SET id=id
         ]]>
+		<if test="subSystemName!=null and subSystemName!=''">,subSystemName=#{subSystemName}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
 		<if test="operatorId!=null and operatorId!=''">,operatorId=#{operatorId}</if>
 		<if test="creater!=null and creater!=''">,creater=#{creater}</if>
@@ -48,6 +49,7 @@
         <![CDATA[
 	  		SELECT * FROM admin_func WHERE 1=1
 	  	]]>
+		<if test="subSystemName!=null and subSystemName!=''">AND subSystemName=#{subSystemName}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
@@ -73,6 +75,7 @@
 	<delete id="removeFunc" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.FuncEntity">
 		DELETE FROM
 		admin_func WHERE id=#{id}
+		<if test="subSystemName!=null and subSystemName!=''">AND subSystemName=#{subSystemName}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
 		<if test="creater!=null and creater!=''">AND creater=#{creater}</if>
@@ -95,12 +98,12 @@
 	<insert id="insertBatchFunc" parameterType="java.util.List">
 		<![CDATA[
             INSERT INTO admin_func
-                (id,subSystemId,code,text,serverUrl,indexOrder,note,operateDate,createrId,creater,operatorId,operator)
+                (id,subSystemId,code,text,serverUrl,indexOrder,note,operateDate,createrId,creater,operatorId,operator,subSystemName)
             VALUES
         ]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.subSystemId},#{item.code},#{item.text},#{item.serverUrl},#{item.indexOrder},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator})
+			(#{item.id},#{item.subSystemId},#{item.code},#{item.text},#{item.serverUrl},#{item.indexOrder},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator},#{item.subSystemName})
 		</foreach>
 	</insert>
 

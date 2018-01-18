@@ -51,7 +51,7 @@
 	<!-- 删除对象 -->
 	<delete id="removeUserrole" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.UserroleEntity">
 		DELETE FROM
-		admin_userrole WHERE userId=#{userId}
+		admin_userrole WHERE id=#{id}
 		<if test="createDate!=null">AND createDate=#{createDate}</if>
 		<if test="roleId!=null and roleId!=''">AND roleId=#{roleId}</if>
 		<if test="userId!=null and userId!=''">AND userId=#{userId}</if>

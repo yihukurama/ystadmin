@@ -54,6 +54,8 @@ public class MenuEntity extends TreeCrud<MenuEntity>
 	private String operator;  //最后更新人姓名
 	@Column(name="indexOrder")
 	private Integer indexOrder;  //排序字段
+	@Column(name="subSystemName")
+	private String subSystemName;  //所属系统名
 	
 	
 	//get  set 方法
@@ -199,6 +201,14 @@ public class MenuEntity extends TreeCrud<MenuEntity>
 
 	public void setIndexOrder(Integer indexOrder){
 		this.indexOrder = indexOrder;
+	}
+
+	public String getSubSystemName(){
+		return subSystemName;
+	}
+
+	public void setSubSystemName(String subSystemName){
+		this.subSystemName = subSystemName;
 	}
 
 	

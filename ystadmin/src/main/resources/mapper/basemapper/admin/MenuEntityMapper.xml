@@ -5,9 +5,9 @@
 	<insert id="createMenu" parameterType="com.gdyunst.ystadmin.framework.domain.entity.admin.MenuEntity">
 		<![CDATA[
 			INSERT INTO admin_menu
-				(id,subSystemId,parentId,path,code,text,linkUrl,serverUrl,iconClass,note,operateDate,createrId,creater,operatorId,operator,indexOrder)
+				(id,subSystemId,parentId,path,code,text,linkUrl,serverUrl,iconClass,note,operateDate,createrId,creater,operatorId,operator,indexOrder,subSystemName)
 			VALUES 
-				(#{id},#{subSystemId},#{parentId},#{path},#{code},#{text},#{linkUrl},#{serverUrl},#{iconClass},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator},#{indexOrder})
+				(#{id},#{subSystemId},#{parentId},#{path},#{code},#{text},#{linkUrl},#{serverUrl},#{iconClass},#{note},#{operateDate},#{createrId},#{creater},#{operatorId},#{operator},#{indexOrder},#{subSystemName})
         ]]>
 	</insert>
 
@@ -16,6 +16,7 @@
         <![CDATA[
 			UPDATE admin_menu SET id=id
 		]]>
+		<if test="subSystemName!=null and subSystemName!=''">,subSystemName=#{subSystemName}</if>
 		<if test="indexOrder!=null ">,indexOrder=#{indexOrder}</if>
 		<if test="operator!=null and operator!=''">,operator=#{operator}</if>
 		<if test="operatorId!=null and operatorId!=''">,operatorId=#{operatorId}</if>
@@ -54,6 +55,7 @@
         <![CDATA[
 	  	 	SELECT * FROM admin_menu WHERE 1=1
 	  	]]>
+		<if test="subSystemName!=null and subSystemName!=''">AND subSystemName=#{subSystemName}</if>
 		<if test="indexOrder!=null">AND indexOrder=#{indexOrder}</if>
 		<if test="operator!=null and operator!=''">AND operator=#{operator}</if>
 		<if test="operatorId!=null and operatorId!=''">AND operatorId=#{operatorId}</if>
@@ -106,12 +108,12 @@
 	<insert id="insertBatchMenu" parameterType="java.util.List">
     	<![CDATA[
     		INSERT INTO admin_menu
-        		(id,subSystemId,parentId,path,code,text,linkUrl,serverUrl,iconClass,note,operateDate,createrId,creater,operatorId,operator,indexOrder)
+        		(id,subSystemId,parentId,path,code,text,linkUrl,serverUrl,iconClass,note,operateDate,createrId,creater,operatorId,operator,indexOrder,subSystemName)
         	VALUES
     	]]>
 		<foreach collection="list" item="item" index="index"
 			separator=",">
-			(#{item.id},#{item.subSystemId},#{item.parentId},#{item.path},#{item.code},#{item.text},#{item.linkUrl},#{item.serverUrl},#{item.iconClass},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator},#{item.indexOrder})
+			(#{item.id},#{item.subSystemId},#{item.parentId},#{item.path},#{item.code},#{item.text},#{item.linkUrl},#{item.serverUrl},#{item.iconClass},#{item.note},#{item.operateDate},#{item.createrId},#{item.creater},#{item.operatorId},#{item.operator},#{item.indexOrder},#{item.subSystemName})
 		</foreach>
 	</insert>
 
