@@ -30,8 +30,6 @@ import java.util.List;
 public class PublicApiService implements IPublicApi{
 
     @Autowired
-    UserDetailsService customUserService;
-    @Autowired
     ISecurity securityService;
     @Autowired
     RedisUtils redisUtils;
@@ -88,7 +86,6 @@ public class PublicApiService implements IPublicApi{
             AppCache.loginTree.add(loginUser);
         }
         LogUtil.DebugLog(this,"当前登录人数为："+AppCache.loginTree.size());
-        customUserService.loadUserByUsername(user.getUsername());
         return Result.successed(loginUser, "登录成功");
     }
 

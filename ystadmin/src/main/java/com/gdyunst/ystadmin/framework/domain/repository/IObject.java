@@ -2,6 +2,7 @@ package com.gdyunst.ystadmin.framework.domain.repository;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,8 @@ import java.util.List;
 public abstract class IObject {
 	public static Logger LOGGER = LoggerFactory.getLogger(IObject.class);
 	protected String id;
-	protected Boolean loadRelate = true;	//加载时默认加载关联数据
+	@ApiModelProperty(value="加载时默认不加载关联数据")
+	protected Boolean loadRelate = true;	//加载时默认不加载关联数据
 
 
 	public Boolean getLoadRelate() {

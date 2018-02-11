@@ -135,6 +135,7 @@ public class GenEntityImpl implements IGenEntity {
                 entColumns.append(column.getRemark()+"\n\t");
                 continue;
             }
+            entColumns.append("@ApiModelProperty(value=\""+column.getRemark()+"\")\n\t");
             entColumns.append("@Column(name=\""+column.getName()+"\")\n\t");
             entColumns.append("private "+column.getType()+" "+column.getName()+";  //");
             entColumns.append(column.getRemark()+"\n\t");
