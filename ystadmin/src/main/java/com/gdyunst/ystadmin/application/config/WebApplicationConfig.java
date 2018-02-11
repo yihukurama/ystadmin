@@ -27,13 +27,16 @@ public class WebApplicationConfig {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
+
+                registry.addMapping("/**")
+                        .allowedHeaders("*")
+                        .allowedMethods("*")
+                        .allowedOrigins("*")
+						.allowCredentials(true);
             }
 
 			@Override
 			public void addInterceptors(InterceptorRegistry registry) {
-//				  registry.addInterceptor(new ParamInterceptor()).addPathPatterns("/**");
-//				  registry.addInterceptor(loginInterceptor()).addPathPatterns("/**");
 //				  registry.addInterceptor(corsInterceptor()).addPathPatterns("/**");
 			}
         };

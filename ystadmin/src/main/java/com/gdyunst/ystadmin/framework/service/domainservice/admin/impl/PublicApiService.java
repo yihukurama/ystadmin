@@ -1,36 +1,36 @@
 package com.gdyunst.ystadmin.framework.service.domainservice.admin.impl;
 
-import java.util.Date;
-import java.util.List;
-
 import com.gdyunst.ystadmin.application.cache.AppCache;
 import com.gdyunst.ystadmin.application.cache.RedisUtils;
 import com.gdyunst.ystadmin.application.constant.Constant;
+import com.gdyunst.ystadmin.application.exception.TipsException;
 import com.gdyunst.ystadmin.application.security.JwtTokenGenerator;
+import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.application.utils.EncrUtil;
 import com.gdyunst.ystadmin.application.utils.LogUtil;
-import com.gdyunst.ystadmin.framework.domain.entity.admin.RoleprivilegeEntity;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.SubsystemEntity;
-import com.gdyunst.ystadmin.framework.service.domain.admin.Subsystem;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.gdyunst.ystadmin.application.exception.TipsException;
-import com.gdyunst.ystadmin.application.utils.EmptyUtil;
 import com.gdyunst.ystadmin.framework.domain.entity.admin.UserEntity;
+import com.gdyunst.ystadmin.framework.service.domain.admin.Subsystem;
 import com.gdyunst.ystadmin.framework.service.domain.admin.User;
 import com.gdyunst.ystadmin.framework.service.domainservice.admin.IPublicApi;
 import com.gdyunst.ystadmin.framework.service.domainservice.admin.ISecurity;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Request;
 import com.gdyunst.ystadmin.framework.web.restful.admin.dto.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class PublicApiService implements IPublicApi{
 
+    @Autowired
+    UserDetailsService customUserService;
     @Autowired
     ISecurity securityService;
     @Autowired
@@ -88,6 +88,7 @@ public class PublicApiService implements IPublicApi{
             AppCache.loginTree.add(loginUser);
         }
         LogUtil.DebugLog(this,"当前登录人数为："+AppCache.loginTree.size());
+        customUserService.loadUserByUsername(user.getUsername());
         return Result.successed(loginUser, "登录成功");
     }
 

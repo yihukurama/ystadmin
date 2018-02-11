@@ -28,6 +28,8 @@ public class BaseMapperManager {
     @Test
     public void batchGenBaseMapper() throws ClassNotFoundException, IllegalArgumentException, IllegalAccessException, SQLException {
 
+        String[] tableNames = {"business_wxacode"};//指定重新构造某些表
+
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -72,7 +74,21 @@ public class BaseMapperManager {
 
         // 2、遍历数据库表，获取各表的字段等信息
         for (int i=0;i<tables.size();i++) {
-            String tableName = tables.get(i).getName();  
+            String tableName = tables.get(i).getName();
+
+
+            boolean needUpdate = false;
+            for (int j = 0; j < tableNames.length; j++) {
+                if(tableName.equals(tableNames[j])){
+                    LogUtil.DebugLog(this,"需要更新的表3是"+tableName);
+                    needUpdate = true;
+                    break;
+                }
+            }
+            if(!needUpdate){
+                continue;
+            }
+
                 ResultSet rs = conn.getMetaData().getColumns(null, "",tableName.toUpperCase(), "%");  
                 List<Column> columns = new ArrayList<>();
                 while(rs.next()){  

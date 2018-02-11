@@ -10,7 +10,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-@EnableAdminServer
+//@EnableAdminServer
 public class YstadminApplication extends SpringBootServletInitializer {
 
 	@Override

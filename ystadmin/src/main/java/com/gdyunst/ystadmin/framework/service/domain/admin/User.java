@@ -1,6 +1,7 @@
 package com.gdyunst.ystadmin.framework.service.domain.admin;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gdyunst.ystadmin.application.component.SpringBeanTools;
 import com.gdyunst.ystadmin.application.exception.TipsException;
 import com.gdyunst.ystadmin.application.utils.EmptyUtil;
@@ -8,10 +9,13 @@ import com.gdyunst.ystadmin.framework.domain.entity.admin.*;
 import com.gdyunst.ystadmin.framework.service.domainservice.admin.ISecurity;
 import com.gdyunst.ystadmin.framework.service.domainservice.admin.impl.SecurityService;
 import com.gdyunst.ystadmin.framework.service.domainservice.prepare.base.LogUtil;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
 public class User extends UserEntity {
 
 	List<String> roleIds;	//创建用户时同时配置角色
@@ -355,4 +359,6 @@ public class User extends UserEntity {
 		User user =  this;
 		return user.getId().hashCode();
 	}
+
+
 }

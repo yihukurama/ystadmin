@@ -9,12 +9,20 @@ public class SystemConfig {
     // 写日志
     private Boolean isWriteLog; // 是否写日志
     private String urlLogFile;
+    private String staticUrl;   //系统静态文件存储路径
     
     //系统id
     private String adminSystemId;	//管理后台
-    
 
-	public String getAdminSystemId() {
+    public String getStaticUrl() {
+        return staticUrl;
+    }
+
+    public void setStaticUrl(String staticUrl) {
+        this.staticUrl = staticUrl;
+    }
+
+    public String getAdminSystemId() {
 		return adminSystemId;
 	}
 
